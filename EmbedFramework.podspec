@@ -16,18 +16,17 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "EmbedFramework"
-  spec.version      = "0.0.1"
-  spec.summary      = "A short description of EmbedFramework."
+  spec.version      = "v0.1-pre-alpha"
+  spec.summary      = "The iOS SDK for Ada Chat"
 
   # This description is used to generate tags and improve search results.
   #   * Think: What does it do? Why did you write it? What is the focus?
   #   * Try to keep it short, snappy and to the point.
   #   * Write the description between the DESC delimiters below.
   #   * Finally, don't worry about the indent, CocoaPods strips it!
-  spec.description  = <<-DESC
-                   DESC
+  spec.description  = "The iOS SDK for Ada Chat. It handles setting the Embed script up inside a WebView."
 
-  spec.homepage     = "http://EXAMPLE/EmbedFramework"
+  spec.homepage     = "https://github.com/AdaSupport/EmbedFramework"
   # spec.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
 
 
@@ -38,7 +37,7 @@ Pod::Spec.new do |spec|
   #  Popular ones are 'MIT', 'BSD' and 'Apache License, Version 2.0'.
   #
 
-  spec.license      = "MIT (example)"
+  spec.license      = "MIT"
   # spec.license      = { :type => "MIT", :file => "FILE_LICENSE" }
 
 
@@ -79,7 +78,7 @@ Pod::Spec.new do |spec|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  spec.source       = { :git => "http://EXAMPLE/EmbedFramework.git", :tag => "#{spec.version}" }
+  spec.source       = { :git => "https://github.com/AdaSupport/EmbedFramework.git", :tag => "#{spec.version}" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
