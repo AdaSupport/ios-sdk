@@ -10,6 +10,9 @@
 		49C73563226F99FE00D22E4B /* EmbedFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49C73559226F99FE00D22E4B /* EmbedFramework.framework */; };
 		49C73568226F99FE00D22E4B /* EmbedFrameworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C73567226F99FE00D22E4B /* EmbedFrameworkTests.swift */; };
 		49C7356A226F99FE00D22E4B /* EmbedFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = 49C7355C226F99FE00D22E4B /* EmbedFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		49C73574226F9A6600D22E4B /* test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C73573226F9A6600D22E4B /* test.swift */; };
+		49C7360B226FA75200D22E4B /* EmbedFrameworkView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49C7360A226FA75200D22E4B /* EmbedFrameworkView.xib */; };
+		49C7360D226FA78C00D22E4B /* EmbedFrameworkUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C7360C226FA78C00D22E4B /* EmbedFrameworkUIView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +32,9 @@
 		49C73562226F99FE00D22E4B /* EmbedFrameworkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EmbedFrameworkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		49C73567226F99FE00D22E4B /* EmbedFrameworkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmbedFrameworkTests.swift; sourceTree = "<group>"; };
 		49C73569226F99FE00D22E4B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		49C73573226F9A6600D22E4B /* test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = test.swift; sourceTree = "<group>"; };
+		49C7360A226FA75200D22E4B /* EmbedFrameworkView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmbedFrameworkView.xib; sourceTree = "<group>"; };
+		49C7360C226FA78C00D22E4B /* EmbedFrameworkUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmbedFrameworkUIView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +79,9 @@
 			children = (
 				49C7355C226F99FE00D22E4B /* EmbedFramework.h */,
 				49C7355D226F99FE00D22E4B /* Info.plist */,
+				49C73573226F9A6600D22E4B /* test.swift */,
+				49C7360A226FA75200D22E4B /* EmbedFrameworkView.xib */,
+				49C7360C226FA78C00D22E4B /* EmbedFrameworkUIView.swift */,
 			);
 			path = EmbedFramework;
 			sourceTree = "<group>";
@@ -148,6 +157,7 @@
 				TargetAttributes = {
 					49C73558226F99FE00D22E4B = {
 						CreatedOnToolsVersion = 10.2.1;
+						LastSwiftMigration = 1020;
 					};
 					49C73561226F99FE00D22E4B = {
 						CreatedOnToolsVersion = 10.2.1;
@@ -177,6 +187,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49C7360B226FA75200D22E4B /* EmbedFrameworkView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -194,6 +205,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49C73574226F9A6600D22E4B /* test.swift in Sources */,
+				49C7360D226FA78C00D22E4B /* EmbedFrameworkUIView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -341,6 +354,7 @@
 		49C7356E226F99FE00D22E4B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -357,6 +371,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ada.EmbedFramework;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -365,6 +380,7 @@
 		49C7356F226F99FE00D22E4B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -389,6 +405,7 @@
 		49C73571226F99FE00D22E4B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = EmbedFrameworkTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -406,6 +423,7 @@
 		49C73572226F99FE00D22E4B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = EmbedFrameworkTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
