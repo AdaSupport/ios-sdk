@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "EmbedFramework"
-  spec.version      = "0.1.2"
+  spec.version      = "0.1.3"
   spec.summary      = "The iOS SDK for Ada Chat"
 
   # This description is used to generate tags and improve search results.
@@ -63,7 +63,7 @@ Pod::Spec.new do |spec|
   #
 
   # spec.platform     = :ios
-  # spec.platform     = :ios, "12.0"
+  spec.platform     = :ios, "12.2"
 
   #  When using multiple platforms
   # spec.ios.deployment_target = "5.0"
@@ -78,7 +78,7 @@ Pod::Spec.new do |spec|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  spec.source       = { :git => "https://github.com/AdaSupport/EmbedFramework.git", :tag => "0.1.2" }
+  spec.source       = { :git => "https://github.com/AdaSupport/EmbedFramework.git", :tag => spec.version }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
