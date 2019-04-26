@@ -11,12 +11,14 @@ import UIKit
 public class AdaEmbed {
     var handle: String
     var view: UIView
+    var webView: EmbedView
     
     public init(handle: String, view: UIView) {
         self.handle = handle
         self.view = view
+        self.webView = EmbedView(frame: view.bounds)
         
-        startView(frame: self.view.bounds)
+        addSubview()
     }
     
     public func printHandle() {
@@ -25,10 +27,10 @@ public class AdaEmbed {
     
     public func setMetaFields(fields: [String : Any]) {
         // evaluateJavascript
+        print("stuff \(fields)")
     }
     
-    private func startView(frame: CGRect) {
-        let embedView = EmbedView(frame: frame)
-        self.view.addSubview(embedView)
+    private func addSubview() {
+        self.view.addSubview(self.webView)
     }
 }
