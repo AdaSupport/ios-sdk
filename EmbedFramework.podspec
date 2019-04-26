@@ -105,6 +105,9 @@ Pod::Spec.new do |spec|
 
   spec.resource  = "index.html"
   spec.resources = "EmbedFramework/*.html"
+  spec.resource_bundles = {
+    "EmbedFramework" => ["EmbedFramework/*/**"]
+  }
 
   # spec.preserve_paths = "FilesToSave", "MoreFilesToSave"
 

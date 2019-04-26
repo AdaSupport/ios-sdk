@@ -28,6 +28,7 @@ public class EmbedView: UIView {
         let webView = WKWebView(frame: self.frame, configuration: WKWebViewConfiguration())
         addSubview(webView)
         
+        // This isn't working yet :(
         let bundle = Bundle.init(identifier: "com.ada.EmbedFramework")
         print(bundle as Any)
         if let htmlPath = bundle?.path(forResource: "index", ofType: "html") {
