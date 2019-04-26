@@ -103,8 +103,8 @@ Pod::Spec.new do |spec|
   #  non-essential files like tests, examples and documentation.
   #
 
-  # spec.resource  = "icon.png"
-  # spec.resources = "Resources/*.png"
+  spec.resource  = "index.html"
+  spec.resources = "EmbedFramework/*.html"
 
   # spec.preserve_paths = "FilesToSave", "MoreFilesToSave"
 
