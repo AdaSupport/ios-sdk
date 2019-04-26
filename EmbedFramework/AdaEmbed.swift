@@ -23,6 +23,10 @@ public class AdaEmbed {
         print("Props: \(self.handle)")
     }
     
+    public func setMetaFields(fields: [String : Any]) {
+        // evaluateJavascript
+    }
+    
     private func startView(frame: CGRect) {
         let embedView = EmbedView(frame: frame)
         self.view.addSubview(embedView)
