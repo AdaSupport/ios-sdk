@@ -27,6 +27,7 @@ public class AdaEmbed {
     
     public func setMetaFields(fields: [String : Any]) {
         // evaluateJavascript
+        // webview.evaluateJavascript("setMetaFields(\(fields))", completionHandler: nil)
         print("stuff \(fields)")
     }
     
