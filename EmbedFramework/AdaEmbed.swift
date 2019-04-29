@@ -7,16 +7,17 @@
 //
 
 import UIKit
+import WebKit
 
 public class AdaEmbed {
     var handle: String
     var view: UIView
-    var webView: EmbedView
+    var webView: WKWebView
     
     public init(handle: String, view: UIView) {
         self.handle = handle
         self.view = view
-        self.webView = EmbedView(frame: view.bounds)
+        self.webView = EmbedView(frame: view.bounds).webView
         
         addSubview()
     }
@@ -27,8 +28,8 @@ public class AdaEmbed {
     
     public func setMetaFields(fields: [String : Any]) {
         // evaluateJavascript
-        // webview.evaluateJavascript("setMetaFields(\(fields))", completionHandler: nil)
-        print("stuff \(fields)")
+        self.webView.evaluateJavaScript("triggerEmbed(\(fields))", completionHandler: nil)
+        print("stuff \(self.webView)")
     }
     
     private func addSubview() {
