@@ -94,7 +94,7 @@ internal class EmbedView: UIView, WKScriptMessageHandler, WKNavigationDelegate {
     
     public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         print("SOMETHING PLEASE HAPPEN")
-        if message.name == "test", let messageBody = message.body as? String {
+        if message.name == "embedReady", let messageBody = message.body as? String {
             print(messageBody)
         }
     }
