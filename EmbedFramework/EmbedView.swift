@@ -49,8 +49,7 @@ internal class EmbedView: UIView, WKUIDelegate {
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
                 </head>
                 <body style="height: 100vh; margin: 0;">
-                    <div id="username" style="height: 50vh; width: 100vw;">Hello</div>
-                    <div id="parent-element" style="height: 50vh; width: 100vw;"></div>
+                    <div id="parent-element" style="height: 100vh; width: 100vw;"></div>
                 </body>
                 <script>
                     window.adaSettings = {
