@@ -38,8 +38,42 @@ internal class EmbedView: UIView, WKUIDelegate {
 //            webView.load(request)
 //        }
         // Use remote URL temporarily until code above is fixed
-        let url = URL(string: "https://kind-stallman-353668.netlify.com/")!
-        let request = URLRequest(url: url)
-        webView.load(request)
+//        let url = URL(string: "https://kind-stallman-353668.netlify.com/")!
+//        let request = URLRequest(url: url)
+//        webView.load(request)
+        
+        let html = """
+            <html>
+              <head>
+                <meta charset="UTF-8" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                </head>
+                <body style="height: 100vh; margin: 0;">
+                    <div id="username" style="height: 50vh; width: 100vw;">Hello</div>
+                    <div id="parent-element" style="height: 50vh; width: 100vw;"></div>
+                </body>
+                <script>
+                    window.adaSettings = {
+                        parentElement: "parent-element"
+                    }
+                </script>
+                <script
+                    async
+                    id="__ada"
+                    src="https://static.ada.support/embed.js"
+                    data-handle="ada-example"
+                ></script>
+                <script>
+                    function triggerEmbed(data) {
+                        const decodedData = window.atob(data)
+                        const parsedData = JSON.parse(decodedData)
+                        return parsedData;
+                    }
+                </script>
+            </html>
+
+        """
+        
+        webView.loadHTMLString(html, baseURL: nil)
     }
 }
