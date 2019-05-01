@@ -61,8 +61,18 @@ internal class EmbedView: UIView, WKUIDelegate {
                     id="__ada"
                     src="https://static.ada.support/embed.js"
                     data-handle="ada-example"
+                    onload="onLoadHandler()"
                 ></script>
                 <script>
+                    function onLoadHandler() {
+                        // Tell framework Embed is ready
+                        try {
+                            webkit.messageHandlers.embedReady.postMessage();
+                        } catch(err) {
+                            console.error('Can not reach native code');
+                        }
+                    }
+
                     function triggerEmbed(data) {
                         const decodedData = window.atob(data)
                         const parsedData = JSON.parse(decodedData)
