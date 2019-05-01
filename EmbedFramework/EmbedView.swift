@@ -68,11 +68,11 @@ internal class EmbedView: UIView, WKScriptMessageHandler, WKNavigationDelegate {
                     onload="onLoadHandler()"
                 ></script>
                 <script>
-                    window.webkit.messageHandlers.embedReady.postMessage("status":"ready");
+                    window.webkit.messageHandlers.embedReady.postMessage({"status":"ready"});
                     function onLoadHandler() {
                         // Tell framework Embed is ready
                         try {
-                            window.webkit.messageHandlers.embedReady.postMessage("status":"ready");
+                            window.webkit.messageHandlers.embedReady.postMessage({"status":"ready"});
                         } catch(err) {
                             console.error('Can not reach native code');
                         }
