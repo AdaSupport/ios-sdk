@@ -49,7 +49,10 @@ public class AdaEmbed {
     }
     
     private func initializeEmbed() {
-        let serializedData = try! JSONSerialization.data(withJSONObject: ["handle": self.handle, "metaFields": self.metaFields], options: [])
+        let serializedData = try! JSONSerialization.data(withJSONObject: [
+                "handle": self.handle,
+                "metaFields": self.metaFields
+            ], options: [])
         let encodedData = serializedData.base64EncodedString()
         
         self.webView.evaluateJavaScript("initializeEmbed('\(encodedData)');") { (result, error) in
