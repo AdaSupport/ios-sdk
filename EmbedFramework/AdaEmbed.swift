@@ -13,15 +13,18 @@ public class AdaEmbed {
     var handle: String
     var view: UIView
     var webView: WKWebView
+    var metaFields: [String: String]
     
-    public init(handle: String, view: UIView) {
-        self.handle = handle
+    public init(view: UIView, handle: String, metaFields: [String: String]) {
         self.view = view
+        self.handle = handle
+        self.metaFields = metaFields
         self.webView = EmbedView(frame: view.bounds).webView
         
         addSubview()
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 10.0) { // Change `2.0` to the desired number of seconds.
+        // Temporary delay until we can recieve event from Embed in HTML when it is loaded
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) { // Change `2.0` to the desired number of seconds.
             self.initializeEmbed()
         }
     }
@@ -46,7 +49,7 @@ public class AdaEmbed {
     }
     
     private func initializeEmbed() {
-        let serializedData = try! JSONSerialization.data(withJSONObject: ["handle": self.handle], options: [])
+        let serializedData = try! JSONSerialization.data(withJSONObject: ["handle": self.handle, "metaFields": self.metaFields], options: [])
         let encodedData = serializedData.base64EncodedString()
         
         self.webView.evaluateJavaScript("initializeEmbed('\(encodedData)');") { (result, error) in
