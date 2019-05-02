@@ -81,12 +81,13 @@ internal class EmbedView: UIView, WKScriptMessageHandler, WKNavigationDelegate {
                     function initializeEmbed(data) {
                         const decodedData = window.atob(data)
                         const parsedData = JSON.parse(decodedData)
-                        const { handle, cluster, metaFields } = parsedData;
+                        const { handle, cluster, language, metaFields } = parsedData;
 
                         adaEmbed.start({
                             handle,
                             parentElement: "parent-element",
                             cluster,
+                            language,
                             metaFields
                         });
                         return handle;
