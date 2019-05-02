@@ -11,13 +11,15 @@ import WebKit
 
 public class AdaEmbed {
     var handle: String
+    var cluster: String
     var view: UIView
     var webView: WKWebView
     var metaFields: [String: String]
     
-    public init(view: UIView, handle: String, metaFields: [String: String]) {
+    public init(view: UIView, handle: String, cluster: String = "", metaFields: [String: String]) {
         self.view = view
         self.handle = handle
+        self.cluster = cluster
         self.metaFields = metaFields
         self.webView = EmbedView(frame: view.bounds).webView
         
@@ -51,6 +53,7 @@ public class AdaEmbed {
     private func initializeEmbed() {
         let serializedData = try! JSONSerialization.data(withJSONObject: [
                 "handle": self.handle,
+                "cluster": self.cluster,
                 "metaFields": self.metaFields
             ], options: [])
         let encodedData = serializedData.base64EncodedString()
