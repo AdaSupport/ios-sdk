@@ -20,6 +20,10 @@ public class AdaEmbed {
         self.webView = EmbedView(frame: view.bounds).webView
         
         addSubview()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 10.0) { // Change `2.0` to the desired number of seconds.
+            self.initializeEmbed()
+        }
     }
     
     public func printHandle() {
@@ -31,6 +35,21 @@ public class AdaEmbed {
         let encodedData = serializedData.base64EncodedString()
         
         self.webView.evaluateJavaScript("triggerEmbed('\(encodedData)');") { (result, error) in
+            if let err = error {
+                print(err)
+                print(err.localizedDescription)
+            } else {
+                guard let dataValue = result else {return}
+                print(dataValue)
+            }
+        }
+    }
+    
+    private func initializeEmbed() {
+        let serializedData = try! JSONSerialization.data(withJSONObject: ["handle": self.handle], options: [])
+        let encodedData = serializedData.base64EncodedString()
+        
+        self.webView.evaluateJavaScript("initializeEmbed('\(encodedData)');") { (result, error) in
             if let err = error {
                 print(err)
                 print(err.localizedDescription)

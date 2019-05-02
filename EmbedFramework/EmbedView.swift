@@ -64,7 +64,7 @@ internal class EmbedView: UIView, WKScriptMessageHandler, WKNavigationDelegate {
                     async
                     id="__ada"
                     src="https://static.ada.support/embed.js"
-                    data-handle="ada-example"
+                    data-lazy
                     onload="onLoadHandler()"
                 ></script>
                 <script>
@@ -76,6 +76,18 @@ internal class EmbedView: UIView, WKScriptMessageHandler, WKNavigationDelegate {
                         } catch(err) {
                             console.error('Can not reach native code');
                         }
+                    }
+
+                    function initializeEmbed(data) {
+                        const decodedData = window.atob(data)
+                        const parsedData = JSON.parse(decodedData)
+                        const { handle } = parsedData;
+
+                        adaEmbed.start({
+                            handle,
+                            parentElement: "parent-element"
+                        });
+                        return handle;
                     }
 
                     function triggerEmbed(data) {
