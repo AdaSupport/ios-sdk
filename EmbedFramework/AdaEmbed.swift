@@ -14,6 +14,7 @@ public class AdaEmbed {
     var cluster: String
     var language: String
     var styles: String
+    var greeting: String
     var view: UIView
     var webView: WKWebView
     var metaFields: [String: String]
@@ -24,6 +25,7 @@ public class AdaEmbed {
         cluster: String = "",
         language: String = "",
         styles: String = "",
+        greeting: String = "",
         metaFields: [String: String]
     ) {
         self.view = view
@@ -31,6 +33,7 @@ public class AdaEmbed {
         self.cluster = cluster
         self.language = language
         self.styles = styles
+        self.greeting = greeting
         self.metaFields = metaFields
         self.webView = EmbedView(frame: view.bounds).webView
         
@@ -67,6 +70,7 @@ public class AdaEmbed {
                 "cluster": self.cluster,
                 "language": self.language,
                 "styles": self.styles,
+                "greeting": self.greeting,
                 "metaFields": self.metaFields
             ], options: [])
         let encodedData = serializedData.base64EncodedString()
