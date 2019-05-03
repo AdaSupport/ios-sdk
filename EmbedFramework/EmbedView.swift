@@ -35,11 +35,10 @@ internal class EmbedView: UIView, WKNavigationDelegate, WKScriptMessageHandler {
                 onload="onLoadHandler()"
             ></script>
             <script>
-                window.webkit.messageHandlers.embedReady.postMessage({"status":"ready"});
                 function onLoadHandler() {
                     // Tell framework Embed is ready
                     try {
-                        window.webkit.messageHandlers.embedReady.postMessage({"status":"ready"});
+                        window.webkit.messageHandlers.embedReady.postMessage("ready");
                     } catch(err) {
                         console.error('Can not reach native code');
                     }
@@ -111,23 +110,10 @@ internal class EmbedView: UIView, WKNavigationDelegate, WKScriptMessageHandler {
         webView.loadHTMLString(html, baseURL: nil)
     }
     
-//    public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-//        print("SOMETHING PLEASE HAPPEN")
-//        if message.name == "embedReady", let messageBody = message.body as? String {
-//            print(messageBody)
-//        }
-//    }
     public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        print("SOMETHING PLEASE HAPPEN")
-        if message.name == "test", let messageBody = message.body as? String {
+        print("PM: \(message.name), \(message.body) ")
+        if message.name == "embedReady", let messageBody = message.body as? String {
             print(messageBody)
         }
     }
-    
-    public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        //This function is called when the webview finishes navigating to the webpage.
-        //We use this to send data to the webview when it's loaded.
-        print("load")
-    }
-
 }
