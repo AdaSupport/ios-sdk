@@ -9,9 +9,8 @@
 import UIKit
 import WebKit
 
-internal class EmbedView: UIView, WKNavigationDelegate {
+internal class EmbedView: UIView, WKNavigationDelegate, WKScriptMessageHandler {
     
-    let userContentController = WKUserContentController()
     var webView: WKWebView!
     
     let html = """
@@ -87,6 +86,10 @@ internal class EmbedView: UIView, WKNavigationDelegate {
     
     private func setUpView() {
         let config = WKWebViewConfiguration()
+        let userContentController = WKUserContentController()
+        
+        userContentController.add(self, name: "embedReady")
+        
         config.userContentController = userContentController
 
         webView = WKWebView(frame: self.frame, configuration: config)
@@ -114,7 +117,12 @@ internal class EmbedView: UIView, WKNavigationDelegate {
 //            print(messageBody)
 //        }
 //    }
-    
+    public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        print("SOMETHING PLEASE HAPPEN")
+        if message.name == "test", let messageBody = message.body as? String {
+            print(messageBody)
+        }
+    }
     
     public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         //This function is called when the webview finishes navigating to the webpage.
@@ -122,12 +130,4 @@ internal class EmbedView: UIView, WKNavigationDelegate {
         print("load")
     }
 
-}
-
-/// Adds support for the WKScriptMessageHandler to ViewController.
-extension EmbedView: WKScriptMessageHandler {
-    func userContentController(_ userContentController: WKUserContentController,
-                               didReceive message: WKScriptMessage) {
-        print("Received message from native: \(message)")
-    }
 }
