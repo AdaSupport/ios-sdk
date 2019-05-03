@@ -18,6 +18,7 @@ public class AdaEmbed {
     var view: UIView
     var webView: WKWebView
     var metaFields: [String: String]
+    var embed: EmbedView
     
     public init(
         view: UIView,
@@ -35,14 +36,20 @@ public class AdaEmbed {
         self.styles = styles
         self.greeting = greeting
         self.metaFields = metaFields
-        self.webView = EmbedView(frame: view.bounds).webView
+        self.embed = EmbedView(frame: view.bounds)
+        self.webView = embed.webView
         
         addSubview()
         
         // Temporary delay until we can recieve event from Embed in HTML when it is loaded
         DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) { // Change `2.0` to the desired number of seconds.
-            self.initializeEmbed()
+            self.initialize()
         }
+    }
+    
+    // This is triggered when Embed is loaded
+    internal func handleEmbedLoad() {
+        self.initialize()
     }
     
     public func printHandle() {
@@ -64,7 +71,7 @@ public class AdaEmbed {
         }
     }
     
-    private func initializeEmbed() {
+    private func initialize() {
         let serializedData = try! JSONSerialization.data(withJSONObject: [
                 "handle": self.handle,
                 "cluster": self.cluster,
