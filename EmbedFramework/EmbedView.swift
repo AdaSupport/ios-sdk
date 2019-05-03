@@ -9,10 +9,69 @@
 import UIKit
 import WebKit
 
-internal class EmbedView: UIView, WKScriptMessageHandler, WKNavigationDelegate {
+internal class EmbedView: UIView, WKNavigationDelegate {
     
     let userContentController = WKUserContentController()
     var webView: WKWebView!
+    
+    let html = """
+        <html>
+          <head>
+            <meta charset="UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            </head>
+            <body style="height: 100vh; margin: 0;">
+                <div id="parent-element" style="height: 100vh; width: 100vw;"></div>
+            </body>
+            <script>
+                window.adaSettings = {
+                    parentElement: "parent-element"
+                }
+            </script>
+            <script
+                async
+                id="__ada"
+                src="https://static.ada.support/embed.js"
+                data-lazy
+                onload="onLoadHandler()"
+            ></script>
+            <script>
+                window.webkit.messageHandlers.embedReady.postMessage({"status":"ready"});
+                function onLoadHandler() {
+                    // Tell framework Embed is ready
+                    try {
+                        window.webkit.messageHandlers.embedReady.postMessage({"status":"ready"});
+                    } catch(err) {
+                        console.error('Can not reach native code');
+                    }
+                }
+
+                function initializeEmbed(data) {
+                    const decodedData = window.atob(data)
+                    const parsedData = JSON.parse(decodedData)
+                    const { handle, cluster, language, styles, greeting, metaFields } = parsedData;
+
+                    adaEmbed.start({
+                        handle,
+                        parentElement: "parent-element",
+                        cluster,
+                        language,
+                        styles,
+                        greeting,
+                        metaFields
+                    });
+                    return handle;
+                }
+
+                function triggerEmbed(data) {
+                    const decodedData = window.atob(data)
+                    const parsedData = JSON.parse(decodedData)
+                    return parsedData;
+                }
+            </script>
+        </html>
+
+    """
     
     internal override init(frame: CGRect) {
         // For use in code
@@ -46,75 +105,15 @@ internal class EmbedView: UIView, WKScriptMessageHandler, WKNavigationDelegate {
 //        let request = URLRequest(url: url)
 //        webView.load(request)
         
-        let html = """
-            <html>
-              <head>
-                <meta charset="UTF-8" />
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                </head>
-                <body style="height: 100vh; margin: 0;">
-                    <div id="parent-element" style="height: 100vh; width: 100vw;"></div>
-                </body>
-                <script>
-                    window.adaSettings = {
-                        parentElement: "parent-element"
-                    }
-                </script>
-                <script
-                    async
-                    id="__ada"
-                    src="https://static.ada.support/embed.js"
-                    data-lazy
-                    onload="onLoadHandler()"
-                ></script>
-                <script>
-                    window.webkit.messageHandlers.embedReady.postMessage({"status":"ready"});
-                    function onLoadHandler() {
-                        // Tell framework Embed is ready
-                        try {
-                            window.webkit.messageHandlers.embedReady.postMessage({"status":"ready"});
-                        } catch(err) {
-                            console.error('Can not reach native code');
-                        }
-                    }
-
-                    function initializeEmbed(data) {
-                        const decodedData = window.atob(data)
-                        const parsedData = JSON.parse(decodedData)
-                        const { handle, cluster, language, styles, greeting, metaFields } = parsedData;
-
-                        adaEmbed.start({
-                            handle,
-                            parentElement: "parent-element",
-                            cluster,
-                            language,
-                            styles,
-                            greeting,
-                            metaFields
-                        });
-                        return handle;
-                    }
-
-                    function triggerEmbed(data) {
-                        const decodedData = window.atob(data)
-                        const parsedData = JSON.parse(decodedData)
-                        return parsedData;
-                    }
-                </script>
-            </html>
-
-        """
-
-        
         webView.loadHTMLString(html, baseURL: nil)
     }
     
-    public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        print("SOMETHING PLEASE HAPPEN")
-        if message.name == "embedReady", let messageBody = message.body as? String {
-            print(messageBody)
-        }
-    }
+//    public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+//        print("SOMETHING PLEASE HAPPEN")
+//        if message.name == "embedReady", let messageBody = message.body as? String {
+//            print(messageBody)
+//        }
+//    }
     
     
     public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
@@ -123,4 +122,12 @@ internal class EmbedView: UIView, WKScriptMessageHandler, WKNavigationDelegate {
         print("load")
     }
 
+}
+
+/// Adds support for the WKScriptMessageHandler to ViewController.
+extension EmbedView: WKScriptMessageHandler {
+    func userContentController(_ userContentController: WKUserContentController,
+                               didReceive message: WKScriptMessage) {
+        print("Received message from native: \(message)")
+    }
 }
