@@ -12,6 +12,7 @@ import WebKit
 internal class EmbedView: UIView, WKNavigationDelegate, WKScriptMessageHandler {
     
     var webView: WKWebView!
+    var handle: String
     
     let html = """
         <html>
@@ -71,16 +72,15 @@ internal class EmbedView: UIView, WKNavigationDelegate, WKScriptMessageHandler {
 
     """
     
-    internal override init(frame: CGRect) {
+    internal init(frame: CGRect, handle: String) {
         // For use in code
+        self.handle = handle
         super.init(frame: frame)
         setUpView()
     }
     
-    internal required init?(coder aDecoder: NSCoder) {
-        // For use in Interface Builder
-        super.init(coder: aDecoder)
-        setUpView()
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     private func setUpView() {
@@ -115,6 +115,25 @@ internal class EmbedView: UIView, WKNavigationDelegate, WKScriptMessageHandler {
         if message.name == "embedReady", let messageBody = message.body as? String {
             // We should trigger a callback here for when Embed has loaded
             print(messageBody)
+            self.initialize()
+        }
+    }
+    
+    private func initialize() {
+        let serializedData = try! JSONSerialization.data(withJSONObject: [
+            "handle": self.handle
+            ], options: [])
+        let encodedData = serializedData.base64EncodedString()
+        
+        self.webView.evaluateJavaScript("initializeEmbed('\(encodedData)');") { (result, error) in
+            if let err = error {
+                print(err)
+                print(err.localizedDescription)
+            } else {
+                print("THIS WORKED")
+                guard let dataValue = result else {return}
+                print(dataValue)
+            }
         }
     }
 }
