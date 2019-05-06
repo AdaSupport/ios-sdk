@@ -10,14 +10,7 @@ import UIKit
 import WebKit
 
 public class AdaEmbed {
-    var handle: String
-    var cluster: String
-    var language: String
-    var styles: String
-    var greeting: String
     var view: UIView
-//    var webView: WKWebView
-    var metaFields: [String: String]
     var embed: EmbedView
     
     public init(
@@ -30,19 +23,17 @@ public class AdaEmbed {
         metaFields: [String: String]
     ) {
         self.view = view
-        self.handle = handle
-        self.cluster = cluster
-        self.language = language
-        self.styles = styles
-        self.greeting = greeting
-        self.metaFields = metaFields
-        self.embed = EmbedView(frame: view.bounds, handle: handle)
-
+        self.embed = EmbedView(
+            frame: view.bounds,
+            handle: handle,
+            cluster: cluster,
+            language: language,
+            styles: styles,
+            greeting: greeting,
+            metaFields: metaFields
+        )
+        
         addSubview()
-    }
-    
-    public func printHandle() {
-        print("Props: \(self.handle)")
     }
     
     public func setMetaFields(fields: [String : Any]) {

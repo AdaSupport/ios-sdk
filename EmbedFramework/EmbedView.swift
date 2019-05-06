@@ -13,6 +13,11 @@ internal class EmbedView: UIView, WKNavigationDelegate, WKScriptMessageHandler {
     
     var webView: WKWebView!
     var handle: String
+    var cluster: String
+    var language: String
+    var styles: String
+    var greeting: String
+    var metaFields: [String: String]
     
     let html = """
         <html>
@@ -72,9 +77,23 @@ internal class EmbedView: UIView, WKNavigationDelegate, WKScriptMessageHandler {
 
     """
     
-    internal init(frame: CGRect, handle: String) {
+    internal init(
+        frame: CGRect,
+        handle: String,
+        cluster: String,
+        language: String,
+        styles: String,
+        greeting: String,
+        metaFields: [String: String]
+    ) {
         // For use in code
         self.handle = handle
+        self.cluster = cluster
+        self.language = language
+        self.styles = styles
+        self.greeting = greeting
+        self.metaFields = metaFields
+        
         super.init(frame: frame)
         setUpView()
     }
