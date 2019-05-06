@@ -126,7 +126,7 @@ internal class EmbedView: UIView, WKNavigationDelegate, WKScriptMessageHandler {
     
     public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         print("PM: \(message.name), \(message.body) ")
-        if message.name == "embedReady", let messageBody = message.body as? String {
+        if message.name == "embedReady" {
             self.initialize()
         }
     }
