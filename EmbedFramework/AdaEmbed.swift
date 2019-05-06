@@ -40,11 +40,14 @@ public class AdaEmbed {
         let serializedData = try! JSONSerialization.data(withJSONObject: fields, options: [])
         let encodedData = serializedData.base64EncodedString()
         
-        self.embed.webView.evaluateJavaScript("triggerEmbed('\(encodedData)');") { (result, error) in
+        print("encoded", encodedData)
+        
+        self.embed.webView.evaluateJavaScript("setMetaFields('\(encodedData)');") { (result, error) in
             if let err = error {
                 print(err)
                 print(err.localizedDescription)
             } else {
+                print("yolo")
                 guard let dataValue = result else {return}
                 print(dataValue)
             }

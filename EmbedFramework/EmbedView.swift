@@ -46,7 +46,7 @@ internal class EmbedView: UIView, WKNavigationDelegate, WKScriptMessageHandler {
                     try {
                         window.webkit.messageHandlers.embedReady.postMessage("ready");
                     } catch(err) {
-                        console.error('Can not reach native code');
+                        console.error("Can not reach native code");
                     }
                 }
 
@@ -64,13 +64,13 @@ internal class EmbedView: UIView, WKNavigationDelegate, WKScriptMessageHandler {
                         greeting,
                         metaFields
                     });
-                    return handle;
                 }
 
-                function triggerEmbed(data) {
+                function setMetaFields(data) {
                     const decodedData = window.atob(data)
                     const parsedData = JSON.parse(decodedData)
-                    return parsedData;
+
+                    adaEmbed.setMetaFields(parsedData);
                 }
             </script>
         </html>
