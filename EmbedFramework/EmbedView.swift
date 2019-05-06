@@ -140,7 +140,12 @@ internal class EmbedView: UIView, WKNavigationDelegate, WKScriptMessageHandler {
     
     private func initialize() {
         let serializedData = try! JSONSerialization.data(withJSONObject: [
-            "handle": self.handle
+            "handle": self.handle,
+            "cluster": self.cluster,
+            "language": self.language,
+            "styles": self.styles,
+            "greeting": self.greeting,
+            "metaFields": self.metaFields
             ], options: [])
         let encodedData = serializedData.base64EncodedString()
         
