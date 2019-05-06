@@ -86,7 +86,6 @@ internal class EmbedView: UIView, WKNavigationDelegate, WKScriptMessageHandler {
         greeting: String,
         metaFields: [String: String]
     ) {
-        // For use in code
         self.handle = handle
         self.cluster = cluster
         self.language = language
@@ -121,19 +120,13 @@ internal class EmbedView: UIView, WKNavigationDelegate, WKScriptMessageHandler {
 //            let request = URLRequest(url: url)
 //            webView.load(request)
 //        }
-        // Use remote URL temporarily until code above is fixed
-//        let url = URL(string: "https://kind-stallman-353668.netlify.com/")!
-//        let request = URLRequest(url: url)
-//        webView.load(request)
-        
+
         webView.loadHTMLString(html, baseURL: nil)
     }
     
     public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         print("PM: \(message.name), \(message.body) ")
         if message.name == "embedReady", let messageBody = message.body as? String {
-            // We should trigger a callback here for when Embed has loaded
-            print(messageBody)
             self.initialize()
         }
     }
@@ -154,7 +147,6 @@ internal class EmbedView: UIView, WKNavigationDelegate, WKScriptMessageHandler {
                 print(err)
                 print(err.localizedDescription)
             } else {
-                print("THIS WORKED")
                 guard let dataValue = result else {return}
                 print(dataValue)
             }
