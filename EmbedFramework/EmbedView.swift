@@ -180,7 +180,6 @@ public class EmbedView: UIView, WKNavigationDelegate, WKScriptMessageHandler {
                 print(err)
                 print(err.localizedDescription)
             } else {
-                print("yolo")
                 guard let dataValue = result else {return}
                 print(dataValue)
             }
@@ -191,6 +190,7 @@ public class EmbedView: UIView, WKNavigationDelegate, WKScriptMessageHandler {
         self.actionStack.forEach { (toRun: String) in
             self.evalJS(toRun)
         }
+        self.actionStack.removeAll()
     }
     
     private func addSubview() {
