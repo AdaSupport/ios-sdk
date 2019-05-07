@@ -9,8 +9,10 @@
 import UIKit
 import WebKit
 
-internal class EmbedView: UIView, WKNavigationDelegate, WKScriptMessageHandler {
+public class EmbedView: UIView, WKNavigationDelegate, WKScriptMessageHandler {
     
+    var view: UIView
+    var actionStack: [String]
     var webView: WKWebView!
     var handle: String
     var cluster: String
@@ -78,8 +80,8 @@ internal class EmbedView: UIView, WKNavigationDelegate, WKScriptMessageHandler {
 
     """
     
-    internal init(
-        frame: CGRect,
+    public init(
+        view: UIView,
         handle: String,
         cluster: String,
         language: String,
@@ -87,6 +89,7 @@ internal class EmbedView: UIView, WKNavigationDelegate, WKScriptMessageHandler {
         greeting: String,
         metaFields: [String: String]
     ) {
+        self.view = view
         self.handle = handle
         self.cluster = cluster
         self.language = language
@@ -94,8 +97,9 @@ internal class EmbedView: UIView, WKNavigationDelegate, WKScriptMessageHandler {
         self.greeting = greeting
         self.metaFields = metaFields
         self.isEmbedReady = false
+        self.actionStack = []
         
-        super.init(frame: frame)
+        super.init(frame: view.frame)
         setUpView()
     }
     
@@ -112,7 +116,7 @@ internal class EmbedView: UIView, WKNavigationDelegate, WKScriptMessageHandler {
         config.userContentController = userContentController
 
         webView = WKWebView(frame: self.frame, configuration: config)
-        addSubview(webView)
+        self.view.addSubview(webView)
         
         // This isn't working yet :(
 //        let bundle = Bundle.init(identifier: "com.ada.EmbedFramework")
@@ -130,8 +134,22 @@ internal class EmbedView: UIView, WKNavigationDelegate, WKScriptMessageHandler {
         print("PM: \(message.name), \(message.body) ")
         if message.name == "embedReady" {
             self.initialize()
+            self.executeActionStack()
             self.isEmbedReady = true
         }
+    }
+    
+    public func setMetaFields(fields: [String : Any]) {
+        let serializedData = try! JSONSerialization.data(withJSONObject: fields, options: [])
+        let encodedData = serializedData.base64EncodedString()
+        let toRun = "setMetaFields('\(encodedData)');"
+        
+        if !self.isEmbedReady {
+            self.actionStack.append(toRun)
+            return
+        }
+        
+        self.evalJS(toRun)
     }
     
     private func initialize() {
@@ -154,5 +172,28 @@ internal class EmbedView: UIView, WKNavigationDelegate, WKScriptMessageHandler {
                 print(dataValue)
             }
         }
+    }
+    
+    private func evalJS(_ toRun: String) {
+        self.webView.evaluateJavaScript(toRun) { (result, error) in
+            if let err = error {
+                print(err)
+                print(err.localizedDescription)
+            } else {
+                print("yolo")
+                guard let dataValue = result else {return}
+                print(dataValue)
+            }
+        }
+    }
+    
+    private func executeActionStack() {
+        self.actionStack.forEach { (toRun: String) in
+            self.evalJS(toRun)
+        }
+    }
+    
+    private func addSubview() {
+        self.view.addSubview(self.webView)
     }
 }
