@@ -18,6 +18,7 @@ internal class EmbedView: UIView, WKNavigationDelegate, WKScriptMessageHandler {
     var styles: String
     var greeting: String
     var metaFields: [String: String]
+    var isEmbedReady: Bool
     
     let html = """
         <html>
@@ -92,6 +93,7 @@ internal class EmbedView: UIView, WKNavigationDelegate, WKScriptMessageHandler {
         self.styles = styles
         self.greeting = greeting
         self.metaFields = metaFields
+        self.isEmbedReady = false
         
         super.init(frame: frame)
         setUpView()
@@ -128,6 +130,7 @@ internal class EmbedView: UIView, WKNavigationDelegate, WKScriptMessageHandler {
         print("PM: \(message.name), \(message.body) ")
         if message.name == "embedReady" {
             self.initialize()
+            self.isEmbedReady = true
         }
     }
     

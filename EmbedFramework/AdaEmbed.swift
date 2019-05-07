@@ -12,6 +12,7 @@ import WebKit
 public class AdaEmbed {
     var view: UIView
     var embed: EmbedView
+    var actionStack: [String]
     
     public init(
         view: UIView,
@@ -23,6 +24,7 @@ public class AdaEmbed {
         metaFields: [String: String]
     ) {
         self.view = view
+        self.actionStack = []
         self.embed = EmbedView(
             frame: view.bounds,
             handle: handle,
@@ -39,10 +41,18 @@ public class AdaEmbed {
     public func setMetaFields(fields: [String : Any]) {
         let serializedData = try! JSONSerialization.data(withJSONObject: fields, options: [])
         let encodedData = serializedData.base64EncodedString()
+        let toRun = "setMetaFields('\(encodedData)');"
         
-        print("encoded", encodedData)
+        if !self.embed.isEmbedReady {
+            self.actionStack.append(toRun)
+            return
+        }
         
-        self.embed.webView.evaluateJavaScript("setMetaFields('\(encodedData)');") { (result, error) in
+        self.evalJS(toRun)
+    }
+    
+    private func evalJS(_ toRun: String) {
+        self.embed.webView.evaluateJavaScript(toRun) { (result, error) in
             if let err = error {
                 print(err)
                 print(err.localizedDescription)
