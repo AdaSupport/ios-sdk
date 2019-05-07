@@ -51,6 +51,10 @@ public class AdaEmbed {
         self.evalJS(toRun)
     }
     
+    private func onLoad() {
+        print("yolo")
+    }
+    
     private func evalJS(_ toRun: String) {
         self.embed.webView.evaluateJavaScript(toRun) { (result, error) in
             if let err = error {
@@ -61,6 +65,12 @@ public class AdaEmbed {
                 guard let dataValue = result else {return}
                 print(dataValue)
             }
+        }
+    }
+    
+    private func executeActionStack() {
+        self.actionStack.forEach { (toRun: String) in
+            self.evalJS(toRun)
         }
     }
 
