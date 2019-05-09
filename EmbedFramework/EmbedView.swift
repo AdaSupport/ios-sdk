@@ -11,6 +11,7 @@ import WebKit
 
 public class EmbedView: UIView, WKNavigationDelegate, WKScriptMessageHandler {
     
+    let network: NetworkManager = NetworkManager.sharedInstance
     var view: UIView
     var actionStack: [String]
     var webView: WKWebView!
@@ -100,6 +101,16 @@ public class EmbedView: UIView, WKNavigationDelegate, WKScriptMessageHandler {
         self.actionStack = []
         
         super.init(frame: view.frame)
+        
+        print("init")
+        NetworkManager.isUnreachable { _ in
+            print("UNREACHABLE NETWORK")
+        }
+        
+        NetworkManager.isReachable { _ in
+            print("REACHABLE NETWORK")
+        }
+        
         setUpView()
     }
     
