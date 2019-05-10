@@ -11,7 +11,7 @@ import UIKit
 public class EmbedViewController: UIViewController {
     
     let network: NetworkManager = NetworkManager.sharedInstance
-    var view: UIView
+    var parentView: UIView
     var actionStack: [String]
     var handle: String
     var cluster: String
@@ -21,10 +21,9 @@ public class EmbedViewController: UIViewController {
     var metaFields: [String: String]
     var isEmbedReady: Bool
     
-    // this is a convenient way to create this view controller without a imageURL
     convenience init() {
         self.init(
-            view: UIView(),
+            parentView: UIView(),
             handle: "",
             cluster: "",
             language: "",
@@ -35,7 +34,7 @@ public class EmbedViewController: UIViewController {
     }
     
     public init(
-        view: UIView,
+        parentView: UIView,
         handle: String,
         cluster: String,
         language: String,
@@ -43,7 +42,7 @@ public class EmbedViewController: UIViewController {
         greeting: String,
         metaFields: [String: String]
     ) {
-        self.view = view
+        self.parentView = parentView
         self.handle = handle
         self.cluster = cluster
         self.language = language
