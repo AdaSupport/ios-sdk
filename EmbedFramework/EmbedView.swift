@@ -9,10 +9,8 @@
 import UIKit
 import WebKit
 
-public class EmbedView: UIView, WKNavigationDelegate, WKScriptMessageHandler {
+public class EmbedView: UIView{
     
-    let network: NetworkManager = NetworkManager.sharedInstance
-    var view: UIView
     var actionStack: [String]
     var webView: WKWebView!
     var handle: String
@@ -82,7 +80,7 @@ public class EmbedView: UIView, WKNavigationDelegate, WKScriptMessageHandler {
     """
     
     public init(
-        view: UIView,
+        frame: CGRect,
         handle: String,
         cluster: String,
         language: String,
@@ -90,7 +88,6 @@ public class EmbedView: UIView, WKNavigationDelegate, WKScriptMessageHandler {
         greeting: String,
         metaFields: [String: String]
     ) {
-        self.view = view
         self.handle = handle
         self.cluster = cluster
         self.language = language
@@ -100,111 +97,96 @@ public class EmbedView: UIView, WKNavigationDelegate, WKScriptMessageHandler {
         self.isEmbedReady = false
         self.actionStack = []
         
-        super.init(frame: view.frame)
-        
-        print("init")
-        NetworkManager.isUnreachable { _ in
-            print("UNREACHABLE NETWORK")
-        }
-        
-        NetworkManager.isReachable { _ in
-            print("REACHABLE NETWORK")
-        }
-        
-        setUpView()
+        super.init(frame: frame)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setUpView() {
-        let config = WKWebViewConfiguration()
-        let userContentController = WKUserContentController()
-        
-        userContentController.add(self, name: "embedReady")
-        
-        config.userContentController = userContentController
-
-        webView = WKWebView(frame: self.frame, configuration: config)
-        self.view.addSubview(webView)
-        
-        // This isn't working yet :(
-//        let bundle = Bundle.init(identifier: "com.ada.EmbedFramework")
-//        print(bundle as Any)
-//        if let htmlPath = bundle?.path(forResource: "index", ofType: "html") {
-//            let url = URL(fileURLWithPath: htmlPath)
-//            let request = URLRequest(url: url)
-//            webView.load(request)
+//    private func setUpView() {
+//        let config = WKWebViewConfiguration()
+//        let userContentController = WKUserContentController()
+//
+//        userContentController.add(self, name: "embedReady")
+//
+//        config.userContentController = userContentController
+//
+//        self.webView = WKWebView(frame: self.frame, configuration: config)
+////        self.parentView.addSubview(webView)
+//
+//        // This isn't working yet :(
+////        let bundle = Bundle.init(identifier: "com.ada.EmbedFramework")
+////        print(bundle as Any)
+////        if let htmlPath = bundle?.path(forResource: "index", ofType: "html") {
+////            let url = URL(fileURLWithPath: htmlPath)
+////            let request = URLRequest(url: url)
+////            webView.load(request)
+////        }
+//
+//        webView.loadHTMLString(html, baseURL: nil)
+//    }
+    
+//    public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+//        print("PM: \(message.name), \(message.body) ")
+//        if message.name == "embedReady" {
+//            self.initialize()
+//            self.executeActionStack()
+//            self.isEmbedReady = true
 //        }
-
-        webView.loadHTMLString(html, baseURL: nil)
-    }
+//    }
     
-    public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        print("PM: \(message.name), \(message.body) ")
-        if message.name == "embedReady" {
-            self.initialize()
-            self.executeActionStack()
-            self.isEmbedReady = true
-        }
-    }
+//    public func setMetaFields(fields: [String : Any]) {
+//        let serializedData = try! JSONSerialization.data(withJSONObject: fields, options: [])
+//        let encodedData = serializedData.base64EncodedString()
+//        let toRun = "setMetaFields('\(encodedData)');"
+//        
+//        if !self.isEmbedReady {
+//            self.actionStack.append(toRun)
+//            return
+//        }
+//        
+//        self.evalJS(toRun)
+//    }
     
-    public func setMetaFields(fields: [String : Any]) {
-        let serializedData = try! JSONSerialization.data(withJSONObject: fields, options: [])
-        let encodedData = serializedData.base64EncodedString()
-        let toRun = "setMetaFields('\(encodedData)');"
-        
-        if !self.isEmbedReady {
-            self.actionStack.append(toRun)
-            return
-        }
-        
-        self.evalJS(toRun)
-    }
+//    private func initialize() {
+//        let serializedData = try! JSONSerialization.data(withJSONObject: [
+//            "handle": self.handle,
+//            "cluster": self.cluster,
+//            "language": self.language,
+//            "styles": self.styles,
+//            "greeting": self.greeting,
+//            "metaFields": self.metaFields
+//            ], options: [])
+//        let encodedData = serializedData.base64EncodedString()
+//        
+//        self.webView.evaluateJavaScript("initializeEmbed('\(encodedData)');") { (result, error) in
+//            if let err = error {
+//                print(err)
+//                print(err.localizedDescription)
+//            } else {
+//                guard let dataValue = result else {return}
+//                print(dataValue)
+//            }
+//        }
+//    }
     
-    private func initialize() {
-        let serializedData = try! JSONSerialization.data(withJSONObject: [
-            "handle": self.handle,
-            "cluster": self.cluster,
-            "language": self.language,
-            "styles": self.styles,
-            "greeting": self.greeting,
-            "metaFields": self.metaFields
-            ], options: [])
-        let encodedData = serializedData.base64EncodedString()
-        
-        self.webView.evaluateJavaScript("initializeEmbed('\(encodedData)');") { (result, error) in
-            if let err = error {
-                print(err)
-                print(err.localizedDescription)
-            } else {
-                guard let dataValue = result else {return}
-                print(dataValue)
-            }
-        }
-    }
+//    private func evalJS(_ toRun: String) {
+//        self.webView.evaluateJavaScript(toRun) { (result, error) in
+//            if let err = error {
+//                print(err)
+//                print(err.localizedDescription)
+//            } else {
+//                guard let dataValue = result else {return}
+//                print(dataValue)
+//            }
+//        }
+//    }
     
-    private func evalJS(_ toRun: String) {
-        self.webView.evaluateJavaScript(toRun) { (result, error) in
-            if let err = error {
-                print(err)
-                print(err.localizedDescription)
-            } else {
-                guard let dataValue = result else {return}
-                print(dataValue)
-            }
-        }
-    }
-    
-    private func executeActionStack() {
-        self.actionStack.forEach { (toRun: String) in
-            self.evalJS(toRun)
-        }
-        self.actionStack.removeAll()
-    }
-    
-    private func addSubview() {
-        self.view.addSubview(self.webView)
-    }
+//    private func executeActionStack() {
+//        self.actionStack.forEach { (toRun: String) in
+//            self.evalJS(toRun)
+//        }
+//        self.actionStack.removeAll()
+//    }
 }

@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		499B565A22847E34009FFA42 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499B565922847E34009FFA42 /* NetworkManager.swift */; };
-		49ADD0EE227232E7008D1ABD /* EmbedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49ADD0ED227232E7008D1ABD /* EmbedView.swift */; };
 		49B786E52284B7E000165844 /* EmbedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B786E42284B7E000165844 /* EmbedViewController.swift */; };
 		49C73563226F99FE00D22E4B /* EmbedFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49C73559226F99FE00D22E4B /* EmbedFramework.framework */; };
 		49C73568226F99FE00D22E4B /* EmbedFrameworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C73567226F99FE00D22E4B /* EmbedFrameworkTests.swift */; };
@@ -30,7 +29,6 @@
 /* Begin PBXFileReference section */
 		1116AF5DBEB454FD9F3AAEE2 /* Pods-EmbedFramework.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EmbedFramework.release.xcconfig"; path = "Target Support Files/Pods-EmbedFramework/Pods-EmbedFramework.release.xcconfig"; sourceTree = "<group>"; };
 		499B565922847E34009FFA42 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
-		49ADD0ED227232E7008D1ABD /* EmbedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmbedView.swift; sourceTree = "<group>"; };
 		49B786E42284B7E000165844 /* EmbedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmbedViewController.swift; sourceTree = "<group>"; };
 		49C73559226F99FE00D22E4B /* EmbedFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EmbedFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		49C7355C226F99FE00D22E4B /* EmbedFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EmbedFramework.h; sourceTree = "<group>"; };
@@ -92,7 +90,6 @@
 				49C7355C226F99FE00D22E4B /* EmbedFramework.h */,
 				49C7355D226F99FE00D22E4B /* Info.plist */,
 				499B565922847E34009FFA42 /* NetworkManager.swift */,
-				49ADD0ED227232E7008D1ABD /* EmbedView.swift */,
 				49B786E42284B7E000165844 /* EmbedViewController.swift */,
 			);
 			path = EmbedFramework;
@@ -286,7 +283,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				499B565A22847E34009FFA42 /* NetworkManager.swift in Sources */,
-				49ADD0EE227232E7008D1ABD /* EmbedView.swift in Sources */,
 				49B786E52284B7E000165844 /* EmbedViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
