@@ -155,28 +155,6 @@ public class EmbedViewController: UIViewController, WKNavigationDelegate, WKScri
         }
     }
     
-    private func initialize() {
-        let serializedData = try! JSONSerialization.data(withJSONObject: [
-            "handle": self.handle,
-            "cluster": self.cluster,
-            "language": self.language,
-            "styles": self.styles,
-            "greeting": self.greeting,
-            "metaFields": self.metaFields
-            ], options: [])
-        let encodedData = serializedData.base64EncodedString()
-        
-        self.webView.evaluateJavaScript("initializeEmbed('\(encodedData)');") { (result, error) in
-            if let err = error {
-                print(err)
-                print(err.localizedDescription)
-            } else {
-                guard let dataValue = result else {return}
-                print(dataValue)
-            }
-        }
-    }
-    
     public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         print("PM: \(message.name), \(message.body) ")
         if message.name == "embedReady" {
@@ -197,6 +175,28 @@ public class EmbedViewController: UIViewController, WKNavigationDelegate, WKScri
         }
         
         self.evalJS(toRun)
+    }
+    
+    private func initialize() {
+        let serializedData = try! JSONSerialization.data(withJSONObject: [
+            "handle": self.handle,
+            "cluster": self.cluster,
+            "language": self.language,
+            "styles": self.styles,
+            "greeting": self.greeting,
+            "metaFields": self.metaFields
+            ], options: [])
+        let encodedData = serializedData.base64EncodedString()
+        
+        self.webView.evaluateJavaScript("initializeEmbed('\(encodedData)');") { (result, error) in
+            if let err = error {
+                print(err)
+                print(err.localizedDescription)
+            } else {
+                guard let dataValue = result else {return}
+                print(dataValue)
+            }
+        }
     }
     
     private func evalJS(_ toRun: String) {
