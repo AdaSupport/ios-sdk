@@ -135,8 +135,6 @@ public class EmbedViewController: UIViewController, WKNavigationDelegate, WKScri
         
         self.webView.loadHTMLString(html, baseURL: nil)
         
-//        let offlineView = OfflineView(frame: parentView.frame)
-        
         self.view.addSubview(self.webView)
         self.parentView.addSubview(self.view)
     }
@@ -147,6 +145,15 @@ public class EmbedViewController: UIViewController, WKNavigationDelegate, WKScri
 
     override public func viewDidLoad() {
         super.viewDidLoad()
+        
+        network.reachability.whenReachable = { _ in            
+            self.view.addSubview(self.webView)
+        }
+        
+        network.reachability.whenUnreachable = { _ in
+            let offlineView = OfflineView(frame: self.parentView.frame)
+            self.view.addSubview(offlineView)
+        }
 
         NetworkManager.isReachable { networkManagerInstance in
             print("Network is available")
