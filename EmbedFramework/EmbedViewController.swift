@@ -135,6 +135,8 @@ public class EmbedViewController: UIViewController, WKNavigationDelegate, WKScri
         
         self.webView.loadHTMLString(html, baseURL: nil)
         
+//        let offlineView = OfflineView(frame: parentView.frame)
+        
         self.view.addSubview(self.webView)
         self.parentView.addSubview(self.view)
     }
