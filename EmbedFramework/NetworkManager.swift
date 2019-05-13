@@ -38,7 +38,7 @@ class NetworkManager: NSObject {
     }
     
     @objc func networkStatusChanged(_ notification: Notification) {
-        // Do something globally here!
+        print("Network status changed")
     }
     
     static func stopNotifier() -> Void {
@@ -60,20 +60,6 @@ class NetworkManager: NSObject {
     // Network is unreachable
     static func isUnreachable(completed: @escaping (NetworkManager) -> Void) {
         if (NetworkManager.sharedInstance.reachability).connection == .none {
-            completed(NetworkManager.sharedInstance)
-        }
-    }
-    
-    // Network is reachable via WWAN/Cellular
-    static func isReachableViaWWAN(completed: @escaping (NetworkManager) -> Void) {
-        if (NetworkManager.sharedInstance.reachability).connection == .cellular {
-            completed(NetworkManager.sharedInstance)
-        }
-    }
-    
-    // Network is reachable via WiFi
-    static func isReachableViaWiFi(completed: @escaping (NetworkManager) -> Void) {
-        if (NetworkManager.sharedInstance.reachability).connection == .wifi {
             completed(NetworkManager.sharedInstance)
         }
     }
