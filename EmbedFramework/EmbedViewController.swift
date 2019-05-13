@@ -114,28 +114,6 @@ public class EmbedViewController: UIViewController, WKNavigationDelegate, WKScri
         
         super.init(nibName: nil, bundle: nil)
         
-        let config = WKWebViewConfiguration()
-        let userContentController = WKUserContentController()
-        
-        userContentController.add(self, name: "embedReady")
-        
-        config.userContentController = userContentController
-        
-        self.webView = WKWebView(frame: parentView.frame, configuration: config)
-        //        self.parentView.addSubview(webView)
-        
-        // This isn't working yet :(
-        //        let bundle = Bundle.init(identifier: "com.ada.EmbedFramework")
-        //        print(bundle as Any)
-        //        if let htmlPath = bundle?.path(forResource: "index", ofType: "html") {
-        //            let url = URL(fileURLWithPath: htmlPath)
-        //            let request = URLRequest(url: url)
-        //            webView.load(request)
-        //        }
-        
-        self.webView.loadHTMLString(html, baseURL: nil)
-        
-        self.view.addSubview(self.webView)
         self.parentView.addSubview(self.view)
     }
     
@@ -145,22 +123,27 @@ public class EmbedViewController: UIViewController, WKNavigationDelegate, WKScri
 
     override public func viewDidLoad() {
         super.viewDidLoad()
+        let offlineView = OfflineView(frame: self.parentView.frame)
         
-        network.reachability.whenReachable = { _ in            
-            self.view.addSubview(self.webView)
+        NetworkManager.isReachable { _ in
+            print("reached")
+            self.initializeWebview()
         }
         
-        network.reachability.whenUnreachable = { _ in
-            let offlineView = OfflineView(frame: self.parentView.frame)
+        NetworkManager.isUnreachable { _ in
+            print("did not load")
             self.view.addSubview(offlineView)
         }
 
-        NetworkManager.isReachable { networkManagerInstance in
+        network.reachability.whenReachable = { _ in
             print("Network is available")
+            self.view.addSubview(self.webView)
+//            self.initializeWebview()
         }
         
-        NetworkManager.isUnreachable { networkManagerInstance in
+        network.reachability.whenUnreachable = { _ in
             print("Network is Unavailable")
+            self.view.addSubview(offlineView)
         }
     }
     
@@ -184,6 +167,29 @@ public class EmbedViewController: UIViewController, WKNavigationDelegate, WKScri
         }
         
         self.evalJS(toRun)
+    }
+    
+    private func initializeWebview() {
+        let config = WKWebViewConfiguration()
+        let userContentController = WKUserContentController()
+        
+        userContentController.add(self, name: "embedReady")
+        
+        config.userContentController = userContentController
+        
+        self.webView = WKWebView(frame: parentView.frame, configuration: config)
+        
+        // This isn't working yet :(
+        //        let bundle = Bundle.init(identifier: "com.ada.EmbedFramework")
+        //        print(bundle as Any)
+        //        if let htmlPath = bundle?.path(forResource: "index", ofType: "html") {
+        //            let url = URL(fileURLWithPath: htmlPath)
+        //            let request = URLRequest(url: url)
+        //            webView.load(request)
+        //        }
+        
+        self.webView.loadHTMLString(html, baseURL: nil)
+        self.view.addSubview(self.webView)
     }
     
     private func initialize() {
