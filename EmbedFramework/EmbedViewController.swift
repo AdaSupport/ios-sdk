@@ -114,6 +114,7 @@ public class EmbedViewController: UIViewController, WKNavigationDelegate, WKScri
         
         super.init(nibName: nil, bundle: nil)
         
+        self.view.frame = self.parentView.frame
         self.parentView.addSubview(self.view)
     }
     
@@ -122,6 +123,8 @@ public class EmbedViewController: UIViewController, WKNavigationDelegate, WKScri
     }
 
     override public func viewDidLoad() {
+        print("Starting")
+        
         super.viewDidLoad()
         let offlineView = OfflineView(frame: self.parentView.frame)
         
@@ -177,7 +180,11 @@ public class EmbedViewController: UIViewController, WKNavigationDelegate, WKScri
         
         config.userContentController = userContentController
         
-        self.webView = WKWebView(frame: parentView.frame, configuration: config)
+        self.webView = WKWebView(frame: CGRect(x: 0, y: 0, width: parentView.frame.width, height: parentView.frame.height), configuration: config)
+        
+        print(parentView.frame)
+        print(self.view.frame)
+        print(self.webView.frame)
         
         // This isn't working yet :(
         //        let bundle = Bundle.init(identifier: "com.ada.EmbedFramework")
@@ -189,7 +196,7 @@ public class EmbedViewController: UIViewController, WKNavigationDelegate, WKScri
         //        }
         
         self.webView.loadHTMLString(html, baseURL: nil)
-        self.view.addSubview(self.webView)
+        self.parentView.addSubview(self.webView)
     }
     
     private func initialize() {
