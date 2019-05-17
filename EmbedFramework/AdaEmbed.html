@@ -28,27 +28,27 @@
             }
         }
     
-    function initializeEmbed(data) {
-        const decodedData = window.atob(data)
-        const parsedData = JSON.parse(decodedData)
-        const { handle, cluster, language, styles, greeting, metaFields } = parsedData;
-        
-        adaEmbed.start({
-                       handle,
-                       parentElement: "parent-element",
-                       cluster,
-                       language,
-                       styles,
-                       greeting,
-                       metaFields
-                       });
-    }
+        function initializeEmbed(data) {
+            const decodedData = window.atob(data)
+            const parsedData = JSON.parse(decodedData)
+            const { handle, cluster, language, styles, greeting, metaFields } = parsedData;
+            
+            adaEmbed.start({
+                           handle,
+                           parentElement: "parent-element",
+                           cluster,
+                           language,
+                           styles,
+                           greeting,
+                           metaFields
+                           });
+        }
     
-    function setMetaFields(data) {
-        const decodedData = window.atob(data)
-        const parsedData = JSON.parse(decodedData)
-        
-        adaEmbed.setMetaFields(parsedData);
-    }
+        function setMetaFields(data) {
+            const decodedData = window.atob(data)
+            const parsedData = JSON.parse(decodedData)
+            
+            adaEmbed.setMetaFields(parsedData);
+        }
     </script>
-    </html>
+</html>

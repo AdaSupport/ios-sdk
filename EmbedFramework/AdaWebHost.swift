@@ -34,7 +34,7 @@ public class AdaWebHost: NSObject {
     private let webView: WKWebView
     
     /// And here's a view controller to host it
-    private var webViewController: UIViewController?
+    private var webViewController: AdaWebHostViewController?
     
     /// Let's figure out which of those properties above need to be sent
     /// to this initialization method
@@ -61,20 +61,17 @@ public class AdaWebHost: NSObject {
     }
     
     public func launchWebSupport(from viewController: UIViewController) {
-        webViewController = UIViewController()
-        guard let webViewController = webViewController else { return }
-        webViewController.view.addSubview(webView)
-        webView.topAnchor.constraint(equalTo: webViewController.view.topAnchor).isActive = true
-        webView.bottomAnchor.constraint(equalTo: webViewController.view.bottomAnchor).isActive = true
-        webView.leadingAnchor.constraint(equalTo: webViewController.view.leadingAnchor).isActive = true
-        webView.trailingAnchor.constraint(equalTo: webViewController.view.trailingAnchor).isActive = true
-        
-        viewController.present(webViewController, animated: true, completion: nil)
+        let webNavController = AdaWebHostViewController.create(with: webView)
+        viewController.present(webNavController, animated: true, completion: {
+            self.webView.reload()
+        })
     }
     
 }
 
 extension AdaWebHost: WKScriptMessageHandler {
+    /// When the webview loads up, it'll pass back a message to here.
+    /// Fire our initialize methods when that happens.
     public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         print("PM: \(message.name), \(message.body) ")
         if message.name == "embedReady" {

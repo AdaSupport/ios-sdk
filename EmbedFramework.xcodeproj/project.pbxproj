@@ -11,6 +11,8 @@
 		49C73568226F99FE00D22E4B /* EmbedFrameworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C73567226F99FE00D22E4B /* EmbedFrameworkTests.swift */; };
 		49C7356A226F99FE00D22E4B /* EmbedFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = 49C7355C226F99FE00D22E4B /* EmbedFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		49CC58A12286169800B26B32 /* OfflineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CC58A02286169800B26B32 /* OfflineView.swift */; };
+		936ED6B7228F438800796860 /* AdaWebHostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936ED6B6228F438800796860 /* AdaWebHostViewController.swift */; };
+		936ED6B9228F471800796860 /* AdaWebHostViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 936ED6B8228F471800796860 /* AdaWebHostViewController.storyboard */; };
 		93A79784228C86D600499BF9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A79783228C86D600499BF9 /* AppDelegate.swift */; };
 		93A7978B228C86D700499BF9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 93A7978A228C86D700499BF9 /* Assets.xcassets */; };
 		93A7978E228C86D700499BF9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93A7978C228C86D700499BF9 /* LaunchScreen.storyboard */; };
@@ -45,7 +47,8 @@
 		49C73567226F99FE00D22E4B /* EmbedFrameworkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmbedFrameworkTests.swift; sourceTree = "<group>"; };
 		49C73569226F99FE00D22E4B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		49CC58A02286169800B26B32 /* OfflineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineView.swift; sourceTree = "<group>"; };
-		902CF6FA3126F21993A8B1DF /* Pods_EmbedFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EmbedFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		936ED6B6228F438800796860 /* AdaWebHostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaWebHostViewController.swift; sourceTree = "<group>"; };
+		936ED6B8228F471800796860 /* AdaWebHostViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AdaWebHostViewController.storyboard; sourceTree = "<group>"; };
 		93A79781228C86D600499BF9 /* ExampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		93A79783228C86D600499BF9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		93A7978A228C86D700499BF9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -55,7 +58,6 @@
 		93A79795228C870300499BF9 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		93A79797228C871200499BF9 /* AdaWebHost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaWebHost.swift; sourceTree = "<group>"; };
 		93A79799228C8A1700499BF9 /* AdaEmbed.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = AdaEmbed.html; sourceTree = "<group>"; };
-		9A741B29485CE568C70502E3 /* Pods_EmbedFrameworkTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EmbedFrameworkTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,8 +105,10 @@
 			children = (
 				49C7355C226F99FE00D22E4B /* EmbedFramework.h */,
 				49C7355D226F99FE00D22E4B /* Info.plist */,
-				49CC58A02286169800B26B32 /* OfflineView.swift */,
 				93A79797228C871200499BF9 /* AdaWebHost.swift */,
+				936ED6B6228F438800796860 /* AdaWebHostViewController.swift */,
+				936ED6B8228F471800796860 /* AdaWebHostViewController.storyboard */,
+				49CC58A02286169800B26B32 /* OfflineView.swift */,
 				93A79799228C8A1700499BF9 /* AdaEmbed.html */,
 			);
 			path = EmbedFramework;
@@ -135,8 +139,6 @@
 		BCB9FCEA4DD240E8F9F7E3C0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				902CF6FA3126F21993A8B1DF /* Pods_EmbedFramework.framework */,
-				9A741B29485CE568C70502E3 /* Pods_EmbedFrameworkTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -256,6 +258,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				93A7979A228C8A1700499BF9 /* AdaEmbed.html in Resources */,
+				936ED6B9228F471800796860 /* AdaWebHostViewController.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,6 +286,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				936ED6B7228F438800796860 /* AdaWebHostViewController.swift in Sources */,
 				93A79798228C871200499BF9 /* AdaWebHost.swift in Sources */,
 				49CC58A12286169800B26B32 /* OfflineView.swift in Sources */,
 			);
