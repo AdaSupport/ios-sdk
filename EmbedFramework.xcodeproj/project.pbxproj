@@ -16,10 +16,10 @@
 		93A79784228C86D600499BF9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A79783228C86D600499BF9 /* AppDelegate.swift */; };
 		93A7978B228C86D700499BF9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 93A7978A228C86D700499BF9 /* Assets.xcassets */; };
 		93A7978E228C86D700499BF9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93A7978C228C86D700499BF9 /* LaunchScreen.storyboard */; };
-		93A79794228C86EE00499BF9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A79793228C86EE00499BF9 /* ViewController.swift */; };
 		93A79796228C870300499BF9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93A79795228C870300499BF9 /* Main.storyboard */; };
 		93A79798228C871200499BF9 /* AdaWebHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A79797228C871200499BF9 /* AdaWebHost.swift */; };
 		93A7979A228C8A1700499BF9 /* AdaEmbed.html in Resources */ = {isa = PBXBuildFile; fileRef = 93A79799228C8A1700499BF9 /* AdaEmbed.html */; };
+		93BB462F229452B2002B71A0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BB462E229452B2002B71A0 /* ViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,10 +54,10 @@
 		93A7978A228C86D700499BF9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		93A7978D228C86D700499BF9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		93A7978F228C86D700499BF9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		93A79793228C86EE00499BF9 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = ../../AdaSDK/ExampleApp/ViewController.swift; sourceTree = "<group>"; };
 		93A79795228C870300499BF9 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		93A79797228C871200499BF9 /* AdaWebHost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaWebHost.swift; sourceTree = "<group>"; };
 		93A79799228C8A1700499BF9 /* AdaEmbed.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = AdaEmbed.html; sourceTree = "<group>"; };
+		93BB462E229452B2002B71A0 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,7 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				93A79783228C86D600499BF9 /* AppDelegate.swift */,
-				93A79793228C86EE00499BF9 /* ViewController.swift */,
+				93BB462E229452B2002B71A0 /* ViewController.swift */,
 				93A79795228C870300499BF9 /* Main.storyboard */,
 				93A7978A228C86D700499BF9 /* Assets.xcassets */,
 				93A7978C228C86D700499BF9 /* LaunchScreen.storyboard */,
@@ -304,7 +304,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				93A79794228C86EE00499BF9 /* ViewController.swift in Sources */,
+				93BB462F229452B2002B71A0 /* ViewController.swift in Sources */,
 				93A79784228C86D600499BF9 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
