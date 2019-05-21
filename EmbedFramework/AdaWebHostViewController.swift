@@ -21,7 +21,12 @@ class AdaWebHostViewController: UIViewController {
         return navController
     }
     
-    @IBOutlet var webView: WKWebView!
+    var webView: WKWebView?
+    
+    override func loadView() {
+        super.loadView()
+        view = webView
+    }
     
     @IBAction func doneButtonTapped(_ sender: UIBarButtonItem) {
         self.dismiss(animated: true, completion: nil)

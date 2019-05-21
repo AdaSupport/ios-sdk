@@ -31,7 +31,7 @@ public class AdaWebHost: NSObject {
     }()
     
     /// Here's where we do our business
-    private let webView: WKWebView
+    private var webView: WKWebView
     
     /// And here's a view controller to host it
     private var webViewController: AdaWebHostViewController?
@@ -47,8 +47,10 @@ public class AdaWebHost: NSObject {
         
         super.init()
         
+        webView.navigationDelegate = self
+        webView.uiDelegate = self
+        webView.loadHTMLString(self.scriptSource, baseURL: nil)
         userContentController.add(self, name: "embedReady")
-        webView.loadHTMLString(scriptSource, baseURL: nil)
     }
     
     /// Push a dictionary of fields to the server
@@ -62,11 +64,15 @@ public class AdaWebHost: NSObject {
     
     public func launchWebSupport(from viewController: UIViewController) {
         let webNavController = AdaWebHostViewController.create(with: webView)
-        viewController.present(webNavController, animated: true, completion: {
-            self.webView.reload()
-        })
+        viewController.present(webNavController, animated: true, completion: nil)
     }
     
+}
+
+extension AdaWebHost: WKNavigationDelegate, WKUIDelegate {
+    public func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+        print("Error loading")
+    }
 }
 
 extension AdaWebHost: WKScriptMessageHandler {

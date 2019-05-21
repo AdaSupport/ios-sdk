@@ -33,23 +33,6 @@
                     <view key="view" contentMode="scaleToFill" id="i5u-Yf-gbe">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YUd-4u-uvk">
-                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
-                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <wkWebViewConfiguration key="configuration">
-                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
-                                    <wkPreferences key="preferences"/>
-                                </wkWebViewConfiguration>
-                            </wkWebView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="YUd-4u-uvk" firstAttribute="bottom" secondItem="XZW-Zd-rNz" secondAttribute="bottom" id="Gho-y1-CfF"/>
-                            <constraint firstItem="YUd-4u-uvk" firstAttribute="top" secondItem="XZW-Zd-rNz" secondAttribute="top" id="ZvD-h9-59d"/>
-                            <constraint firstItem="YUd-4u-uvk" firstAttribute="leading" secondItem="XZW-Zd-rNz" secondAttribute="leading" id="hwi-EQ-Ji0"/>
-                            <constraint firstItem="YUd-4u-uvk" firstAttribute="trailing" secondItem="XZW-Zd-rNz" secondAttribute="trailing" id="mSu-fL-jWS"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="XZW-Zd-rNz"/>
                     </view>
                     <navigationItem key="navigationItem" title="Ada Support" id="hb7-QR-GWV">
@@ -59,9 +42,6 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <connections>
-                        <outlet property="webView" destination="YUd-4u-uvk" id="Ybu-Fj-SVk"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gwL-X0-CKZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
