@@ -31,10 +31,11 @@
             <objects>
                 <viewController storyboardIdentifier="adaWebHostViewController" id="D6W-gQ-JwA" customClass="AdaWebHostViewController" customModule="EmbedFramework" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="i5u-Yf-gbe">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="XZW-Zd-rNz"/>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" title="Ada Support" id="hb7-QR-GWV">
                         <barButtonItem key="leftBarButtonItem" title="Done" id="lYn-xr-WCd">
                             <connections>
