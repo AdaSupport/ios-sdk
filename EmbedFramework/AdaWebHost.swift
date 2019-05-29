@@ -19,39 +19,18 @@ public class AdaWebHost: NSObject {
     public var styles = ""
     public var greeting = ""
     
-    /// Provide the host script as a separate file for cleanliness
-    private lazy var scriptSource: String = {
-        do {
-            let bundle = Bundle(for: AdaWebHost.self)
-            guard let sourcePath = bundle.path(forResource: "AdaEmbed", ofType: "html") else { return "" }
-            return try String(contentsOfFile: sourcePath)
-        } catch {
-            return ""
-        }
-    }()
-    
     /// Here's where we do our business
-    private var webView: WKWebView
-    
-    /// And here's a view controller to host it
-    private var webViewController: AdaWebHostViewController?
+    private var webView: WKWebView?
     
     /// Let's figure out which of those properties above need to be sent
     /// to this initialization method
     /// Alternative: init(withCustomerId: String) and we look up these properties
     public override init() {
-        let configuration = WKWebViewConfiguration()
-        let userContentController = WKUserContentController()
-        configuration.userContentController = userContentController
-        webView = WKWebView(frame: .zero, configuration: configuration)
-        
         super.init()
-        
-        webView.navigationDelegate = self
-        webView.uiDelegate = self
-        webView.loadHTMLString(self.scriptSource, baseURL: nil)
-        userContentController.add(self, name: "embedReady")
+        setupWebView()
     }
+    
+    // MARK: - Public Methods
     
     /// Push a dictionary of fields to the server
     public func setMetaFields(_ fields: [String: Any]) {
@@ -62,11 +41,51 @@ public class AdaWebHost: NSObject {
         self.evalJS(toRun)
     }
     
-    public func launchWebSupport(from viewController: UIViewController) {
-        let webNavController = AdaWebHostViewController.create(with: webView)
+    /// Provide a view controller to launch web support from
+    /// this will present the chat view modally
+    public func launchModalWebSupport(from viewController: UIViewController) {
+        guard let webView = webView else { return }
+        let webNavController = AdaWebHostViewController.createNavController(with: webView)
         viewController.present(webNavController, animated: true, completion: nil)
     }
     
+    /// Provide a navigation controller to push web support onto the stack
+    public func launchNavWebSupport(from navController: UINavigationController) {
+        guard let webView = webView else { return }
+        let webController = AdaWebHostViewController.createWebController(with: webView)
+        navController.pushViewController(webController, animated: true)
+    }
+    
+    /// Provide a view to inject the web support into
+    public func launchInjectingWebSupport(into view: UIView) {
+        guard let webView = webView else { return }
+        webView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(webView)
+        NSLayoutConstraint.activate([
+            view.topAnchor.constraint(equalTo: webView.topAnchor),
+            view.leadingAnchor.constraint(equalTo: webView.leadingAnchor),
+            view.trailingAnchor.constraint(equalTo: webView.trailingAnchor),
+            view.bottomAnchor.constraint(equalTo: webView.bottomAnchor)
+        ])
+    }
+    
+}
+
+extension AdaWebHost {
+    private func setupWebView() {
+        let configuration = WKWebViewConfiguration()
+        let userContentController = WKUserContentController()
+        configuration.userContentController = userContentController
+        webView = WKWebView(frame: .zero, configuration: configuration)
+        guard let webView = webView else { return }
+        webView.navigationDelegate = self
+        webView.uiDelegate = self
+        
+        guard let remoteURL = URL(string: "https://nic.ada-dev.support/page.html") else { return }
+        let webRequest = URLRequest(url: remoteURL, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 30)
+        webView.load(webRequest)
+        userContentController.add(self, name: "embedReady")
+    }
 }
 
 extension AdaWebHost: WKNavigationDelegate, WKUIDelegate {
@@ -91,6 +110,7 @@ extension AdaWebHost {
         do {
             let dictionaryData = [
                 "handle": self.handle,
+                "domain": "ada-dev",
                 "cluster": self.cluster,
                 "language": self.language,
                 "styles": self.styles,
@@ -106,6 +126,7 @@ extension AdaWebHost {
     }
     
     private func evalJS(_ toRun: String) {
+        guard let webView = webView else { return }
         webView.evaluateJavaScript(toRun) { (result, error) in
             if let err = error {
                 print(err)
@@ -116,5 +137,4 @@ extension AdaWebHost {
             }
         }
     }
-    
 }

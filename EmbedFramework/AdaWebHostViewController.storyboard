@@ -29,7 +29,7 @@
         <!--Ada Support-->
         <scene sceneID="TGF-zz-RQB">
             <objects>
-                <viewController id="D6W-gQ-JwA" customClass="AdaWebHostViewController" customModule="EmbedFramework" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="adaWebHostViewController" id="D6W-gQ-JwA" customClass="AdaWebHostViewController" customModule="EmbedFramework" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="i5u-Yf-gbe">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

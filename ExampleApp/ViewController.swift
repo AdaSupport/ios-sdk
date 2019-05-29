@@ -16,14 +16,7 @@ class ViewController: UIViewController {
     @IBOutlet var firstNameField: UITextField!
     @IBOutlet var lastNameField: UITextField!
     @IBOutlet var emailField: UITextField!
-    @IBOutlet var adaSupportButton: UIButton!
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-    }
-    
-    
     @IBAction func submitForm(_ sender: UIButton) {
         guard
             let firstName = firstNameField.text,
@@ -36,7 +29,19 @@ class ViewController: UIViewController {
             "email": email])
     }
     
-    @IBAction func openSupport(_ sender: UIButton) {
-        adaFramework.launchWebSupport(from: self)
+    @IBAction func openModalSupport(_ sender: UIButton) {
+        adaFramework.launchModalWebSupport(from: self)
+    }
+    
+    @IBAction func openNavigationControllerSupport(_ sender: UIButton) {
+        guard let navigationController = navigationController else { return }
+        adaFramework.launchNavWebSupport(from: navigationController)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard segue.identifier == "injectingViewIdentifier",
+              let injectingVC = segue.destination as? InjectedViewController else { return }
+        _ = injectingVC.view
+        adaFramework.launchInjectingWebSupport(into: injectingVC.injectingView)
     }
 }

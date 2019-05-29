@@ -20,6 +20,7 @@
 		93A79798228C871200499BF9 /* AdaWebHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A79797228C871200499BF9 /* AdaWebHost.swift */; };
 		93A7979A228C8A1700499BF9 /* AdaEmbed.html in Resources */ = {isa = PBXBuildFile; fileRef = 93A79799228C8A1700499BF9 /* AdaEmbed.html */; };
 		93BB462F229452B2002B71A0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BB462E229452B2002B71A0 /* ViewController.swift */; };
+		93FB0A34229DFC240056B016 /* InjectedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93FB0A33229DFC240056B016 /* InjectedViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,7 @@
 		93A79797228C871200499BF9 /* AdaWebHost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaWebHost.swift; sourceTree = "<group>"; };
 		93A79799228C8A1700499BF9 /* AdaEmbed.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = AdaEmbed.html; sourceTree = "<group>"; };
 		93BB462E229452B2002B71A0 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		93FB0A33229DFC240056B016 /* InjectedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InjectedViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +130,7 @@
 			children = (
 				93A79783228C86D600499BF9 /* AppDelegate.swift */,
 				93BB462E229452B2002B71A0 /* ViewController.swift */,
+				93FB0A33229DFC240056B016 /* InjectedViewController.swift */,
 				93A79795228C870300499BF9 /* Main.storyboard */,
 				93A7978A228C86D700499BF9 /* Assets.xcassets */,
 				93A7978C228C86D700499BF9 /* LaunchScreen.storyboard */,
@@ -305,6 +308,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				93BB462F229452B2002B71A0 /* ViewController.swift in Sources */,
+				93FB0A34229DFC240056B016 /* InjectedViewController.swift in Sources */,
 				93A79784228C86D600499BF9 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
