@@ -10,5 +10,4 @@ import UIKit
 
 class InjectedViewController: UIViewController {
     @IBOutlet var injectingView: UIView!
-    
 }

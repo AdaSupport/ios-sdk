@@ -11,22 +11,23 @@ import WebKit
 
 class AdaWebHostViewController: UIViewController {
     
-    static func createNavController(with webView: WKWebView) -> UINavigationController {
-        let bundle = Bundle(for: AdaWebHostViewController.self)
-        let storyboard = UIStoryboard(name: "AdaWebHostViewController", bundle: bundle)
-        guard
-            let navController = storyboard.instantiateInitialViewController() as? UINavigationController,
-            let viewController = navController.topViewController as? AdaWebHostViewController else { fatalError("This should never, ever happen.") }
-        viewController.webView = webView
-        return navController
-    }
-    
     static func createWebController(with webView: WKWebView) -> AdaWebHostViewController {
         let bundle = Bundle(for: AdaWebHostViewController.self)
         let storyboard = UIStoryboard(name: "AdaWebHostViewController", bundle: bundle)
-        guard let viewController = storyboard.instantiateViewController(withIdentifier: "adaWebHostViewController") as? AdaWebHostViewController else { fatalError("This should never, ever happen.") }
+        guard let viewController = storyboard.instantiateInitialViewController() as? AdaWebHostViewController else { fatalError("This should never, ever happen.") }
         viewController.webView = webView
         return viewController
+    }
+    
+    static func createNavController(with webView: WKWebView) -> UINavigationController {
+        let adaWebHostController = createWebController(with: webView)
+        let navController = UINavigationController(rootViewController: adaWebHostController)
+        
+        let doneBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: adaWebHostController, action: #selector(doneButtonTapped(_:)))
+        adaWebHostController.title = NSLocalizedString("Ada Support", comment: "")
+        adaWebHostController.navigationItem.setLeftBarButton(doneBarButtonItem, animated: false)
+        
+        return navController
     }
     
     var webView: WKWebView?
@@ -36,13 +37,7 @@ class AdaWebHostViewController: UIViewController {
         view = webView
     }
     
-    @IBAction func doneButtonTapped(_ sender: UIBarButtonItem) {
-        guard let navController = navigationController else { return }
-        if navController.viewControllers.count > 1 {
-            navController.popViewController(animated: true)
-        } else {
-            self.dismiss(animated: true, completion: nil)
-        }
+    @objc func doneButtonTapped(_ sender: UIBarButtonItem) {
+        self.dismiss(animated: true, completion: nil)
     }
-    
 }
