@@ -11,22 +11,28 @@ import WebKit
 
 public class AdaWebHost: NSObject {
     
-    /// These seem to be per-application options; can they be configured
-    /// at the app level instead of requiring a lengthy init process?
-    public var handle = "nic"
+    public var handle = ""
     public var cluster = ""
     public var language = ""
     public var styles = ""
     public var greeting = ""
     
+    /// Metafields can be passed in during init; use `setMetaFields()`
+    /// to send values in at runtime
+    private var metafields: [String: String]?
+    
     /// Here's where we do our business
     private var webView: WKWebView?
     
-    /// Let's figure out which of those properties above need to be sent
-    /// to this initialization method
-    /// Alternative: init(withCustomerId: String) and we look up these properties
-    public override init() {
+    public init(handle: String, cluster: String, language: String, styles: String, greeting: String, metafields: [String: String]?) {
+        self.handle = handle
+        self.cluster = cluster
+        self.language = language
+        self.styles = styles
+        self.greeting = greeting
+        self.metafields = metafields
         super.init()
+        
         setupWebView()
     }
     
@@ -123,6 +129,9 @@ extension AdaWebHost {
             let serializedData = try JSONSerialization.data(withJSONObject: dictionaryData, options: [])
             let encodedData = serializedData.base64EncodedString()
             evalJS("initializeEmbed('\(encodedData)');")
+            if let metafields = self.metafields {
+                setMetaFields(metafields)
+            }
         } catch (let error) {
             print("Serialization error: \(error.localizedDescription)")
             return
