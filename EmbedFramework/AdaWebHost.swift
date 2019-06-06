@@ -24,6 +24,15 @@ public class AdaWebHost: NSObject {
     /// Here's where we do our business
     private var webView: WKWebView?
     
+    /// Key an eye on the network
+    private let reachability: Reachability
+    
+    /// Keep a reference to the OfflineViewController
+    private var offlineViewController: OfflineViewController?
+    
+    /// Keep track of whether the host is loaded
+    private var webHostLoaded = false
+    
     public init(handle: String, cluster: String, language: String, styles: String, greeting: String, metafields: [String: String]?) {
         self.handle = handle
         self.cluster = cluster
@@ -31,7 +40,44 @@ public class AdaWebHost: NSObject {
         self.styles = styles
         self.greeting = greeting
         self.metafields = metafields
+        self.reachability = Reachability()!
         super.init()
+        
+        reachability.whenReachable = { _ in
+            if let offlineVC = self.offlineViewController {
+                offlineVC.view.removeFromSuperview()
+                self.offlineViewController = nil
+            }
+            
+            // This should reset the webview if client is offline on launch
+            if !self.webHostLoaded {
+                self.setupWebView()
+            }
+        }
+        
+        reachability.whenUnreachable = { [weak self] _ in
+            guard let strongSelf = self,
+                  let webView = strongSelf.webView else { return }
+            if webView.superview != nil {
+                strongSelf.offlineViewController = OfflineViewController.create()
+                if let offlineVC = strongSelf.offlineViewController {
+                    offlineVC.view.translatesAutoresizingMaskIntoConstraints = false
+                    webView.addSubview(offlineVC.view)
+                    NSLayoutConstraint.activate([
+                        offlineVC.view.topAnchor.constraint(equalTo: webView.topAnchor),
+                        offlineVC.view.bottomAnchor.constraint(equalTo: webView.bottomAnchor),
+                        offlineVC.view.leadingAnchor.constraint(equalTo: webView.leadingAnchor),
+                        offlineVC.view.trailingAnchor.constraint(equalTo: webView.trailingAnchor)
+                    ])
+                }
+            }
+        }
+        
+        do {
+            try reachability.startNotifier()
+        } catch {
+            print("Unable to start reachability notifier.")
+        }
         
         setupWebView()
     }
@@ -110,6 +156,7 @@ extension AdaWebHost: WKScriptMessageHandler {
     public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         print("PM: \(message.name), \(message.body) ")
         if message.name == "embedReady" {
+            self.webHostLoaded = true
             self.initializeWebView()
         }
     }
