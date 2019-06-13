@@ -134,12 +134,9 @@ extension AdaWebHost {
         webView.uiDelegate = self
         
         
-//        guard let remoteURL = URL(string: "https://nic.ada-dev.support/page.html") else { return }
-//        let webRequest = URLRequest(url: remoteURL, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 30)
-//        webView.load(webRequest)
-        guard let htmlPath = Bundle.main.path(forResource: "AdaEmbed", ofType: "html"),
-              let html = try? String(contentsOf: URL(fileURLWithPath: htmlPath), encoding: .utf8) else { return }
-        webView.loadHTMLString(html, baseURL: nil)
+        guard let remoteURL = URL(string: "https://\(handle).ada-dev.support/mobile-sdk-webview/") else { return }
+        let webRequest = URLRequest(url: remoteURL, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 30)
+        webView.load(webRequest)
         userContentController.add(self, name: "embedReady")
     }
 }
