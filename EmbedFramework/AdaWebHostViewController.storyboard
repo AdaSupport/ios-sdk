@@ -34,47 +34,45 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B1c-UZ-eXX">
-                                <rect key="frame" x="41.5" y="328" width="331" height="240"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="GEl-oI-0Ew">
-                                        <rect key="frame" x="20" y="20" width="291" height="200"/>
+                                        <rect key="frame" x="69.5" y="320" width="275" height="178.5"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no-wifi" translatesAutoresizingMaskIntoConstraints="NO" id="olQ-zG-REJ">
-                                                <rect key="frame" x="0.0" y="0.0" width="291" height="64"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="275" height="64"/>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Internet Connection" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MSL-GX-jct">
-                                                <rect key="frame" x="0.0" y="84" width="291" height="31.5"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                                <rect key="frame" x="0.0" y="84" width="275" height="24"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="An Internet connection is required for chat. Check your connection and try again." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MTk-U3-4ll">
-                                                <rect key="frame" x="0.0" y="135.5" width="291" height="64.5"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                <rect key="frame" x="0.0" y="128" width="275" height="50.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="275" id="g1r-sX-XZT"/>
+                                        </constraints>
                                     </stackView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="GEl-oI-0Ew" firstAttribute="centerX" secondItem="B1c-UZ-eXX" secondAttribute="centerX" id="0g2-Q6-aAV"/>
-                                    <constraint firstItem="GEl-oI-0Ew" firstAttribute="leading" secondItem="B1c-UZ-eXX" secondAttribute="leading" constant="20" id="1Dg-xD-Qej"/>
-                                    <constraint firstAttribute="trailing" secondItem="GEl-oI-0Ew" secondAttribute="trailing" constant="20" id="8ui-BD-twg"/>
-                                    <constraint firstAttribute="trailing" secondItem="GEl-oI-0Ew" secondAttribute="trailing" constant="20" id="FzJ-UZ-HeW"/>
-                                    <constraint firstItem="GEl-oI-0Ew" firstAttribute="top" secondItem="B1c-UZ-eXX" secondAttribute="top" constant="20" id="NUR-Sp-2OZ"/>
-                                    <constraint firstItem="GEl-oI-0Ew" firstAttribute="centerY" secondItem="B1c-UZ-eXX" secondAttribute="centerY" id="cIo-0r-Jbg"/>
-                                    <constraint firstItem="GEl-oI-0Ew" firstAttribute="leading" secondItem="B1c-UZ-eXX" secondAttribute="leading" constant="20" id="qlx-4u-9NW"/>
-                                    <constraint firstAttribute="bottom" secondItem="GEl-oI-0Ew" secondAttribute="bottom" constant="20" id="w7i-Gx-wC3"/>
+                                    <constraint firstItem="GEl-oI-0Ew" firstAttribute="centerX" secondItem="B1c-UZ-eXX" secondAttribute="centerX" id="4yN-6X-b9p"/>
+                                    <constraint firstItem="GEl-oI-0Ew" firstAttribute="centerY" secondItem="B1c-UZ-eXX" secondAttribute="centerY" id="vvs-mU-4cg"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="B1c-UZ-eXX" firstAttribute="centerX" secondItem="AJC-ml-g1g" secondAttribute="centerX" id="14W-Et-WOt"/>
-                            <constraint firstItem="B1c-UZ-eXX" firstAttribute="width" secondItem="AJC-ml-g1g" secondAttribute="width" multiplier="0.8" id="Pai-ap-f95"/>
-                            <constraint firstItem="B1c-UZ-eXX" firstAttribute="centerY" secondItem="AJC-ml-g1g" secondAttribute="centerY" id="nkj-eW-ZGB"/>
+                            <constraint firstItem="B1c-UZ-eXX" firstAttribute="leading" secondItem="auu-Pf-WkL" secondAttribute="leading" id="7TN-Go-dQI"/>
+                            <constraint firstItem="auu-Pf-WkL" firstAttribute="trailing" secondItem="B1c-UZ-eXX" secondAttribute="trailing" id="KQP-PY-ncf"/>
+                            <constraint firstItem="B1c-UZ-eXX" firstAttribute="top" secondItem="auu-Pf-WkL" secondAttribute="top" id="Wcr-az-9Nc"/>
+                            <constraint firstItem="auu-Pf-WkL" firstAttribute="bottom" secondItem="B1c-UZ-eXX" secondAttribute="bottom" id="Wu6-5w-dZj"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="auu-Pf-WkL"/>
                     </view>
