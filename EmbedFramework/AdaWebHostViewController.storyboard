@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="D6W-gQ-JwA">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Ada Web Host View Controller-->
+        <scene sceneID="TGF-zz-RQB">
+            <objects>
+                <viewController storyboardIdentifier="adaWebHostViewController" id="D6W-gQ-JwA" customClass="AdaWebHostViewController" customModule="EmbedFramework" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="i5u-Yf-gbe">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="XZW-Zd-rNz"/>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gwL-X0-CKZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="82.608695652173921" y="-79.017857142857139"/>
+        </scene>
+        <!--Offline View Controller-->
+        <scene sceneID="4Vb-7Z-kTU">
+            <objects>
+                <viewController storyboardIdentifier="OfflineViewController" id="dls-Jp-5Mo" customClass="OfflineViewController" customModule="EmbedFramework" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="AJC-ml-g1g">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B1c-UZ-eXX">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="GEl-oI-0Ew">
+                                        <rect key="frame" x="69.5" y="363" width="275" height="170.5"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no-wifi" translatesAutoresizingMaskIntoConstraints="NO" id="olQ-zG-REJ">
+                                                <rect key="frame" x="0.0" y="0.0" width="275" height="64"/>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Internet Connection" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MSL-GX-jct">
+                                                <rect key="frame" x="0.0" y="80" width="275" height="24"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="An Internet connection is required for chat. Check your connection and try again." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MTk-U3-4ll">
+                                                <rect key="frame" x="0.0" y="120" width="275" height="50.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <color key="textColor" red="0.069250188767910004" green="0.089501447975635529" blue="0.11744100600481033" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="275" id="5gB-np-JfJ"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="GEl-oI-0Ew" firstAttribute="centerY" secondItem="B1c-UZ-eXX" secondAttribute="centerY" id="KjO-r3-vjn"/>
+                                    <constraint firstItem="GEl-oI-0Ew" firstAttribute="centerX" secondItem="B1c-UZ-eXX" secondAttribute="centerX" id="ffA-93-515"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="B1c-UZ-eXX" secondAttribute="bottom" id="2fw-wv-cmS"/>
+                            <constraint firstItem="B1c-UZ-eXX" firstAttribute="leading" secondItem="AJC-ml-g1g" secondAttribute="leading" id="DBe-mr-5CX"/>
+                            <constraint firstAttribute="trailing" secondItem="B1c-UZ-eXX" secondAttribute="trailing" id="P5o-0D-Uef"/>
+                            <constraint firstItem="B1c-UZ-eXX" firstAttribute="top" secondItem="AJC-ml-g1g" secondAttribute="top" id="cDo-Si-Ode"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="auu-Pf-WkL"/>
+                    </view>
+                    <connections>
+                        <outlet property="container" destination="B1c-UZ-eXX" id="t7G-8U-aJH"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DCw-ec-uBJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1004" y="-79"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="no-wifi" width="64" height="64"/>
+    </resources>
+</document>

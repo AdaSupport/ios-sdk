@@ -2,29 +2,24 @@
 //  OfflineViewController.swift
 //  EmbedFramework
 //
-//  Created by Nicholas Haley on 2019-05-10.
+//  Created by Aaron Vegh on 2019-06-06.
 //  Copyright © 2019 Ada Support. All rights reserved.
 //
 
 import UIKit
 
-public class OfflineViewController: UIViewController {
-
-    override public func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+class OfflineViewController: UIViewController {
+    
+    @IBOutlet var container: UIView!
+    
+    static func create() -> OfflineViewController? {
+        let bundle = Bundle(for: OfflineViewController.self)
+        let storyboard = UIStoryboard(name: "AdaWebHostViewController", bundle: bundle)
+        return storyboard.instantiateViewController(withIdentifier: "OfflineViewController") as? OfflineViewController
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    override func viewDidLoad() {
+        super.viewDidLoad()
     }
-    */
-
+    
 }
