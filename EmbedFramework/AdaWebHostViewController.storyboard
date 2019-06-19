@@ -59,11 +59,27 @@
                                             <constraint firstAttribute="width" constant="275" id="5gB-np-JfJ"/>
                                         </constraints>
                                     </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DyO-zH-0Hs">
+                                        <rect key="frame" x="152" y="568.5" width="110" height="30"/>
+                                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="110" id="DLs-Sy-gaQ"/>
+                                            <constraint firstAttribute="height" constant="30" id="I3O-Gm-iBZ"/>
+                                        </constraints>
+                                        <state key="normal" title="Tap to Retry">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="retryNetworkConnectionWithSender:" destination="dls-Jp-5Mo" eventType="primaryActionTriggered" id="Yd6-YN-qxI"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstItem="DyO-zH-0Hs" firstAttribute="centerX" secondItem="B1c-UZ-eXX" secondAttribute="centerX" id="7ep-El-sdM"/>
                                     <constraint firstItem="GEl-oI-0Ew" firstAttribute="centerY" secondItem="B1c-UZ-eXX" secondAttribute="centerY" id="KjO-r3-vjn"/>
                                     <constraint firstItem="GEl-oI-0Ew" firstAttribute="centerX" secondItem="B1c-UZ-eXX" secondAttribute="centerX" id="ffA-93-515"/>
+                                    <constraint firstItem="DyO-zH-0Hs" firstAttribute="top" secondItem="GEl-oI-0Ew" secondAttribute="bottom" constant="35" id="vp5-RU-0px"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -78,11 +94,12 @@
                     </view>
                     <connections>
                         <outlet property="container" destination="B1c-UZ-eXX" id="t7G-8U-aJH"/>
+                        <outlet property="retryButton" destination="DyO-zH-0Hs" id="dal-In-V1R"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DCw-ec-uBJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1004" y="-79"/>
+            <point key="canvasLocation" x="1002.8985507246377" y="-79.017857142857139"/>
         </scene>
     </scenes>
     <resources>

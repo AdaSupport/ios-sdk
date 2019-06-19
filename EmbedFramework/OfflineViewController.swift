@@ -11,6 +11,9 @@ import UIKit
 class OfflineViewController: UIViewController {
     
     @IBOutlet var container: UIView!
+    @IBOutlet var retryButton: UIButton!
+    
+    var retryBlock: (() -> Void)?
     
     static func create() -> OfflineViewController? {
         let bundle = Bundle(for: OfflineViewController.self)
@@ -20,6 +23,11 @@ class OfflineViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        retryButton.layer.cornerRadius = 3
+    }
+    
+    @IBAction func retryNetworkConnection(sender: UIButton) {
+        retryBlock?()
     }
     
 }

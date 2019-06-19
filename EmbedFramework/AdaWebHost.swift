@@ -33,6 +33,9 @@ public class AdaWebHost: NSObject {
     /// Keep track of whether the host is loaded
     private var webHostLoaded = false
     
+    /// Keep track of whether we're showing offline view
+    internal var isInOfflineMode = false
+    
     public init(handle: String, cluster: String, language: String, styles: String, greeting: String, metafields: [String: String]?) {
         self.handle = handle
         self.cluster = cluster
@@ -44,23 +47,21 @@ public class AdaWebHost: NSObject {
         super.init()
         
         reachability.whenReachable = { _ in
-            if let offlineVC = self.offlineViewController {
-                offlineVC.view.removeFromSuperview()
-                self.offlineViewController = nil
-            }
-            
-            // This should reset the webview if client is offline on launch
-            if !self.webHostLoaded {
-                self.setupWebView()
-            }
+            self.isInOfflineMode = false
         }
         
         reachability.whenUnreachable = { [weak self] _ in
             guard let strongSelf = self,
                   let webView = strongSelf.webView else { return }
+            
+            strongSelf.isInOfflineMode = true
+            
             if webView.superview != nil {
                 strongSelf.offlineViewController = OfflineViewController.create()
                 if let offlineVC = strongSelf.offlineViewController {
+                    offlineVC.retryBlock = {
+                        strongSelf.returnToOnline()
+                    }
                     offlineVC.view.translatesAutoresizingMaskIntoConstraints = false
                     webView.addSubview(offlineVC.view)
                     NSLayoutConstraint.activate([
@@ -97,6 +98,7 @@ public class AdaWebHost: NSObject {
     /// this will present the chat view modally
     public func launchModalWebSupport(from viewController: UIViewController) {
         guard let webView = webView else { return }
+        webView.translatesAutoresizingMaskIntoConstraints = true
         let webNavController = AdaWebHostViewController.createNavController(with: webView)
         viewController.present(webNavController, animated: true, completion: nil)
     }
@@ -104,6 +106,7 @@ public class AdaWebHost: NSObject {
     /// Provide a navigation controller to push web support onto the stack
     public func launchNavWebSupport(from navController: UINavigationController) {
         guard let webView = webView else { return }
+        webView.translatesAutoresizingMaskIntoConstraints = true
         let webController = AdaWebHostViewController.createWebController(with: webView)
         navController.pushViewController(webController, animated: true)
     }
@@ -130,6 +133,7 @@ extension AdaWebHost {
         configuration.userContentController = userContentController
         webView = WKWebView(frame: .zero, configuration: configuration)
         guard let webView = webView else { return }
+        webView.scrollView.isScrollEnabled = false
         webView.navigationDelegate = self
         webView.uiDelegate = self
         
@@ -192,6 +196,20 @@ extension AdaWebHost {
                 guard let dataValue = result else { return }
                 print(dataValue)
             }
+        }
+    }
+    
+    private func returnToOnline() {
+        guard !isInOfflineMode else { return }
+        
+        if let offlineVC = self.offlineViewController {
+            offlineVC.view.removeFromSuperview()
+            self.offlineViewController = nil
+        }
+        
+        // This should reset the webview if client is offline on launch
+        if !self.webHostLoaded {
+            self.setupWebView()
         }
     }
 }
