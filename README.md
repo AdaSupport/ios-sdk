@@ -1,2 +1,3 @@
 # EmbedFramework
-This project is a work-in-progress and is not yet intended for client-use.
+## Usage
+Refer to client-facing docs [here](https://github.com/AdaSupport/docs/blob/master/ada-ios-sdk.md#launchinjectingwebsupportinto-view-uiview).
