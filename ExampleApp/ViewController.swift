@@ -11,7 +11,7 @@ import EmbedFramework
 
 class ViewController: UIViewController {
     
-    var adaFramework = AdaWebHost(handle: "nic", cluster: "", language: "en", styles: "", greeting: "", metafields: ["test": "this"])
+    var adaFramework = AdaWebHost(handle: "telus-mobility-development", cluster: "ca", language: "en", styles: "", greeting: "", metafields: ["test": "this"])
     
     @IBOutlet var firstNameField: UITextField!
     @IBOutlet var lastNameField: UITextField!
