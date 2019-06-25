@@ -25,4 +25,4 @@ Finally, push the new pod to the private podspec repo, [EmbedFrameworkSpec](http
 pod repo push EmbedFrameworkSpec AdaEmbedFramework.podspec
 ```
 
-That's it! Clients using the EmbedFramework Cocoapod can now update the version in the podfile, then run `pod install` to get the latest changes.
+That's it! Clients using the AdaEmbedFramework Cocoapod can now update the version in the podfile, then run `pod install` to get the latest changes.
