@@ -23,7 +23,7 @@ class OfflineViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        retryButton.layer.cornerRadius = 3
+        retryButton.layer.cornerRadius = 6
     }
     
     @IBAction func retryNetworkConnection(sender: UIButton) {

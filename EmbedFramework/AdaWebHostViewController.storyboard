@@ -37,7 +37,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="GEl-oI-0Ew">
-                                        <rect key="frame" x="69.5" y="363" width="275" height="170.5"/>
+                                        <rect key="frame" x="69.5" y="339" width="275" height="218.5"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no-wifi" translatesAutoresizingMaskIntoConstraints="NO" id="olQ-zG-REJ">
                                                 <rect key="frame" x="0.0" y="0.0" width="275" height="64"/>
@@ -54,32 +54,42 @@
                                                 <color key="textColor" red="0.069250188767910004" green="0.089501447975635529" blue="0.11744100600481033" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qvu-aw-TnU">
+                                                <rect key="frame" x="0.0" y="186.5" width="275" height="32"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DyO-zH-0Hs">
+                                                        <rect key="frame" x="82.5" y="0.0" width="110" height="32"/>
+                                                        <color key="backgroundColor" red="0.20256891846656799" green="0.45271092653274536" blue="0.90760737657546997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="110" id="DLs-Sy-gaQ"/>
+                                                            <constraint firstAttribute="height" constant="32" id="I3O-Gm-iBZ"/>
+                                                        </constraints>
+                                                        <state key="normal" title="Tap to Retry">
+                                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="retryNetworkConnectionWithSender:" destination="dls-Jp-5Mo" eventType="primaryActionTriggered" id="Yd6-YN-qxI"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstItem="DyO-zH-0Hs" firstAttribute="centerX" secondItem="Qvu-aw-TnU" secondAttribute="centerX" id="E7L-qu-faS"/>
+                                                    <constraint firstAttribute="width" constant="110" id="P2S-Un-epb"/>
+                                                    <constraint firstAttribute="height" constant="32" id="ZOc-RG-qra"/>
+                                                    <constraint firstItem="DyO-zH-0Hs" firstAttribute="centerY" secondItem="Qvu-aw-TnU" secondAttribute="centerY" id="qgA-HH-2QP"/>
+                                                </constraints>
+                                            </view>
                                         </subviews>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="275" id="5gB-np-JfJ"/>
                                         </constraints>
                                     </stackView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DyO-zH-0Hs">
-                                        <rect key="frame" x="152" y="568.5" width="110" height="30"/>
-                                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="110" id="DLs-Sy-gaQ"/>
-                                            <constraint firstAttribute="height" constant="30" id="I3O-Gm-iBZ"/>
-                                        </constraints>
-                                        <state key="normal" title="Tap to Retry">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="retryNetworkConnectionWithSender:" destination="dls-Jp-5Mo" eventType="primaryActionTriggered" id="Yd6-YN-qxI"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="DyO-zH-0Hs" firstAttribute="centerX" secondItem="B1c-UZ-eXX" secondAttribute="centerX" id="7ep-El-sdM"/>
                                     <constraint firstItem="GEl-oI-0Ew" firstAttribute="centerY" secondItem="B1c-UZ-eXX" secondAttribute="centerY" id="KjO-r3-vjn"/>
                                     <constraint firstItem="GEl-oI-0Ew" firstAttribute="centerX" secondItem="B1c-UZ-eXX" secondAttribute="centerX" id="ffA-93-515"/>
-                                    <constraint firstItem="DyO-zH-0Hs" firstAttribute="top" secondItem="GEl-oI-0Ew" secondAttribute="bottom" constant="35" id="vp5-RU-0px"/>
                                 </constraints>
                             </view>
                         </subviews>
