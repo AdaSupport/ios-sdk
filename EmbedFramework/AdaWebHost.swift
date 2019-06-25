@@ -36,7 +36,7 @@ public class AdaWebHost: NSObject {
     /// Keep track of whether we're showing offline view
     internal var isInOfflineMode = false
     
-    public init(handle: String, cluster: String, language: String, styles: String, greeting: String, metafields: [String: String]?) {
+    public init(handle: String, cluster: String = "", language: String = "", styles: String = "", greeting: String = "", metafields: [String: String]? = [:]) {
         self.handle = handle
         self.cluster = cluster
         self.language = language
