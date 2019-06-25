@@ -21,4 +21,5 @@ Pod::Spec.new do |spec|
 
   spec.resources    = ['EmbedFramework/**/*.xcassets', 'EmbedFramework/AdaWebHostViewController.storyboard']
 
+  spec.swift_version = '5.0'
 end
