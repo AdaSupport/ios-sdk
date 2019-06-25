@@ -19,7 +19,7 @@ Tag the code on Github by running the following command on the EmbedFramework re
 git tag ‘1.2.3’ // Replace with the same tag version specified in the podspec file
 git push --tags
 ```
-Finally, push the new pod to the private podspec repo, (EmbedFrameworkSpec)[https://github.com/AdaSupport/EmbedFrameworkSpec], by running:
+Finally, push the new pod to the private podspec repo, [EmbedFrameworkSpec](https://github.com/AdaSupport/EmbedFrameworkSpec), by running:
 
 ```
 pod repo push EmbedFrameworkSpec AdaEmbedFramework.podspec
