@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import EmbedFramework
+import AdaEmbedFramework
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

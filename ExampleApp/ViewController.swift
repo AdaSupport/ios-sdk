@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import EmbedFramework
+import AdaEmbedFramework
 
 class ViewController: UIViewController {
     
