@@ -13,7 +13,7 @@
         <!--Ada Web Host View Controller-->
         <scene sceneID="TGF-zz-RQB">
             <objects>
-                <viewController storyboardIdentifier="adaWebHostViewController" id="D6W-gQ-JwA" customClass="AdaWebHostViewController" customModule="EmbedFramework" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="adaWebHostViewController" id="D6W-gQ-JwA" customClass="AdaWebHostViewController" customModule="AdaEmbedFramework" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="i5u-Yf-gbe">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -28,7 +28,7 @@
         <!--Offline View Controller-->
         <scene sceneID="4Vb-7Z-kTU">
             <objects>
-                <viewController storyboardIdentifier="OfflineViewController" id="dls-Jp-5Mo" customClass="OfflineViewController" customModule="EmbedFramework" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OfflineViewController" id="dls-Jp-5Mo" customClass="OfflineViewController" customModule="AdaEmbedFramework" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="AJC-ml-g1g">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -36,29 +36,29 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B1c-UZ-eXX">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="GEl-oI-0Ew">
-                                        <rect key="frame" x="69.5" y="339" width="275" height="218.5"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="GEl-oI-0Ew">
+                                        <rect key="frame" x="67" y="329.5" width="280" height="237.5"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no-wifi" translatesAutoresizingMaskIntoConstraints="NO" id="olQ-zG-REJ">
-                                                <rect key="frame" x="0.0" y="0.0" width="275" height="64"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="280" height="64"/>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Internet Connection" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MSL-GX-jct">
-                                                <rect key="frame" x="0.0" y="80" width="275" height="24"/>
+                                                <rect key="frame" x="0.0" y="76" width="280" height="24"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="An Internet connection is required for chat. Check your connection and try again." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MTk-U3-4ll">
-                                                <rect key="frame" x="0.0" y="120" width="275" height="50.5"/>
+                                                <rect key="frame" x="0.0" y="112" width="280" height="33.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <color key="textColor" red="0.069250188767910004" green="0.089501447975635529" blue="0.11744100600481033" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qvu-aw-TnU">
-                                                <rect key="frame" x="0.0" y="186.5" width="275" height="32"/>
+                                                <rect key="frame" x="0.0" y="157.5" width="280" height="80"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DyO-zH-0Hs">
-                                                        <rect key="frame" x="82.5" y="0.0" width="110" height="32"/>
+                                                        <rect key="frame" x="85" y="10" width="110" height="32"/>
                                                         <color key="backgroundColor" red="0.20256891846656799" green="0.45271092653274536" blue="0.90760737657546997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="110" id="DLs-Sy-gaQ"/>
@@ -74,15 +74,15 @@
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
+                                                    <constraint firstItem="DyO-zH-0Hs" firstAttribute="top" secondItem="Qvu-aw-TnU" secondAttribute="top" constant="10" id="90I-6d-cmL"/>
                                                     <constraint firstItem="DyO-zH-0Hs" firstAttribute="centerX" secondItem="Qvu-aw-TnU" secondAttribute="centerX" id="E7L-qu-faS"/>
                                                     <constraint firstAttribute="width" constant="110" id="P2S-Un-epb"/>
-                                                    <constraint firstAttribute="height" constant="32" id="ZOc-RG-qra"/>
-                                                    <constraint firstItem="DyO-zH-0Hs" firstAttribute="centerY" secondItem="Qvu-aw-TnU" secondAttribute="centerY" id="qgA-HH-2QP"/>
+                                                    <constraint firstAttribute="height" constant="80" id="ZOc-RG-qra"/>
                                                 </constraints>
                                             </view>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="275" id="5gB-np-JfJ"/>
+                                            <constraint firstAttribute="width" constant="280" id="5gB-np-JfJ"/>
                                         </constraints>
                                     </stackView>
                                 </subviews>
