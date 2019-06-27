@@ -16,7 +16,7 @@ To create a new version of the Cocoapoad, first update the pod version in the `.
 Tag the code on Github by running the following command on the EmbedFramework repo from the terminal.
 
 ```
-git tag ‘1.2.3’ // Replace with the same tag version specified in the podspec file
+git tag 1.2.3 // Replace with the same tag version specified in the podspec file
 git push --tags
 ```
 Finally, push the new pod to the private podspec repo, [EmbedFrameworkSpec](https://github.com/AdaSupport/EmbedFrameworkSpec), by running:
