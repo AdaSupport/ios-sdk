@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
 
   spec.name         = "AdaEmbedFramework"
-  spec.version      = "1.0.0"
+  spec.version      = "1.0.1"
   spec.summary      = "Embed the Ada Support SDK in your app."
   spec.description  = <<-DESC
   Use the Ada Support SDK to inject the Ada support experience into your app. Visit https://ada.support to learn more.
