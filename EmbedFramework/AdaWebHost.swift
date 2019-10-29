@@ -100,6 +100,7 @@ public class AdaWebHost: NSObject {
         guard let webView = webView else { return }
         webView.translatesAutoresizingMaskIntoConstraints = true
         let webNavController = AdaWebHostViewController.createNavController(with: webView)
+        webNavController.modalPresentationStyle = .overFullScreen
         viewController.present(webNavController, animated: true, completion: nil)
     }
     
