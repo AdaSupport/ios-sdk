@@ -74,6 +74,8 @@ public class AdaWebHost: NSObject {
             }
         }
         
+        NotificationCenter.default.addObserver(self, selector: #selector(AdaWebHost.keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
         do {
             try reachability.startNotifier()
         } catch {
@@ -124,7 +126,6 @@ public class AdaWebHost: NSObject {
             view.bottomAnchor.constraint(equalTo: webView.bottomAnchor)
         ])
     }
-    
 }
 
 extension AdaWebHost {
@@ -139,7 +140,7 @@ extension AdaWebHost {
         webView.navigationDelegate = self
         webView.uiDelegate = self
         
-        
+
         guard let remoteURL = URL(string: "https://\(handle).\(clusterString)ada.support/mobile-sdk-webview/") else { return }
         let webRequest = URLRequest(url: remoteURL, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 30)
         webView.load(webRequest)
@@ -222,6 +223,21 @@ extension AdaWebHost {
         // This should reset the webview if client is offline on launch
         if !self.webHostLoaded {
             self.setupWebView()
+        }
+    }
+}
+
+extension AdaWebHost {
+    @objc func keyboardWillHide(notification: NSNotification) {
+        if #available(iOS 12.0, *) {
+            guard let webView = webView else { return }
+            
+            for view in webView.subviews {
+                if view.isKind(of: NSClassFromString("WKScrollView") ?? UIScrollView.self) {
+                    guard let scroller = view as? UIScrollView else { return }
+                    scroller.contentOffset = CGPoint(x: 0, y: 0)
+                }
+            }
         }
     }
 }
