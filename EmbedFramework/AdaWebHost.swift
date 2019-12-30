@@ -154,7 +154,11 @@ extension AdaWebHost: WKNavigationDelegate, WKUIDelegate {
             if let url = navigationAction.request.url {
                 let shared = UIApplication.shared
                 if shared.canOpenURL(url) {
-                    shared.open(url, options: [:], completionHandler: nil)
+                    if #available(iOS 10.0, *) {
+                        shared.open(url, options: [:], completionHandler: nil)
+                    } else {
+                        shared.openURL(url)
+                    }
                 }
             }
             decisionHandler(.cancel)
