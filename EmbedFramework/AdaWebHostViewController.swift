@@ -24,7 +24,6 @@ class AdaWebHostViewController: UIViewController {
         let navController = UINavigationController(rootViewController: adaWebHostController)
         
         let doneBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: adaWebHostController, action: #selector(doneButtonTapped(_:)))
-        adaWebHostController.title = NSLocalizedString("Ada Support", comment: "")
         adaWebHostController.navigationItem.setLeftBarButton(doneBarButtonItem, animated: false)
         
         return navController
