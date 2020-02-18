@@ -38,6 +38,14 @@ class ViewController: UIViewController {
         adaFramework.launchNavWebSupport(from: navigationController)
     }
     
+    @IBAction func resetChat(_ sender: UIButton) {
+        adaFramework.reset()
+    }
+    
+    @IBAction func deleteHistory(_ sender: UIButton) {
+        adaFramework.deleteHistory()
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard segue.identifier == "injectingViewIdentifier",
               let injectingVC = segue.destination as? InjectedViewController else { return }

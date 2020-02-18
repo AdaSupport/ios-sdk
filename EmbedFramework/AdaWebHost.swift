@@ -96,6 +96,20 @@ public class AdaWebHost: NSObject {
         self.evalJS(toRun)
     }
     
+    /// Re-initialize chat and optionally reset history, language, meta data, etc
+    public func reset() {
+        let toRun = "adaEmbed.reset();"
+        
+        self.evalJS(toRun)
+    }
+    
+    /// Re-initialize chat and optionally reset history, language, meta data, etc
+    public func deleteHistory() {
+        let toRun = "adaEmbed.deleteHistory();"
+        
+        self.evalJS(toRun)
+    }
+    
     /// Provide a view controller to launch web support from
     /// this will present the chat view modally
     public func launchModalWebSupport(from viewController: UIViewController) {
