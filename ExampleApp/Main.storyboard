@@ -171,17 +171,15 @@
                                     <segue destination="r5d-3u-sPX" kind="show" identifier="injectingViewIdentifier" id="ejM-Nj-Phr"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u7d-xJ-5Ec">
-                                <rect key="frame" x="159" y="794" width="98" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u7d-xJ-5Ec">
+                                <rect key="frame" x="158" y="674" width="98" height="30"/>
                                 <state key="normal" title="Delete History"/>
                                 <connections>
                                     <action selector="deleteHistory:" destination="BYZ-38-t0r" eventType="touchUpInside" id="mTj-fs-xpq"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5df-SD-wH8">
-                                <rect key="frame" x="189" y="756" width="39" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5df-SD-wH8">
+                                <rect key="frame" x="187.5" y="636" width="39" height="30"/>
                                 <state key="normal" title="Reset"/>
                                 <connections>
                                     <action selector="resetChat:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hxr-p4-oo1"/>
@@ -193,17 +191,21 @@
                             <constraint firstItem="bEe-yh-TE2" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="0zO-42-DUU"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="bEe-yh-TE2" secondAttribute="trailing" constant="20" id="2GP-LJ-7Vy"/>
                             <constraint firstItem="lHt-FX-CIJ" firstAttribute="top" secondItem="UtT-DW-ACa" secondAttribute="bottom" constant="8" id="5b6-HO-1se"/>
+                            <constraint firstItem="u7d-xJ-5Ec" firstAttribute="top" secondItem="5df-SD-wH8" secondAttribute="bottom" constant="8" id="853-21-0wA"/>
                             <constraint firstItem="QAq-Ol-ajH" firstAttribute="top" secondItem="bEe-yh-TE2" secondAttribute="bottom" constant="20" id="9pB-Jh-Y2x"/>
                             <constraint firstItem="UtT-DW-ACa" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="FRZ-MT-OVN"/>
                             <constraint firstItem="yPq-pX-NTs" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="K6o-bO-h5n"/>
                             <constraint firstItem="lHt-FX-CIJ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Q1b-z7-3gO"/>
                             <constraint firstItem="yPq-pX-NTs" firstAttribute="top" secondItem="lHt-FX-CIJ" secondAttribute="bottom" constant="8" id="QE5-XV-rhP"/>
+                            <constraint firstItem="5df-SD-wH8" firstAttribute="top" secondItem="yPq-pX-NTs" secondAttribute="bottom" constant="50" id="Xiv-RP-eOi"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="QAq-Ol-ajH" secondAttribute="trailing" constant="20" id="epz-KG-l15"/>
                             <constraint firstItem="bEe-yh-TE2" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="12" id="iKC-8o-K5H"/>
                             <constraint firstItem="TnO-pk-bj3" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="igj-rI-NhK"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="TnO-pk-bj3" secondAttribute="trailing" constant="20" id="kA9-5n-Cyq"/>
+                            <constraint firstItem="u7d-xJ-5Ec" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="lC6-Fh-5Z7"/>
                             <constraint firstItem="QAq-Ol-ajH" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="n8G-ok-Pno"/>
                             <constraint firstItem="UtT-DW-ACa" firstAttribute="top" secondItem="TnO-pk-bj3" secondAttribute="bottom" constant="8" id="qBa-Pv-whi"/>
+                            <constraint firstItem="5df-SD-wH8" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="wrW-AO-OMx"/>
                             <constraint firstItem="TnO-pk-bj3" firstAttribute="top" secondItem="QAq-Ol-ajH" secondAttribute="bottom" constant="52" id="yTW-0g-3tv"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>

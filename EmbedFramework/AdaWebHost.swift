@@ -8,6 +8,7 @@
 
 import Foundation
 import WebKit
+import SwiftyJSON
 
 public class AdaWebHost: NSObject {
     
@@ -97,8 +98,16 @@ public class AdaWebHost: NSObject {
     }
     
     /// Re-initialize chat and optionally reset history, language, meta data, etc
-    public func reset() {
-        let toRun = "adaEmbed.reset();"
+    public func reset(language: String? = nil, greeting: String? = nil, metaFields: [String: Any]? = nil, resetChatHistory: Bool? = nil) {
+        
+        let data: [String: Any?] = [
+            "language": language,
+            "greeting": greeting,
+            "metaFields": metaFields,
+            "resetChatHistory": resetChatHistory
+        ]
+        let json = JSON(data)
+        let toRun = "adaEmbed.reset(\(json));"
         
         self.evalJS(toRun)
     }
