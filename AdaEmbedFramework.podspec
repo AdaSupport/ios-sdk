@@ -15,7 +15,7 @@ Pod::Spec.new do |spec|
    
   spec.platform     = :ios, "10.0"
 
-  spec.source       = { :git => "git@github.com:AdaSupport/EmbedFramework.git", :branch => 'master', :tag => spec.version.to_s }
+  spec.source       = { :git => "https://github.com/AdaSupport/ios-sdk.git", :branch => 'master', :tag => spec.version.to_s }
 
   spec.source_files = "EmbedFramework/**/*.swift"
 
