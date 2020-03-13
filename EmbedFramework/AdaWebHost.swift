@@ -8,6 +8,7 @@
 
 import Foundation
 import WebKit
+import SafariServices
 
 public class AdaWebHost: NSObject {
     
@@ -16,6 +17,13 @@ public class AdaWebHost: NSObject {
     public var language = ""
     public var styles = ""
     public var greeting = ""
+    
+    /// Set the chat to open links in Safari
+    /// Set to false to use SFSafariViewController instead
+    public var openWebLinksInSafari = true
+    
+    /// If your app handles universal links, provide the scheme here, so the chat view will forward the link appropriately
+    public var appScheme = ""
     
     /// Metafields can be passed in during init; use `setMetaFields()`
     /// to send values in at runtime
@@ -36,8 +44,10 @@ public class AdaWebHost: NSObject {
     /// Keep track of whether we're showing offline view
     internal var isInOfflineMode = false
     
-    public init(handle: String, cluster: String = "", language: String = "", styles: String = "", greeting: String = "", metafields: [String: String]? = [:]) {
+    public init(handle: String, openWebLinksInSafari: Bool, appScheme: String = "", cluster: String = "", language: String = "", styles: String = "", greeting: String = "", metafields: [String: String]? = [:]) {
         self.handle = handle
+        self.appScheme = appScheme
+        self.openWebLinksInSafari = openWebLinksInSafari
         self.cluster = cluster
         self.language = language
         self.styles = styles
@@ -152,9 +162,23 @@ extension AdaWebHost: WKNavigationDelegate, WKUIDelegate {
     public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Swift.Void) {
         if navigationAction.navigationType == WKNavigationType.linkActivated {
             if let url = navigationAction.request.url {
-                let shared = UIApplication.shared
-                if shared.canOpenURL(url) {
-                    shared.open(url, options: [:], completionHandler: nil)
+                if url.scheme == appScheme {
+                    guard let presentingVC = findViewController(from: webView) else { return }
+                    presentingVC.dismiss(animated: true) {
+                        let shared = UIApplication.shared
+                        if shared.canOpenURL(url) {
+                            shared.open(url, options: [:], completionHandler: nil)
+                        }
+                    }
+                } else if openWebLinksInSafari {
+                    let shared = UIApplication.shared
+                    if shared.canOpenURL(url) {
+                        shared.open(url, options: [:], completionHandler: nil)
+                    }
+                } else {
+                    let sfVC = SFSafariViewController(url: url)
+                    guard let presentingVC = findViewController(from: webView) else { return }
+                    presentingVC.present(sfVC, animated: true, completion: nil)
                 }
             }
             decisionHandler(.cancel)
@@ -238,6 +262,18 @@ extension AdaWebHost {
                     scroller.contentOffset = CGPoint(x: 0, y: 0)
                 }
             }
+        }
+    }
+}
+
+extension AdaWebHost {
+    func findViewController(from view: UIView) -> UIViewController? {
+        if let nextResponder = view.next as? UIViewController {
+            return nextResponder
+        } else if let nextResponder = view.next as? UIView {
+            return findViewController(from: nextResponder)
+        } else {
+            return nil
         }
     }
 }

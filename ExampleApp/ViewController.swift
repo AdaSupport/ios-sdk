@@ -11,7 +11,7 @@ import AdaEmbedFramework
 
 class ViewController: UIViewController {
     
-    var adaFramework = AdaWebHost(handle: "kiwi")
+    var adaFramework = AdaWebHost(handle: "nic", openWebLinksInSafari: false, appScheme: "adaexampleapp")
     
     @IBOutlet var firstNameField: UITextField!
     @IBOutlet var lastNameField: UITextField!
