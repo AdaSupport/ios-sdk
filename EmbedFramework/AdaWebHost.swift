@@ -9,6 +9,7 @@
 import Foundation
 import WebKit
 import SafariServices
+import SwiftyJSON
 
 public class AdaWebHost: NSObject {
     
@@ -102,6 +103,28 @@ public class AdaWebHost: NSObject {
         let serializedData = try! JSONSerialization.data(withJSONObject: fields, options: [])
         let encodedData = serializedData.base64EncodedString()
         let toRun = "setMetaFields('\(encodedData)');"
+        
+        self.evalJS(toRun)
+    }
+    
+    /// Re-initialize chat and optionally reset history, language, meta data, etc
+    public func reset(language: String? = nil, greeting: String? = nil, metaFields: [String: Any]? = nil, resetChatHistory: Bool? = nil) {
+        
+        let data: [String: Any?] = [
+            "language": language,
+            "greeting": greeting,
+            "metaFields": metaFields,
+            "resetChatHistory": resetChatHistory
+        ]
+        let json = JSON(data)
+        let toRun = "adaEmbed.reset(\(json));"
+        
+        self.evalJS(toRun)
+    }
+    
+    /// Re-initialize chat and optionally reset history, language, meta data, etc
+    public func deleteHistory() {
+        let toRun = "adaEmbed.deleteHistory();"
         
         self.evalJS(toRun)
     }
