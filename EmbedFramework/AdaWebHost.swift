@@ -9,7 +9,6 @@
 import Foundation
 import WebKit
 import SafariServices
-import SwiftyJSON
 
 public class AdaWebHost: NSObject {
     
@@ -40,10 +39,22 @@ public class AdaWebHost: NSObject {
     private var offlineViewController: OfflineViewController?
     
     /// Keep track of whether the host is loaded
-    private var webHostLoaded = false
+    private var webHostLoaded = false {
+        didSet {
+            if webHostLoaded == true {
+                self.initializeWebView()
+                for command in pendingCommands {
+                    self.evalJS(command)
+                }
+            }
+        }
+    }
     
     /// Keep track of whether we're showing offline view
     internal var isInOfflineMode = false
+    
+    /// If commands are sent prior to `embedReady`, store until it can be cleared out
+    private var pendingCommands = [String]()
     
     public init(handle: String, openWebLinksInSafari: Bool, appScheme: String = "", cluster: String = "", language: String = "", styles: String = "", greeting: String = "", metafields: [String: String]? = [:]) {
         self.handle = handle
@@ -116,8 +127,10 @@ public class AdaWebHost: NSObject {
             "metaFields": metaFields,
             "resetChatHistory": resetChatHistory
         ]
-        let json = JSON(data)
-        let toRun = "adaEmbed.reset(\(json));"
+        
+        guard let json = try? JSONSerialization.data(withJSONObject: data, options: .fragmentsAllowed),
+              let jsonString = String(data: json, encoding: .utf8) else { return }
+        let toRun = "adaEmbed.reset(\(jsonString));"
         
         self.evalJS(toRun)
     }
@@ -219,7 +232,6 @@ extension AdaWebHost: WKScriptMessageHandler {
         print("PM: \(message.name), \(message.body) ")
         if message.name == "embedReady" {
             self.webHostLoaded = true
-            self.initializeWebView()
         }
     }
 }
@@ -247,7 +259,12 @@ extension AdaWebHost {
     }
     
     private func evalJS(_ toRun: String) {
+        guard self.webHostLoaded else {
+            pendingCommands.append(toRun)
+            return
+        }
         guard let webView = webView else { return }
+        print("Running command: \(toRun)")
         webView.evaluateJavaScript(toRun) { (result, error) in
             if let err = error {
                 print(err)
