@@ -10,6 +10,20 @@ import Foundation
 import WebKit
 import SafariServices
 
+public struct AdaWebHostOptions {
+    /// Set the chat to open links in Safari
+    /// Set to false to use SFSafariViewController instead
+    let openWebLinksInSafari: Bool
+    
+    /// If your app handles universal links, provide the scheme here, so the chat view will forward the link appropriately
+    let appScheme: String
+    
+    public init(openWebLinksInSafari: Bool, appScheme: String) {
+        self.openWebLinksInSafari = openWebLinksInSafari
+        self.appScheme = appScheme
+    }
+}
+
 public class AdaWebHost: NSObject {
     
     public var handle = ""
@@ -17,13 +31,7 @@ public class AdaWebHost: NSObject {
     public var language = ""
     public var styles = ""
     public var greeting = ""
-    
-    /// Set the chat to open links in Safari
-    /// Set to false to use SFSafariViewController instead
-    public var openWebLinksInSafari = true
-    
-    /// If your app handles universal links, provide the scheme here, so the chat view will forward the link appropriately
-    public var appScheme = ""
+    public var options: AdaWebHostOptions
     
     /// Metafields can be passed in during init; use `setMetaFields()`
     /// to send values in at runtime
@@ -56,10 +64,9 @@ public class AdaWebHost: NSObject {
     /// If commands are sent prior to `embedReady`, store until it can be cleared out
     private var pendingCommands = [String]()
     
-    public init(handle: String, openWebLinksInSafari: Bool, appScheme: String = "", cluster: String = "", language: String = "", styles: String = "", greeting: String = "", metafields: [String: String]? = [:]) {
+    public init(handle: String, options: AdaWebHostOptions, cluster: String = "", language: String = "", styles: String = "", greeting: String = "", metafields: [String: String]? = [:]) {
         self.handle = handle
-        self.appScheme = appScheme
-        self.openWebLinksInSafari = openWebLinksInSafari
+        self.options = options
         self.cluster = cluster
         self.language = language
         self.styles = styles
@@ -198,7 +205,8 @@ extension AdaWebHost: WKNavigationDelegate, WKUIDelegate {
     public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Swift.Void) {
         if navigationAction.navigationType == WKNavigationType.linkActivated {
             if let url = navigationAction.request.url {
-                if url.scheme == appScheme {
+                // Handle a universal link from the chat
+                if url.scheme == options.appScheme {
                     guard let presentingVC = findViewController(from: webView) else { return }
                     presentingVC.dismiss(animated: true) {
                         let shared = UIApplication.shared
@@ -206,11 +214,13 @@ extension AdaWebHost: WKNavigationDelegate, WKUIDelegate {
                             shared.open(url, options: [:], completionHandler: nil)
                         }
                     }
-                } else if openWebLinksInSafari {
+                // Handle opening links in Safari, if set
+                } else if options.openWebLinksInSafari {
                     let shared = UIApplication.shared
                     if shared.canOpenURL(url) {
                         shared.open(url, options: [:], completionHandler: nil)
                     }
+                // Handle opening links in a local web view
                 } else {
                     let sfVC = SFSafariViewController(url: url)
                     guard let presentingVC = findViewController(from: webView) else { return }
