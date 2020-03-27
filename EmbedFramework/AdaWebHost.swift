@@ -8,6 +8,21 @@
 
 import Foundation
 import WebKit
+import SafariServices
+
+public struct AdaWebHostOptions {
+    /// Set the chat to open links in Safari
+    /// Set to false to use SFSafariViewController instead
+    let openWebLinksInSafari: Bool
+    
+    /// If your app handles universal links, provide the scheme here, so the chat view will forward the link appropriately
+    let appScheme: String
+    
+    public init(openWebLinksInSafari: Bool, appScheme: String) {
+        self.openWebLinksInSafari = openWebLinksInSafari
+        self.appScheme = appScheme
+    }
+}
 
 public class AdaWebHost: NSObject {
     
@@ -16,6 +31,7 @@ public class AdaWebHost: NSObject {
     public var language = ""
     public var styles = ""
     public var greeting = ""
+    public var options: AdaWebHostOptions
     
     /// Metafields can be passed in during init; use `setMetaFields()`
     /// to send values in at runtime
@@ -31,13 +47,26 @@ public class AdaWebHost: NSObject {
     private var offlineViewController: OfflineViewController?
     
     /// Keep track of whether the host is loaded
-    private var webHostLoaded = false
+    private var webHostLoaded = false {
+        didSet {
+            if webHostLoaded == true {
+                self.initializeWebView()
+                for command in pendingCommands {
+                    self.evalJS(command)
+                }
+            }
+        }
+    }
     
     /// Keep track of whether we're showing offline view
     internal var isInOfflineMode = false
     
-    public init(handle: String, cluster: String = "", language: String = "", styles: String = "", greeting: String = "", metafields: [String: String]? = [:]) {
+    /// If commands are sent prior to `embedReady`, store until it can be cleared out
+    private var pendingCommands = [String]()
+    
+    public init(handle: String, options: AdaWebHostOptions, cluster: String = "", language: String = "", styles: String = "", greeting: String = "", metafields: [String: String]? = [:]) {
         self.handle = handle
+        self.options = options
         self.cluster = cluster
         self.language = language
         self.styles = styles
@@ -92,6 +121,30 @@ public class AdaWebHost: NSObject {
         let serializedData = try! JSONSerialization.data(withJSONObject: fields, options: [])
         let encodedData = serializedData.base64EncodedString()
         let toRun = "setMetaFields('\(encodedData)');"
+        
+        self.evalJS(toRun)
+    }
+    
+    /// Re-initialize chat and optionally reset history, language, meta data, etc
+    public func reset(language: String? = nil, greeting: String? = nil, metaFields: [String: Any]? = nil, resetChatHistory: Bool? = nil) {
+        
+        let data: [String: Any?] = [
+            "language": language,
+            "greeting": greeting,
+            "metaFields": metaFields,
+            "resetChatHistory": resetChatHistory
+        ]
+        
+        guard let json = try? JSONSerialization.data(withJSONObject: data, options: .fragmentsAllowed),
+              let jsonString = String(data: json, encoding: .utf8) else { return }
+        let toRun = "adaEmbed.reset(\(jsonString));"
+        
+        self.evalJS(toRun)
+    }
+    
+    /// Re-initialize chat and optionally reset history, language, meta data, etc
+    public func deleteHistory() {
+        let toRun = "adaEmbed.deleteHistory();"
         
         self.evalJS(toRun)
     }
@@ -152,9 +205,26 @@ extension AdaWebHost: WKNavigationDelegate, WKUIDelegate {
     public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Swift.Void) {
         if navigationAction.navigationType == WKNavigationType.linkActivated {
             if let url = navigationAction.request.url {
-                let shared = UIApplication.shared
-                if shared.canOpenURL(url) {
-                    shared.open(url, options: [:], completionHandler: nil)
+                // Handle a universal link from the chat
+                if url.scheme == options.appScheme {
+                    guard let presentingVC = findViewController(from: webView) else { return }
+                    presentingVC.dismiss(animated: true) {
+                        let shared = UIApplication.shared
+                        if shared.canOpenURL(url) {
+                            shared.open(url, options: [:], completionHandler: nil)
+                        }
+                    }
+                // Handle opening links in Safari, if set
+                } else if options.openWebLinksInSafari {
+                    let shared = UIApplication.shared
+                    if shared.canOpenURL(url) {
+                        shared.open(url, options: [:], completionHandler: nil)
+                    }
+                // Handle opening links in a local web view
+                } else {
+                    let sfVC = SFSafariViewController(url: url)
+                    guard let presentingVC = findViewController(from: webView) else { return }
+                    presentingVC.present(sfVC, animated: true, completion: nil)
                 }
             }
             decisionHandler(.cancel)
@@ -172,7 +242,6 @@ extension AdaWebHost: WKScriptMessageHandler {
         print("PM: \(message.name), \(message.body) ")
         if message.name == "embedReady" {
             self.webHostLoaded = true
-            self.initializeWebView()
         }
     }
 }
@@ -200,7 +269,12 @@ extension AdaWebHost {
     }
     
     private func evalJS(_ toRun: String) {
+        guard self.webHostLoaded else {
+            pendingCommands.append(toRun)
+            return
+        }
         guard let webView = webView else { return }
+        print("Running command: \(toRun)")
         webView.evaluateJavaScript(toRun) { (result, error) in
             if let err = error {
                 print(err)
@@ -238,6 +312,18 @@ extension AdaWebHost {
                     scroller.contentOffset = CGPoint(x: 0, y: 0)
                 }
             }
+        }
+    }
+}
+
+extension AdaWebHost {
+    func findViewController(from view: UIView) -> UIViewController? {
+        if let nextResponder = view.next as? UIViewController {
+            return nextResponder
+        } else if let nextResponder = view.next as? UIView {
+            return findViewController(from: nextResponder)
+        } else {
+            return nil
         }
     }
 }

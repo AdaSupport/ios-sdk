@@ -11,7 +11,8 @@ import AdaEmbedFramework
 
 class ViewController: UIViewController {
     
-    var adaFramework = AdaWebHost(handle: "kiwi")
+    let webHostOptions = AdaWebHostOptions(openWebLinksInSafari: false, appScheme: "adaexampleapp")
+    lazy var adaFramework = AdaWebHost(handle: "nic", options: webHostOptions)
     
     @IBOutlet var firstNameField: UITextField!
     @IBOutlet var lastNameField: UITextField!
@@ -36,6 +37,14 @@ class ViewController: UIViewController {
     @IBAction func openNavigationControllerSupport(_ sender: UIButton) {
         guard let navigationController = navigationController else { return }
         adaFramework.launchNavWebSupport(from: navigationController)
+    }
+    
+    @IBAction func resetChat(_ sender: UIButton) {
+        adaFramework.reset()
+    }
+    
+    @IBAction func deleteHistory(_ sender: UIButton) {
+        adaFramework.deleteHistory()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
