@@ -10,20 +10,6 @@ import Foundation
 import WebKit
 import SafariServices
 
-public struct AdaWebHostOptions {
-    /// Set the chat to open links in Safari
-    /// Set to false to use SFSafariViewController instead
-    let openWebLinksInSafari: Bool
-    
-    /// If your app handles universal links, provide the scheme here, so the chat view will forward the link appropriately
-    let appScheme: String
-    
-    public init(openWebLinksInSafari: Bool, appScheme: String) {
-        self.openWebLinksInSafari = openWebLinksInSafari
-        self.appScheme = appScheme
-    }
-}
-
 public class AdaWebHost: NSObject {
     
     public var handle = ""
@@ -31,11 +17,13 @@ public class AdaWebHost: NSObject {
     public var language = ""
     public var styles = ""
     public var greeting = ""
-    public var options: AdaWebHostOptions
     
     /// Metafields can be passed in during init; use `setMetaFields()`
     /// to send values in at runtime
     private var metafields: [String: String]?
+    
+    public var openWebLinksInSafari = false
+    public var appScheme = ""
     
     /// Here's where we do our business
     private var webView: WKWebView?
@@ -64,14 +52,15 @@ public class AdaWebHost: NSObject {
     /// If commands are sent prior to `embedReady`, store until it can be cleared out
     private var pendingCommands = [String]()
     
-    public init(handle: String, options: AdaWebHostOptions, cluster: String = "", language: String = "", styles: String = "", greeting: String = "", metafields: [String: String]? = [:]) {
+    public init(handle: String, cluster: String = "", language: String = "", styles: String = "", greeting: String = "", metafields: [String: String]? = [:], openWebLinksInSafari: Bool = false, appScheme: String = "") {
         self.handle = handle
-        self.options = options
         self.cluster = cluster
         self.language = language
         self.styles = styles
         self.greeting = greeting
         self.metafields = metafields
+        self.openWebLinksInSafari = openWebLinksInSafari
+        self.appScheme = appScheme
         self.reachability = Reachability()!
         super.init()
         
@@ -206,7 +195,7 @@ extension AdaWebHost: WKNavigationDelegate, WKUIDelegate {
         if navigationAction.navigationType == WKNavigationType.linkActivated {
             if let url = navigationAction.request.url {
                 // Handle a universal link from the chat
-                if url.scheme == options.appScheme {
+                if url.scheme == self.appScheme {
                     guard let presentingVC = findViewController(from: webView) else { return }
                     presentingVC.dismiss(animated: true) {
                         let shared = UIApplication.shared
@@ -215,7 +204,7 @@ extension AdaWebHost: WKNavigationDelegate, WKUIDelegate {
                         }
                     }
                 // Handle opening links in Safari, if set
-                } else if options.openWebLinksInSafari {
+                } else if self.openWebLinksInSafari {
                     let shared = UIApplication.shared
                     if shared.canOpenURL(url) {
                         shared.open(url, options: [:], completionHandler: nil)
