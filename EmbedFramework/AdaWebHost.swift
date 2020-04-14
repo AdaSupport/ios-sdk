@@ -115,7 +115,7 @@ public class AdaWebHost: NSObject {
     }
     
     /// Re-initialize chat and optionally reset history, language, meta data, etc
-    public func reset(language: String? = nil, greeting: String? = nil, metaFields: [String: Any]? = nil, resetChatHistory: Bool? = nil) {
+    public func reset(language: String? = nil, greeting: String? = nil, metaFields: [String: Any]? = nil, resetChatHistory: Bool? = true) {
         
         let data: [String: Any?] = [
             "language": language,
