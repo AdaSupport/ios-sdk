@@ -20,7 +20,7 @@ public class AdaWebHost: NSObject {
     
     /// Metafields can be passed in during init; use `setMetaFields()`
     /// to send values in at runtime
-    private var metafields: [String: String]?
+    private var metafields: [String: String] = [:]
     
     public var openWebLinksInSafari = false
     public var appScheme = ""
@@ -52,7 +52,7 @@ public class AdaWebHost: NSObject {
     /// If commands are sent prior to `embedReady`, store until it can be cleared out
     private var pendingCommands = [String]()
     
-    public init(handle: String, cluster: String = "", language: String = "", styles: String = "", greeting: String = "", metafields: [String: String]? = [:], openWebLinksInSafari: Bool = false, appScheme: String = "") {
+    public init(handle: String, cluster: String = "", language: String = "", styles: String = "", greeting: String = "", metafields: [String: String] = [:], openWebLinksInSafari: Bool = false, appScheme: String = "") {
         self.handle = handle
         self.cluster = cluster
         self.language = language
@@ -243,14 +243,12 @@ extension AdaWebHost {
                 "cluster": self.cluster,
                 "language": self.language,
                 "styles": self.styles,
-                "greeting": self.greeting
+                "greeting": self.greeting,
+                "metaFields": self.metafields
                 ] as [String : Any]
             let serializedData = try JSONSerialization.data(withJSONObject: dictionaryData, options: [])
             let encodedData = serializedData.base64EncodedString()
             evalJS("initializeEmbed('\(encodedData)');")
-            if let metafields = self.metafields {
-                setMetaFields(metafields)
-            }
         } catch (let error) {
             print("Serialization error: \(error.localizedDescription)")
             return
