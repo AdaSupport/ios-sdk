@@ -25,6 +25,8 @@ public class AdaWebHost: NSObject {
     public var openWebLinksInSafari = false
     public var appScheme = ""
     
+    public var zendeskAuthCallback: ((((_ token: String) -> Void)) -> Void)?
+    
     /// Here's where we do our business
     private var webView: WKWebView?
     
@@ -52,7 +54,17 @@ public class AdaWebHost: NSObject {
     /// If commands are sent prior to `embedReady`, store until it can be cleared out
     private var pendingCommands = [String]()
     
-    public init(handle: String, cluster: String = "", language: String = "", styles: String = "", greeting: String = "", metafields: [String: String] = [:], openWebLinksInSafari: Bool = false, appScheme: String = "") {
+    public init(
+        handle: String,
+        cluster: String = "",
+        language: String = "",
+        styles: String = "",
+        greeting: String = "",
+        metafields: [String: String] = [:],
+        openWebLinksInSafari: Bool = false,
+        appScheme: String = "",
+        zendeskAuthCallback: ((((_ token: String) -> Void)) -> Void)? = nil
+    ) {
         self.handle = handle
         self.cluster = cluster
         self.language = language
@@ -61,6 +73,8 @@ public class AdaWebHost: NSObject {
         self.metafields = metafields
         self.openWebLinksInSafari = openWebLinksInSafari
         self.appScheme = appScheme
+        self.zendeskAuthCallback = zendeskAuthCallback
+    
         self.reachability = Reachability()!
         super.init()
         
@@ -182,8 +196,8 @@ extension AdaWebHost {
         webView.navigationDelegate = self
         webView.uiDelegate = self
         
-
-        guard let remoteURL = URL(string: "https://\(handle).\(clusterString)ada.support/mobile-sdk-webview/") else { return }
+        guard let remoteURL = URL(string: "http://0.0.0.0:1339/") else { return }
+//        guard let remoteURL = URL(string: "https://\(handle).\(clusterString)ada.support/mobile-sdk-webview/") else { return }
         let webRequest = URLRequest(url: remoteURL, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 30)
         webView.load(webRequest)
         userContentController.add(self, name: "embedReady")
@@ -229,8 +243,16 @@ extension AdaWebHost: WKScriptMessageHandler {
     /// Fire our initialize methods when that happens.
     public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         print("PM: \(message.name), \(message.body) ")
-        if message.name == "embedReady" {
+        guard let messageBodyString = message.body as? String else {
+            return
+        }
+        
+        if messageBodyString == "ready" {
             self.webHostLoaded = true
+        } else if let zendeskAuthCallback = self.zendeskAuthCallback, messageBodyString == "getToken" {
+            zendeskAuthCallback() { token in
+                evalJS("window.authTokenCallback\(token);")
+            }
         }
     }
 }
@@ -238,17 +260,32 @@ extension AdaWebHost: WKScriptMessageHandler {
 extension AdaWebHost {
     private func initializeWebView() {
         do {
-            let dictionaryData = [
-                "handle": self.handle,
-                "cluster": self.cluster,
-                "language": self.language,
-                "styles": self.styles,
-                "greeting": self.greeting,
-                "metaFields": self.metafields
-                ] as [String : Any]
-            let serializedData = try JSONSerialization.data(withJSONObject: dictionaryData, options: [])
-            let encodedData = serializedData.base64EncodedString()
-            evalJS("initializeEmbed('\(encodedData)');")
+//            let dictionaryData = [
+//                "handle": self.handle,
+//                "cluster": self.cluster,
+//                "language": self.language,
+//                "styles": self.styles,
+//                "greeting": self.greeting,
+//                "metaFields": self.metafields
+//                ] as [String : Any]
+//            let serializedData = try JSONSerialization.data(withJSONObject: dictionaryData, options: [])
+//            let encodedData = serializedData.base64EncodedString()
+//            evalJS("initializeEmbed('\(encodedData)');")
+            evalJS("""
+                window.adaEmbed.start({
+                    handle: \"\(self.handle)\",
+                    cluster: \"\(self.cluster)\",
+                    language: \"\(self.language)\",
+                    styles: \"\(self.styles)\",
+                    greeting: \"\(self.greeting)\",
+                    authCallback: (callback) => {
+                        console.log(1111);
+                        window.authTokenCallback = callback;
+                        window.webkit.messageHandlers.embedReady.postMessage(\"getToken\");
+                    },
+                    parentElement: \"parent-element\"
+                });
+            """)
         } catch (let error) {
             print("Serialization error: \(error.localizedDescription)")
             return
