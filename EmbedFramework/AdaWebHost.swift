@@ -279,7 +279,6 @@ extension AdaWebHost {
                     });
                 })();
             """)
-            evalJS("let test = 1 + 1;")
         } catch (let error) {
             print("Serialization error: \(error.localizedDescription)")
             return
