@@ -263,21 +263,23 @@ extension AdaWebHost {
             let json = String(data: jsonData, encoding: .utf8) ?? "{}"
 
             evalJS("""
-                window.adaEmbed.start({
-                    handle: \"\(self.handle)\",
-                    cluster: \"\(self.cluster)\",
-                    language: \"\(self.language)\",
-                    styles: \"\(self.styles)\",
-                    greeting: \"\(self.greeting)\",
-                    metaFields: \(json),
-                    authCallback: (callback) => {
-                        window.authTokenCallback = callback;
-                        window.webkit.messageHandlers.embedReady.postMessage(\"getToken\");
-
-                    },
-                    parentElement: \"parent-element\"
-                });
+                (function() {
+                    window.adaEmbed.start({
+                        handle: \"\(self.handle)\",
+                        cluster: \"\(self.cluster)\",
+                        language: \"\(self.language)\",
+                        styles: \"\(self.styles)\",
+                        greeting: \"\(self.greeting)\",
+                        metaFields: \(json),
+                        authCallback: function(callback) {
+                            window.authTokenCallback = callback;
+                            window.webkit.messageHandlers.embedReady.postMessage(\"getToken\");
+                        },
+                        parentElement: \"parent-element\"
+                    });
+                })();
             """)
+            evalJS("let test = 1 + 1;")
         } catch (let error) {
             print("Serialization error: \(error.localizedDescription)")
             return
@@ -294,7 +296,6 @@ extension AdaWebHost {
         webView.evaluateJavaScript(toRun) { (result, error) in
             if let err = error {
                 print(err)
-                print(err.localizedDescription)
             } else {
                 guard let dataValue = result else { return }
                 print(dataValue)
