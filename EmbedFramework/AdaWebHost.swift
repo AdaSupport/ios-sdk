@@ -263,7 +263,7 @@ extension AdaWebHost {
             authCallback = """
                 authCallback: function(callback) {
                     window.authTokenCallback = callback;
-                    window.webkit.messageHandlers.embedReady.postMessage(\"getToken\");
+                    window.webkit.messageHandlers.embedReady.postMessage("getToken");
                 }
             """
         }
@@ -275,13 +275,13 @@ extension AdaWebHost {
             evalJS("""
                 (function() {
                     window.adaEmbed.start({
-                        handle: \"\(self.handle)\",
-                        cluster: \"\(self.cluster)\",
-                        language: \"\(self.language)\",
-                        styles: \"\(self.styles)\",
-                        greeting: \"\(self.greeting)\",
+                        handle: "\(self.handle)",
+                        cluster: "\(self.cluster)",
+                        language: "\(self.language)",
+                        styles: "\(self.styles)",
+                        greeting: "\(self.greeting)",
                         metaFields: \(json),
-                        parentElement: \"parent-element\",
+                        parentElement: "parent-element",
                         \(authCallback)
                     });
                 })();
