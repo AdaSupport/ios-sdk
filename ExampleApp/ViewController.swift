@@ -11,9 +11,7 @@ import AdaEmbedFramework
 
 class ViewController: UIViewController {
     
-    lazy var adaFramework = AdaWebHost(handle: "nic", appScheme: "adaexampleapp", zendeskAuthCallback: { callback in
-        callback("123456")
-    })
+    lazy var adaFramework = AdaWebHost(handle: "nic", appScheme: "adaexampleapp")
     
     @IBOutlet var firstNameField: UITextField!
     @IBOutlet var lastNameField: UITextField!

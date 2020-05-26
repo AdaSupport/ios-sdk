@@ -257,6 +257,17 @@ extension AdaWebHost: WKScriptMessageHandler {
 
 extension AdaWebHost {
     private func initializeWebView() {
+        var authCallback: String = ""
+        
+        if self.zendeskAuthCallback != nil {
+            authCallback = """
+                authCallback: function(callback) {
+                    window.authTokenCallback = callback;
+                    window.webkit.messageHandlers.embedReady.postMessage(\"getToken\");
+                }
+            """
+        }
+        
         do {
             let jsonData = try JSONSerialization.data(withJSONObject: self.metafields, options: [])
             let json = String(data: jsonData, encoding: .utf8) ?? "{}"
@@ -270,11 +281,8 @@ extension AdaWebHost {
                         styles: \"\(self.styles)\",
                         greeting: \"\(self.greeting)\",
                         metaFields: \(json),
-                        authCallback: function(callback) {
-                            window.authTokenCallback = callback;
-                            window.webkit.messageHandlers.embedReady.postMessage(\"getToken\");
-                        },
-                        parentElement: \"parent-element\"
+                        parentElement: \"parent-element\",
+                        \(authCallback)
                     });
                 })();
             """)
