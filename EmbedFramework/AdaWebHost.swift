@@ -242,7 +242,6 @@ extension AdaWebHost: WKScriptMessageHandler {
     /// When the webview loads up, it'll pass back a message to here.
     /// Fire our initialize methods when that happens.
     public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        print("PM: \(message.name), \(message.body) ")
         guard let messageBodyString = message.body as? String else {
             return
         }
@@ -251,7 +250,7 @@ extension AdaWebHost: WKScriptMessageHandler {
             self.webHostLoaded = true
         } else if let zendeskAuthCallback = self.zendeskAuthCallback, messageBodyString == "getToken" {
             zendeskAuthCallback() { token in
-                evalJS("window.authTokenCallback\(token); console.log(\(token));")
+                evalJS("window.authTokenCallback(\(token));")
             }
         }
     }
@@ -260,17 +259,9 @@ extension AdaWebHost: WKScriptMessageHandler {
 extension AdaWebHost {
     private func initializeWebView() {
         do {
-//            let dictionaryData = [
-//                "handle": self.handle,
-//                "cluster": self.cluster,
-//                "language": self.language,
-//                "styles": self.styles,
-//                "greeting": self.greeting,
-//                "metaFields": self.metafields
-//                ] as [String : Any]
-//            let serializedData = try JSONSerialization.data(withJSONObject: dictionaryData, options: [])
-//            let encodedData = serializedData.base64EncodedString()
-//            evalJS("initializeEmbed('\(encodedData)');")
+            let jsonData = try JSONSerialization.data(withJSONObject: self.metafields, options: [])
+            let json = String(data: jsonData, encoding: .utf8) ?? "{}"
+
             evalJS("""
                 window.adaEmbed.start({
                     handle: \"\(self.handle)\",
@@ -278,10 +269,11 @@ extension AdaWebHost {
                     language: \"\(self.language)\",
                     styles: \"\(self.styles)\",
                     greeting: \"\(self.greeting)\",
+                    metaFields: \(json),
                     authCallback: (callback) => {
-                        console.log(1111);
                         window.authTokenCallback = callback;
                         window.webkit.messageHandlers.embedReady.postMessage(\"getToken\");
+
                     },
                     parentElement: \"parent-element\"
                 });
@@ -298,7 +290,7 @@ extension AdaWebHost {
             return
         }
         guard let webView = webView else { return }
-        print("Running command: \(toRun)")
+
         webView.evaluateJavaScript(toRun) { (result, error) in
             if let err = error {
                 print(err)
