@@ -249,7 +249,7 @@ extension AdaWebHost: WKScriptMessageHandler {
             self.webHostLoaded = true
         } else if let zendeskAuthCallback = self.zendeskAuthCallback, messageBodyString == "getToken" {
             zendeskAuthCallback() { token in
-                evalJS("window.authTokenCallback(\(token));")
+                evalJS("window.authTokenCallback(\"\(token)\");")
             }
         }
     }
