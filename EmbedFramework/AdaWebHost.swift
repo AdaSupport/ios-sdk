@@ -9,6 +9,7 @@
 import Foundation
 import WebKit
 import SafariServices
+import UserNotifications
 
 public class AdaWebHost: NSObject {
     
@@ -114,6 +115,10 @@ public class AdaWebHost: NSObject {
             print("Unable to start reachability notifier.")
         }
         
+        requestNotificationPermission()
+        
+        createNotification()
+        
         setupWebView()
     }
     
@@ -181,6 +186,58 @@ public class AdaWebHost: NSObject {
             view.trailingAnchor.constraint(equalTo: webView.trailingAnchor),
             view.bottomAnchor.constraint(equalTo: webView.bottomAnchor)
         ])
+    }
+}
+
+extension AdaWebHost {
+    private func requestNotificationPermission() {
+        let center = UNUserNotificationCenter.current()
+        center.requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
+            
+            print(granted)
+            
+            if let error = error {
+                // Handle the error here.
+                print(error)
+            }
+            
+            // Enable or disable features based on the authorization.
+        }
+    }
+    
+    private func createNotification() {
+        let center = UNUserNotificationCenter.current()
+        let content = UNMutableNotificationContent()
+        
+        content.title = "Response from \(self.handle.capitalized)"
+        content.body = "Hey there Nic! Nice to meet you. You can..."
+        content.categoryIdentifier = "alarm"
+        content.sound = UNNotificationSound.default
+        
+        center.getNotificationSettings { settings in
+            guard (settings.authorizationStatus == .authorized) else { return }
+
+            if settings.alertSetting == .enabled {
+                // Schedule an alert-only notification.
+                print(123)
+                let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 15, repeats: false)
+                
+                // Note: this will only work if app is running in the background (ie. app is not open).
+                let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+
+                center.add(request) { (error) in
+                    print(4444, error)
+                    if error != nil {
+                        print(333333)
+                        // Handle any errors.
+                    }
+                }
+
+            } else {
+                print(123)
+                // Schedule a notification with a badge and sound.
+            }
+        }
     }
 }
 
