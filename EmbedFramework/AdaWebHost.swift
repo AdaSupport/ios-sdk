@@ -26,6 +26,7 @@ public class AdaWebHost: NSObject {
     public var appScheme = ""
     
     public var zendeskAuthCallback: ((((_ token: String) -> Void)) -> Void)?
+    public var eventCallbacks: [String: () -> Void]?
     
     /// Here's where we do our business
     private var webView: WKWebView?
@@ -63,7 +64,8 @@ public class AdaWebHost: NSObject {
         metafields: [String: String] = [:],
         openWebLinksInSafari: Bool = false,
         appScheme: String = "",
-        zendeskAuthCallback: ((((_ token: String) -> Void)) -> Void)? = nil
+        zendeskAuthCallback: ((((_ token: String) -> Void)) -> Void)? = nil,
+        eventCallbacks: [String: () -> Void]? = nil
     ) {
         self.handle = handle
         self.cluster = cluster
@@ -74,6 +76,7 @@ public class AdaWebHost: NSObject {
         self.openWebLinksInSafari = openWebLinksInSafari
         self.appScheme = appScheme
         self.zendeskAuthCallback = zendeskAuthCallback
+        self.eventCallbacks = eventCallbacks
     
         self.reachability = Reachability()!
         super.init()
@@ -274,7 +277,10 @@ extension AdaWebHost {
                         authCallback: function(callback) {
                             window.authTokenCallback = callback;
                             window.webkit.messageHandlers.embedReady.postMessage("getToken");
-                        }
+                        },
+                        eventCallbacks: [
+                            "test": window.webkit.messageHandlers.embedReady.postMessage("test");
+                        ]
                     });
                 })();
             """)
