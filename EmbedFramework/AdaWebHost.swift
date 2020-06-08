@@ -117,8 +117,6 @@ public class AdaWebHost: NSObject {
         
         requestNotificationPermission()
         
-        createNotification()
-        
         setupWebView()
     }
     
@@ -212,7 +210,7 @@ extension AdaWebHost {
         content.title = "Response from \(self.handle.capitalized)"
         content.body = "Hey there Nic! Nice to meet you. You can..."
         content.categoryIdentifier = "alarm"
-        content.sound = UNNotificationSound.default
+//        content.sound = UNNotificationSound.default
         
         center.getNotificationSettings { settings in
             guard (settings.authorizationStatus == .authorized) else { return }
@@ -220,7 +218,7 @@ extension AdaWebHost {
             if settings.alertSetting == .enabled {
                 // Schedule an alert-only notification.
                 print(123)
-                let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 15, repeats: false)
+                let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
                 
                 // Note: this will only work if app is running in the background (ie. app is not open).
                 let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
@@ -308,6 +306,9 @@ extension AdaWebHost: WKScriptMessageHandler {
             zendeskAuthCallback() { token in
                 evalJS("window.authTokenCallback(\"\(token)\");")
             }
+        } else if messageBodyString == "liveAgent" {
+            print("1111111111111111")
+            createNotification()
         }
     }
 }
@@ -331,6 +332,9 @@ extension AdaWebHost {
                         authCallback: function(callback) {
                             window.authTokenCallback = callback;
                             window.webkit.messageHandlers.embedReady.postMessage("getToken");
+                        },
+                        liveAgentCallback: function(event) {
+                            window.webkit.messageHandlers.embedReady.postMessage("liveAgent");
                         }
                     });
                 })();
