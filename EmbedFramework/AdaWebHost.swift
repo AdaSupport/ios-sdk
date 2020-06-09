@@ -26,7 +26,7 @@ public class AdaWebHost: NSObject {
     public var appScheme = ""
     
     public var zdChatterAuthCallback: (((@escaping (_ token: String) -> Void)) -> Void)?
-    public var eventCallbacks: [String: () -> Void]?
+    public var eventCallbacks: [String: (_ event: [String: Any]) -> Void]?
     
     /// Here's where we do our business
     private var webView: WKWebView?
@@ -65,7 +65,7 @@ public class AdaWebHost: NSObject {
         openWebLinksInSafari: Bool = false,
         appScheme: String = "",
         zdChatterAuthCallback: (((@escaping (_ token: String) -> Void)) -> Void)? = nil,
-        eventCallbacks: [String: () -> Void]? = nil
+        eventCallbacks: [String: (_ event: [String: Any]) -> Void]? = nil
     ) {
         self.handle = handle
         self.cluster = cluster
@@ -247,7 +247,7 @@ extension AdaWebHost: WKNavigationDelegate, WKUIDelegate {
 extension AdaWebHost: WKScriptMessageHandler {
     /// When the webview loads up, it'll pass back a message to here.
     /// Fire our initialize methods when that happens.
-    public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {        
+    public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         let messageName = message.name
         
         if messageName == "embedReady" {
@@ -257,7 +257,17 @@ extension AdaWebHost: WKScriptMessageHandler {
                 self.evalJS("window.zdTokenCallback(\"\(token)\");")
             }
         } else if messageName == "eventCallbackHandler" {
-            print(1111111222, message.body)
+            if let event = message.body as? [String: Any] {
+                if let eventName = event["event_name"] as? String {
+                    if let specificCallback = self.eventCallbacks?[eventName] {
+                        specificCallback(event)
+                    }
+                }
+                
+                if let specificCallback = self.eventCallbacks?["*"] {
+                    specificCallback(event)
+                }
+            }
         }
     }
 }
@@ -283,7 +293,7 @@ extension AdaWebHost {
                             window.webkit.messageHandlers.zdChatterAuthCallbackHandler.postMessage("getToken");
                         },
                         eventCallbacks: {
-                            "*": (event) => window.webkit.messageHandlers.eventCallbackHandler.postMessage("yolotown")
+                            "*": (event) => window.webkit.messageHandlers.eventCallbackHandler.postMessage(event)
                         }
                     });
                 })();
