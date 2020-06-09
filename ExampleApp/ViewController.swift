@@ -11,7 +11,7 @@ import AdaEmbedFramework
 
 class ViewController: UIViewController {
     
-    lazy var adaFramework = AdaWebHost(handle: "nic", appScheme: "adaexampleapp", eventCallbacks: ["yolotown": { event in print(1123123123, event) }])
+    lazy var adaFramework = AdaWebHost(handle: "nic", appScheme: "adaexampleapp")
     
     @IBOutlet var firstNameField: UITextField!
     @IBOutlet var lastNameField: UITextField!
