@@ -254,6 +254,8 @@ extension AdaWebHost: WKScriptMessageHandler {
             zdChatterAuthCallback() { token in
                 self.evalJS("window.zdTokenCallback(\"\(token)\");")
             }
+        } else if messageBodyString == "yolotown" {
+            print(1111111222, messageBodyString)
         }
     }
 }
@@ -278,9 +280,9 @@ extension AdaWebHost {
                             window.zdTokenCallback = callback;
                             window.webkit.messageHandlers.embedReady.postMessage("getToken");
                         },
-                        eventCallbacks: [
-                            "test": window.webkit.messageHandlers.embedReady.postMessage("test");
-                        ]
+                        eventCallbacks: {
+                            "yolotown": (event) => window.webkit.messageHandlers.embedReady.postMessage("yolotown")
+                        }
                     });
                 })();
             """)
