@@ -25,7 +25,7 @@ public class AdaWebHost: NSObject {
     public var openWebLinksInSafari = false
     public var appScheme = ""
     
-    public var zendeskAuthCallback: ((((_ token: String) -> Void)) -> Void)?
+    public var zdChatterAuthCallback: (((@escaping (_ token: String) -> Void)) -> Void)?
     public var eventCallbacks: [String: () -> Void]?
     
     /// Here's where we do our business
@@ -64,7 +64,7 @@ public class AdaWebHost: NSObject {
         metafields: [String: String] = [:],
         openWebLinksInSafari: Bool = false,
         appScheme: String = "",
-        zendeskAuthCallback: ((((_ token: String) -> Void)) -> Void)? = nil,
+        zdChatterAuthCallback: (((@escaping (_ token: String) -> Void)) -> Void)? = nil,
         eventCallbacks: [String: () -> Void]? = nil
     ) {
         self.handle = handle
@@ -75,7 +75,7 @@ public class AdaWebHost: NSObject {
         self.metafields = metafields
         self.openWebLinksInSafari = openWebLinksInSafari
         self.appScheme = appScheme
-        self.zendeskAuthCallback = zendeskAuthCallback
+        self.zdChatterAuthCallback = zdChatterAuthCallback
         self.eventCallbacks = eventCallbacks
     
         self.reachability = Reachability()!
@@ -250,9 +250,9 @@ extension AdaWebHost: WKScriptMessageHandler {
         
         if messageBodyString == "ready" {
             self.webHostLoaded = true
-        } else if let zendeskAuthCallback = self.zendeskAuthCallback, messageBodyString == "getToken" {
-            zendeskAuthCallback() { token in
-                evalJS("window.authTokenCallback(\"\(token)\");")
+        } else if let zdChatterAuthCallback = self.zdChatterAuthCallback, messageBodyString == "getToken" {
+            zdChatterAuthCallback() { token in
+                self.evalJS("window.zdTokenCallback(\"\(token)\");")
             }
         }
     }
@@ -274,8 +274,8 @@ extension AdaWebHost {
                         greeting: "\(self.greeting)",
                         metaFields: \(json),
                         parentElement: "parent-element",
-                        authCallback: function(callback) {
-                            window.authTokenCallback = callback;
+                        zdChatterAuthCallback: function(callback) {
+                            window.zdTokenCallback = callback;
                             window.webkit.messageHandlers.embedReady.postMessage("getToken");
                         },
                         eventCallbacks: [
