@@ -249,7 +249,7 @@ extension AdaWebHost: WKScriptMessageHandler {
             self.webHostLoaded = true
         } else if let zdChatterAuthCallback = self.zdChatterAuthCallback, messageBodyString == "getToken" {
             zdChatterAuthCallback() { token in
-                evalJS("window.authTokenCallback(\"\(token)\");")
+                evalJS("window.zdTokenCallback(\"\(token)\");")
             }
         }
     }
@@ -271,8 +271,8 @@ extension AdaWebHost {
                         greeting: "\(self.greeting)",
                         metaFields: \(json),
                         parentElement: "parent-element",
-                        authCallback: function(callback) {
-                            window.authTokenCallback = callback;
+                        zdChatterAuthCallback: function(callback) {
+                            window.zdTokenCallback = callback;
                             window.webkit.messageHandlers.embedReady.postMessage("getToken");
                         }
                     });
