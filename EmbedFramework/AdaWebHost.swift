@@ -25,7 +25,7 @@ public class AdaWebHost: NSObject {
     public var openWebLinksInSafari = false
     public var appScheme = ""
     
-    public var zdChatterAuthCallback: ((((_ token: String) -> Void)) -> Void)?
+    public var zdChatterAuthCallback: (((@escaping (_ token: String) -> Void)) -> Void)?
     
     /// Here's where we do our business
     private var webView: WKWebView?
@@ -63,7 +63,7 @@ public class AdaWebHost: NSObject {
         metafields: [String: String] = [:],
         openWebLinksInSafari: Bool = false,
         appScheme: String = "",
-        zdChatterAuthCallback: ((((_ token: String) -> Void)) -> Void)? = nil
+        zdChatterAuthCallback: (((@escaping (_ token: String) -> Void)) -> Void)? = nil
     ) {
         self.handle = handle
         self.cluster = cluster
@@ -249,7 +249,7 @@ extension AdaWebHost: WKScriptMessageHandler {
             self.webHostLoaded = true
         } else if let zdChatterAuthCallback = self.zdChatterAuthCallback, messageBodyString == "getToken" {
             zdChatterAuthCallback() { token in
-                evalJS("window.authTokenCallback(\"\(token)\");")
+                self.evalJS("window.zdTokenCallback(\"\(token)\");")
             }
         }
     }
@@ -271,8 +271,8 @@ extension AdaWebHost {
                         greeting: "\(self.greeting)",
                         metaFields: \(json),
                         parentElement: "parent-element",
-                        authCallback: function(callback) {
-                            window.authTokenCallback = callback;
+                        zdChatterAuthCallback: function(callback) {
+                            window.zdTokenCallback = callback;
                             window.webkit.messageHandlers.embedReady.postMessage("getToken");
                         }
                     });
