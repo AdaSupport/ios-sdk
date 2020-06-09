@@ -25,7 +25,7 @@ public class AdaWebHost: NSObject {
     public var openWebLinksInSafari = false
     public var appScheme = ""
     
-    public var zendeskAuthCallback: ((((_ token: String) -> Void)) -> Void)?
+    public var zdChatterAuthCallback: ((((_ token: String) -> Void)) -> Void)?
     
     /// Here's where we do our business
     private var webView: WKWebView?
@@ -63,7 +63,7 @@ public class AdaWebHost: NSObject {
         metafields: [String: String] = [:],
         openWebLinksInSafari: Bool = false,
         appScheme: String = "",
-        zendeskAuthCallback: ((((_ token: String) -> Void)) -> Void)? = nil
+        zdChatterAuthCallback: ((((_ token: String) -> Void)) -> Void)? = nil
     ) {
         self.handle = handle
         self.cluster = cluster
@@ -73,7 +73,7 @@ public class AdaWebHost: NSObject {
         self.metafields = metafields
         self.openWebLinksInSafari = openWebLinksInSafari
         self.appScheme = appScheme
-        self.zendeskAuthCallback = zendeskAuthCallback
+        self.zdChatterAuthCallback = zdChatterAuthCallback
     
         self.reachability = Reachability()!
         super.init()
@@ -247,8 +247,8 @@ extension AdaWebHost: WKScriptMessageHandler {
         
         if messageBodyString == "ready" {
             self.webHostLoaded = true
-        } else if let zendeskAuthCallback = self.zendeskAuthCallback, messageBodyString == "getToken" {
-            zendeskAuthCallback() { token in
+        } else if let zdChatterAuthCallback = self.zdChatterAuthCallback, messageBodyString == "getToken" {
+            zdChatterAuthCallback() { token in
                 evalJS("window.authTokenCallback(\"\(token)\");")
             }
         }
