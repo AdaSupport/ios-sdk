@@ -202,7 +202,11 @@ extension AdaWebHost {
         guard let remoteURL = URL(string: "https://\(handle).\(clusterString)ada.support/mobile-sdk-webview/") else { return }
         let webRequest = URLRequest(url: remoteURL, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 30)
         webView.load(webRequest)
+        
+        // Bind handlers for JS messages
         userContentController.add(self, name: "embedReady")
+        userContentController.add(self, name: "eventCallbackHandler")
+        userContentController.add(self, name: "zdChatterAuthCallbackHandler")
     }
 }
 
@@ -243,19 +247,17 @@ extension AdaWebHost: WKNavigationDelegate, WKUIDelegate {
 extension AdaWebHost: WKScriptMessageHandler {
     /// When the webview loads up, it'll pass back a message to here.
     /// Fire our initialize methods when that happens.
-    public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        guard let messageBodyString = message.body as? String else {
-            return
-        }
+    public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {        
+        let messageName = message.name
         
-        if messageBodyString == "ready" {
+        if messageName == "embedReady" {
             self.webHostLoaded = true
-        } else if let zdChatterAuthCallback = self.zdChatterAuthCallback, messageBodyString == "getToken" {
+        } else if let zdChatterAuthCallback = self.zdChatterAuthCallback, messageName == "zdChatterAuthCallbackHandler" {
             zdChatterAuthCallback() { token in
                 self.evalJS("window.zdTokenCallback(\"\(token)\");")
             }
-        } else if messageBodyString == "yolotown" {
-            print(1111111222, messageBodyString)
+        } else if messageName == "eventCallbackHandler" {
+            print(1111111222, message.body)
         }
     }
 }
@@ -278,10 +280,10 @@ extension AdaWebHost {
                         parentElement: "parent-element",
                         zdChatterAuthCallback: function(callback) {
                             window.zdTokenCallback = callback;
-                            window.webkit.messageHandlers.embedReady.postMessage("getToken");
+                            window.webkit.messageHandlers.zdChatterAuthCallbackHandler.postMessage("getToken");
                         },
                         eventCallbacks: {
-                            "yolotown": (event) => window.webkit.messageHandlers.embedReady.postMessage("yolotown")
+                            "*": (event) => window.webkit.messageHandlers.eventCallbackHandler.postMessage("yolotown")
                         }
                     });
                 })();
