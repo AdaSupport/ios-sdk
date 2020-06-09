@@ -11,9 +11,7 @@ import AdaEmbedFramework
 
 class ViewController: UIViewController {
     
-    lazy var adaFramework = AdaWebHost(handle: "nic", appScheme: "adaexampleapp", zdChatterAuthCallback: { callback in
-        callback("JWT TOKEN")
-    })
+    lazy var adaFramework = AdaWebHost(handle: "nic", appScheme: "adaexampleapp")
     
     @IBOutlet var firstNameField: UITextField!
     @IBOutlet var lastNameField: UITextField!
