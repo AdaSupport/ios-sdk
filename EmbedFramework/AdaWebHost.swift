@@ -26,6 +26,7 @@ public class AdaWebHost: NSObject {
     public var appScheme = ""
     
     public var zdChatterAuthCallback: (((@escaping (_ token: String) -> Void)) -> Void)?
+    public var eventCallbacks: [String: (_ event: [String: Any]) -> Void]?
     
     /// Here's where we do our business
     private var webView: WKWebView?
@@ -63,7 +64,8 @@ public class AdaWebHost: NSObject {
         metafields: [String: String] = [:],
         openWebLinksInSafari: Bool = false,
         appScheme: String = "",
-        zdChatterAuthCallback: (((@escaping (_ token: String) -> Void)) -> Void)? = nil
+        zdChatterAuthCallback: (((@escaping (_ token: String) -> Void)) -> Void)? = nil,
+        eventCallbacks: [String: (_ event: [String: Any]) -> Void]? = nil
     ) {
         self.handle = handle
         self.cluster = cluster
@@ -74,6 +76,7 @@ public class AdaWebHost: NSObject {
         self.openWebLinksInSafari = openWebLinksInSafari
         self.appScheme = appScheme
         self.zdChatterAuthCallback = zdChatterAuthCallback
+        self.eventCallbacks = eventCallbacks
     
         self.reachability = Reachability()!
         super.init()
@@ -199,7 +202,11 @@ extension AdaWebHost {
         guard let remoteURL = URL(string: "https://\(handle).\(clusterString)ada.support/mobile-sdk-webview/") else { return }
         let webRequest = URLRequest(url: remoteURL, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 30)
         webView.load(webRequest)
+        
+        // Bind handlers for JS messages
         userContentController.add(self, name: "embedReady")
+        userContentController.add(self, name: "eventCallbackHandler")
+        userContentController.add(self, name: "zdChatterAuthCallbackHandler")
     }
 }
 
@@ -241,15 +248,25 @@ extension AdaWebHost: WKScriptMessageHandler {
     /// When the webview loads up, it'll pass back a message to here.
     /// Fire our initialize methods when that happens.
     public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        guard let messageBodyString = message.body as? String else {
-            return
-        }
+        let messageName = message.name
         
-        if messageBodyString == "ready" {
+        if messageName == "embedReady" {
             self.webHostLoaded = true
-        } else if let zdChatterAuthCallback = self.zdChatterAuthCallback, messageBodyString == "getToken" {
+        } else if let zdChatterAuthCallback = self.zdChatterAuthCallback, messageName == "zdChatterAuthCallbackHandler" {
             zdChatterAuthCallback() { token in
                 self.evalJS("window.zdTokenCallback(\"\(token)\");")
+            }
+        } else if messageName == "eventCallbackHandler" {
+            if let event = message.body as? [String: Any] {
+                if let eventName = event["event_name"] as? String {
+                    if let specificCallback = self.eventCallbacks?[eventName] {
+                        specificCallback(event)
+                    }
+                }
+                
+                if let specificCallback = self.eventCallbacks?["*"] {
+                    specificCallback(event)
+                }
             }
         }
     }
@@ -273,7 +290,10 @@ extension AdaWebHost {
                         parentElement: "parent-element",
                         zdChatterAuthCallback: function(callback) {
                             window.zdTokenCallback = callback;
-                            window.webkit.messageHandlers.embedReady.postMessage("getToken");
+                            window.webkit.messageHandlers.zdChatterAuthCallbackHandler.postMessage("getToken");
+                        },
+                        eventCallbacks: {
+                            "*": (event) => window.webkit.messageHandlers.eventCallbackHandler.postMessage(event)
                         }
                     });
                 })();
