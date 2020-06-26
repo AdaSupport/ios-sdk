@@ -55,6 +55,16 @@ public class AdaWebHost: NSObject {
     /// If commands are sent prior to `embedReady`, store until it can be cleared out
     private var pendingCommands = [String]()
     
+    private lazy var scriptSource: String = {
+        do {
+            let bundle = Bundle(for: AdaWebHost.self)
+            guard let sourcePath = bundle.path(forResource: "AdaEmbed", ofType: "html") else { return "" }
+            return try String(contentsOfFile: sourcePath)
+        } catch {
+            return ""
+        }
+    }()
+    
     public init(
         handle: String,
         cluster: String = "",
@@ -191,7 +201,7 @@ extension AdaWebHost {
     private func setupWebView() {
         let configuration = WKWebViewConfiguration()
         let userContentController = WKUserContentController()
-        let clusterString = cluster.isEmpty ? "" : "\(cluster)."
+
         configuration.userContentController = userContentController
         webView = WKWebView(frame: .zero, configuration: configuration)
         guard let webView = webView else { return }
@@ -199,9 +209,7 @@ extension AdaWebHost {
         webView.navigationDelegate = self
         webView.uiDelegate = self
         
-        guard let remoteURL = URL(string: "https://\(handle).\(clusterString)ada.support/mobile-sdk-webview/") else { return }
-        let webRequest = URLRequest(url: remoteURL, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 30)
-        webView.load(webRequest)
+        webView.loadHTMLString(scriptSource, baseURL: nil)
         
         // Bind handlers for JS messages
         userContentController.add(self, name: "embedReady")
