@@ -227,7 +227,7 @@ extension AdaWebHost: WKNavigationDelegate, WKUIDelegate {
                             shared.open(url, options: [:], completionHandler: nil)
                         }
                     }
-                // Only open links in Safari if URL uses HTTP(S) scheme, and the openWebLinksInSafari option is set
+                // Only open links in in-app WebView if URL uses HTTP(S) scheme, and the openWebLinksInSafari option is false
                 } else if self.openWebLinksInSafari == false && httpSchemes.contains(urlScheme ?? "") {
                     let sfVC = SFSafariViewController(url: url)
                     guard let presentingVC = findViewController(from: webView) else { return }
