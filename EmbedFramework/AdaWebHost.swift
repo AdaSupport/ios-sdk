@@ -212,10 +212,14 @@ extension AdaWebHost {
 
 extension AdaWebHost: WKNavigationDelegate, WKUIDelegate {
     public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Swift.Void) {
+        let httpSchemes = ["http", "https"]
+        
         if navigationAction.navigationType == WKNavigationType.linkActivated {
             if let url = navigationAction.request.url {
-                // Handle a universal link from the chat
-                if url.scheme == self.appScheme {
+                let urlScheme = url.scheme
+                // Handle opening universal links within the host App
+                // This requires the appScheme argument to work
+                if urlScheme == self.appScheme {
                     guard let presentingVC = findViewController(from: webView) else { return }
                     presentingVC.dismiss(animated: true) {
                         let shared = UIApplication.shared
@@ -223,17 +227,16 @@ extension AdaWebHost: WKNavigationDelegate, WKUIDelegate {
                             shared.open(url, options: [:], completionHandler: nil)
                         }
                     }
-                // Handle opening links in Safari, if set
-                } else if self.openWebLinksInSafari {
+                // Only open links in in-app WebView if URL uses HTTP(S) scheme, and the openWebLinksInSafari option is false
+                } else if self.openWebLinksInSafari == false && httpSchemes.contains(urlScheme ?? "") {
+                    let sfVC = SFSafariViewController(url: url)
+                    guard let presentingVC = findViewController(from: webView) else { return }
+                    presentingVC.present(sfVC, animated: true, completion: nil)
+                } else {
                     let shared = UIApplication.shared
                     if shared.canOpenURL(url) {
                         shared.open(url, options: [:], completionHandler: nil)
                     }
-                // Handle opening links in a local web view
-                } else {
-                    let sfVC = SFSafariViewController(url: url)
-                    guard let presentingVC = findViewController(from: webView) else { return }
-                    presentingVC.present(sfVC, animated: true, completion: nil)
                 }
             }
             decisionHandler(.cancel)
