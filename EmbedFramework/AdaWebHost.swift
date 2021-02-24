@@ -193,6 +193,7 @@ extension AdaWebHost {
         let userContentController = WKUserContentController()
         let clusterString = cluster.isEmpty ? "" : "\(cluster)."
         configuration.userContentController = userContentController
+        configuration.mediaTypesRequiringUserActionForPlayback = []
         webView = WKWebView(frame: .zero, configuration: configuration)
         guard let webView = webView else { return }
         webView.scrollView.isScrollEnabled = false
