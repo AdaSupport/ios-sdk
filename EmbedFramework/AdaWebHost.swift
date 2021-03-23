@@ -126,7 +126,7 @@ public class AdaWebHost: NSObject {
     public func setMetaFields(_ fields: [String: Any]) {
         guard let json = try? JSONSerialization.data(withJSONObject: fields, options: []),
               let jsonString = String(data: json, encoding: .utf8) else { return }
-        let toRun = "adaEmbed.setMetaFields('\(jsonString)');"
+        let toRun = "adaEmbed.setMetaFields(\(jsonString));"
         
         self.evalJS(toRun)
     }
