@@ -12,6 +12,7 @@ import AdaEmbedFramework
 class ViewController: UIViewController {
     
     lazy var adaFramework = AdaWebHost(handle: "nic", appScheme: "adaexampleapp")
+        
     
     @IBOutlet var firstNameField: UITextField!
     @IBOutlet var lastNameField: UITextField!
@@ -44,6 +45,10 @@ class ViewController: UIViewController {
     
     @IBAction func deleteHistory(_ sender: UIButton) {
         adaFramework.deleteHistory()
+    }
+    
+    @IBAction func deleteListeners(_ sender: UIButton) {
+        adaFramework.destroyListeners()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

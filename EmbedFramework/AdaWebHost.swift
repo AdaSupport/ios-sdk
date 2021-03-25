@@ -32,7 +32,7 @@ public class AdaWebHost: NSObject {
     private var webView: WKWebView?
     
     /// Key an eye on the network
-    private let reachability: Reachability
+    private var reachability: Reachability?
     
     /// Keep a reference to the OfflineViewController
     private var offlineViewController: OfflineViewController?
@@ -81,16 +81,16 @@ public class AdaWebHost: NSObject {
         self.reachability = Reachability()!
         super.init()
         
-        reachability.whenReachable = { _ in
+        reachability?.whenReachable = { _ in
             self.isInOfflineMode = false
         }
-        
-        reachability.whenUnreachable = { [weak self] _ in
+
+        reachability?.whenUnreachable = { [weak self] _ in
             guard let strongSelf = self,
                   let webView = strongSelf.webView else { return }
-            
+
             strongSelf.isInOfflineMode = true
-            
+
             if webView.superview != nil {
                 strongSelf.offlineViewController = OfflineViewController.create()
                 if let offlineVC = strongSelf.offlineViewController {
@@ -112,7 +112,7 @@ public class AdaWebHost: NSObject {
         NotificationCenter.default.addObserver(self, selector: #selector(AdaWebHost.keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         
         do {
-            try reachability.startNotifier()
+            try reachability?.startNotifier()
         } catch {
             print("Unable to start reachability notifier.")
         }
@@ -153,6 +153,18 @@ public class AdaWebHost: NSObject {
         let toRun = "adaEmbed.deleteHistory();"
         
         self.evalJS(toRun)
+    }
+    
+    /// Allows the Ada WebView to be deinitalized when navigating away from the view
+    /// Only use this if you do not want to persist the WebView
+    public func destroyListeners(){
+        /// Turn off reachability;
+        self.reachability = nil
+        
+        /// Disable WebView listeners
+        self.webView?.configuration.userContentController.removeScriptMessageHandler(forName: "adaEmbedReady");
+        self.webView?.configuration.userContentController.removeScriptMessageHandler(forName: "eventCallbackHandler");
+        self.webView?.configuration.userContentController.removeScriptMessageHandler(forName: "zdChatterAuthCallbackHandler");
     }
     
     /// Provide a view controller to launch web support from
@@ -205,9 +217,9 @@ extension AdaWebHost {
         webView.load(webRequest)
         
         // Bind handlers for JS messages
-        userContentController.add(self, name: "embedReady")
-        userContentController.add(self, name: "eventCallbackHandler")
-        userContentController.add(self, name: "zdChatterAuthCallbackHandler")
+        userContentController.add(AdaScriptMessageHandler(delegate:self), name: "embedReady")
+        userContentController.add(AdaScriptMessageHandler(delegate:self), name: "eventCallbackHandler")
+        userContentController.add(AdaScriptMessageHandler(delegate:self), name: "zdChatterAuthCallbackHandler")
     }
 }
 
