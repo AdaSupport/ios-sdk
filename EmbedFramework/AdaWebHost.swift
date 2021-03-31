@@ -229,6 +229,7 @@ extension AdaWebHost {
             // call error callback and stop trying to load the webview
             if(self.hasError || timerCount >= timeout){
                 webView.stopLoading()
+                timerCount = 0.0
                 timer.invalidate()
                 self.errorCallback?(AdaWebHostError.WebViewFailedToLoad)
                 return
@@ -237,7 +238,7 @@ extension AdaWebHost {
             
             // If we loaded and didn't run over the timer
             // reset count and stop timer
-            timerCount = 0.0;
+            timerCount = 0.0
             timer.invalidate()
         }
 
