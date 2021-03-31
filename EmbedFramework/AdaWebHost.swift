@@ -14,6 +14,7 @@ public class AdaWebHost: NSObject {
     
     public enum AdaWebHostError: Error {
         case WebViewFailedToLoad
+        case WebViewTimeout
     }
     
     private var hasError = false
@@ -22,6 +23,7 @@ public class AdaWebHost: NSObject {
     public var language = ""
     public var styles = ""
     public var greeting = ""
+    public var webViewTimeout = 30.0
     
     /// Metafields can be passed in during init; use `setMetaFields()`
     /// to send values in at runtime
@@ -31,7 +33,7 @@ public class AdaWebHost: NSObject {
     public var appScheme = ""
     
     
-    public var WebViewLoadingErrorCallback: ((Error) -> Void)? = nil
+    public var webViewLoadingErrorCallback: ((Error) -> Void)? = nil
     public var zdChatterAuthCallback: (((@escaping (_ token: String) -> Void)) -> Void)?
     public var eventCallbacks: [String: (_ event: [String: Any]) -> Void]?
     
@@ -72,8 +74,9 @@ public class AdaWebHost: NSObject {
         openWebLinksInSafari: Bool = false,
         appScheme: String = "",
         zdChatterAuthCallback: (((@escaping (_ token: String) -> Void)) -> Void)? = nil,
-        WebViewLoadingErrorCallback: ((Error) -> Void)? = nil,
-        eventCallbacks: [String: (_ event: [String: Any]) -> Void]? = nil
+        webViewLoadingErrorCallback: ((Error) -> Void)? = nil,
+        eventCallbacks: [String: (_ event: [String: Any]) -> Void]? = nil,
+        webViewTimeout: Double = 30.0
     ) {
         self.handle = handle
         self.cluster = cluster
@@ -84,8 +87,9 @@ public class AdaWebHost: NSObject {
         self.openWebLinksInSafari = openWebLinksInSafari
         self.appScheme = appScheme
         self.zdChatterAuthCallback = zdChatterAuthCallback
-        self.WebViewLoadingErrorCallback = WebViewLoadingErrorCallback
+        self.webViewLoadingErrorCallback = webViewLoadingErrorCallback
         self.eventCallbacks = eventCallbacks
+        self.webViewTimeout = webViewTimeout
     
         self.reachability = Reachability()!
         super.init()
@@ -197,7 +201,7 @@ public class AdaWebHost: NSObject {
 }
 
 extension AdaWebHost {
-    private func setupWebView(){
+    private func setupWebView() {
         let configuration = WKWebViewConfiguration()
         let userContentController = WKUserContentController()
         let clusterString = cluster.isEmpty ? "" : "\(cluster)."
@@ -210,49 +214,28 @@ extension AdaWebHost {
         webView.uiDelegate = self
         
         guard let remoteURL = URL(string: "https://\(handle).\(clusterString)ada.support/mobile-sdk-webview/") else { return }
-        let timeout = 30.0
-        let webRequest = URLRequest(url: remoteURL, cachePolicy: .useProtocolCachePolicy, timeoutInterval: timeout)
+        let webRequest = URLRequest(url: remoteURL, cachePolicy: .useProtocolCachePolicy, timeoutInterval: webViewTimeout)
         webView.load(webRequest)
-        
-        var timerCount = 0.0;
-        
-        // WebView timeout takes some extra time to call didFailProvisionalNavigation (around 240 seconds)
-        // So we use a timer to stop it if it took longer than expected
-        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { (timer) in
-            timerCount += timer.timeInterval;
 
-            if webView.isLoading && timerCount < timeout{
-                return
-            }
-            
-            // If the webview recieved any error or we ran over the alloted time
-            // call error callback and stop trying to load the webview
-            if(self.hasError || timerCount >= timeout){
-                webView.stopLoading()
-                timerCount = 0.0
-                timer.invalidate()
-                self.WebViewLoadingErrorCallback?(AdaWebHostError.WebViewFailedToLoad)
-                return
-            }
-            
-            
-            // If we loaded and didn't run over the timer
-            // reset count and stop timer
-            timerCount = 0.0
-            timer.invalidate()
-        }
-
-        
-        // Bind handlers for JS messages
         userContentController.add(self, name: "embedReady")
         userContentController.add(self, name: "eventCallbackHandler")
         userContentController.add(self, name: "zdChatterAuthCallbackHandler")
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + webViewTimeout) {
+            if(!self.hasError && webView.isLoading){
+                webView.stopLoading();
+                self.webViewLoadingErrorCallback?(AdaWebHostError.WebViewTimeout)
+            }
+        }
+
+        
     }
 }
 
 extension AdaWebHost: WKNavigationDelegate, WKUIDelegate {
     public func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
             self.hasError = true
+            self.webViewLoadingErrorCallback?(AdaWebHostError.WebViewFailedToLoad)
     }
     public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Swift.Void) {
         let httpSchemes = ["http", "https"]

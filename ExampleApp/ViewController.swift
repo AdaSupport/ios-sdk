@@ -10,7 +10,7 @@ import UIKit
 import AdaEmbedFramework
 
 class ViewController: UIViewController {
-    lazy var adaFramework = AdaWebHost(handle: "nic", appScheme: "adaexampleapp", WebViewLoadingErrorCallback: LoadingErrorCallback)
+    lazy var adaFramework = AdaWebHost(handle: "nic", appScheme: "adaexampleapp", webViewLoadingErrorCallback: LoadingErrorCallback, webViewTimeout: 30.0)
     
     @IBOutlet var firstNameField: UITextField!
     @IBOutlet var lastNameField: UITextField!
