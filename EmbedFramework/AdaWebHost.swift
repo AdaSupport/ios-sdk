@@ -31,7 +31,7 @@ public class AdaWebHost: NSObject {
     public var appScheme = ""
     
     
-    public var errorCallback: ((Error) -> Void)? = nil
+    public var WebViewLoadingErrorCallback: ((Error) -> Void)? = nil
     public var zdChatterAuthCallback: (((@escaping (_ token: String) -> Void)) -> Void)?
     public var eventCallbacks: [String: (_ event: [String: Any]) -> Void]?
     
@@ -72,7 +72,7 @@ public class AdaWebHost: NSObject {
         openWebLinksInSafari: Bool = false,
         appScheme: String = "",
         zdChatterAuthCallback: (((@escaping (_ token: String) -> Void)) -> Void)? = nil,
-        errorCallback: ((Error) -> Void)? = nil,
+        WebViewLoadingErrorCallback: ((Error) -> Void)? = nil,
         eventCallbacks: [String: (_ event: [String: Any]) -> Void]? = nil
     ) {
         self.handle = handle
@@ -84,7 +84,7 @@ public class AdaWebHost: NSObject {
         self.openWebLinksInSafari = openWebLinksInSafari
         self.appScheme = appScheme
         self.zdChatterAuthCallback = zdChatterAuthCallback
-        self.errorCallback = errorCallback
+        self.WebViewLoadingErrorCallback = WebViewLoadingErrorCallback
         self.eventCallbacks = eventCallbacks
     
         self.reachability = Reachability()!
@@ -231,7 +231,7 @@ extension AdaWebHost {
                 webView.stopLoading()
                 timerCount = 0.0
                 timer.invalidate()
-                self.errorCallback?(AdaWebHostError.WebViewFailedToLoad)
+                self.WebViewLoadingErrorCallback?(AdaWebHostError.WebViewFailedToLoad)
                 return
             }
             

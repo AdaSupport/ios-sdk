@@ -10,7 +10,7 @@ import UIKit
 import AdaEmbedFramework
 
 class ViewController: UIViewController {
-    lazy var adaFramework = AdaWebHost(handle: "nic", appScheme: "adaexampleapp", errorCallback: errorCallback)
+    lazy var adaFramework = AdaWebHost(handle: "nic", appScheme: "adaexampleapp", WebViewLoadingErrorCallback: LoadingErrorCallback)
     
     @IBOutlet var firstNameField: UITextField!
     @IBOutlet var lastNameField: UITextField!
@@ -18,7 +18,7 @@ class ViewController: UIViewController {
     
     
     //Example error callback
-    func errorCallback(error: Error){
+    func LoadingErrorCallback(error: Error){
         // Handle any error logic here
         view.window?.rootViewController?.dismiss(animated: true, completion: nil)
         navigationController?.popToRootViewController(animated: true);
