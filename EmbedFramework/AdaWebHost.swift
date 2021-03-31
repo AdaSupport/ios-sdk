@@ -12,11 +12,18 @@ import SafariServices
 
 public class AdaWebHost: NSObject {
     
+    public enum AdaWebHostError: Error {
+        case WebViewFailedToLoad
+        case WebViewTimeout
+    }
+    
+    private var hasError = false
     public var handle = ""
     public var cluster = ""
     public var language = ""
     public var styles = ""
     public var greeting = ""
+    public var webViewTimeout = 30.0
     
     /// Metafields can be passed in during init; use `setMetaFields()`
     /// to send values in at runtime
@@ -25,6 +32,8 @@ public class AdaWebHost: NSObject {
     public var openWebLinksInSafari = false
     public var appScheme = ""
     
+    
+    public var webViewLoadingErrorCallback: ((Error) -> Void)? = nil
     public var zdChatterAuthCallback: (((@escaping (_ token: String) -> Void)) -> Void)?
     public var eventCallbacks: [String: (_ event: [String: Any]) -> Void]?
     
@@ -65,7 +74,9 @@ public class AdaWebHost: NSObject {
         openWebLinksInSafari: Bool = false,
         appScheme: String = "",
         zdChatterAuthCallback: (((@escaping (_ token: String) -> Void)) -> Void)? = nil,
-        eventCallbacks: [String: (_ event: [String: Any]) -> Void]? = nil
+        webViewLoadingErrorCallback: ((Error) -> Void)? = nil,
+        eventCallbacks: [String: (_ event: [String: Any]) -> Void]? = nil,
+        webViewTimeout: Double = 30.0
     ) {
         self.handle = handle
         self.cluster = cluster
@@ -76,7 +87,10 @@ public class AdaWebHost: NSObject {
         self.openWebLinksInSafari = openWebLinksInSafari
         self.appScheme = appScheme
         self.zdChatterAuthCallback = zdChatterAuthCallback
+        self.webViewLoadingErrorCallback = webViewLoadingErrorCallback
         self.eventCallbacks = eventCallbacks
+        self.webViewTimeout = webViewTimeout
+        self.hasError = false
     
         self.reachability = Reachability()!
         super.init()
@@ -201,17 +215,30 @@ extension AdaWebHost {
         webView.uiDelegate = self
         
         guard let remoteURL = URL(string: "https://\(handle).\(clusterString)ada.support/mobile-sdk-webview/") else { return }
-        let webRequest = URLRequest(url: remoteURL, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 30)
+        let webRequest = URLRequest(url: remoteURL, cachePolicy: .useProtocolCachePolicy, timeoutInterval: webViewTimeout)
         webView.load(webRequest)
-        
-        // Bind handlers for JS messages
+
         userContentController.add(self, name: "embedReady")
         userContentController.add(self, name: "eventCallbackHandler")
         userContentController.add(self, name: "zdChatterAuthCallbackHandler")
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + webViewTimeout) {
+            if(!self.hasError && webView.isLoading){
+                webView.stopLoading();
+                self.webViewLoadingErrorCallback?(AdaWebHostError.WebViewTimeout)
+            }
+        }
+
+        
     }
 }
 
 extension AdaWebHost: WKNavigationDelegate, WKUIDelegate {
+    public func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
+            /// Whena  reset method is built - we will need to set this back to false
+            self.hasError = true
+            self.webViewLoadingErrorCallback?(AdaWebHostError.WebViewFailedToLoad)
+    }
     public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Swift.Void) {
         let httpSchemes = ["http", "https"]
         
