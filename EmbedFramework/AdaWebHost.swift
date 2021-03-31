@@ -90,6 +90,7 @@ public class AdaWebHost: NSObject {
         self.webViewLoadingErrorCallback = webViewLoadingErrorCallback
         self.eventCallbacks = eventCallbacks
         self.webViewTimeout = webViewTimeout
+        self.hasError = false
     
         self.reachability = Reachability()!
         super.init()
@@ -234,6 +235,7 @@ extension AdaWebHost {
 
 extension AdaWebHost: WKNavigationDelegate, WKUIDelegate {
     public func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
+            /// Whena  reset method is built - we will need to set this back to false
             self.hasError = true
             self.webViewLoadingErrorCallback?(AdaWebHostError.WebViewFailedToLoad)
     }
