@@ -12,6 +12,11 @@ import SafariServices
 
 public class AdaWebHost: NSObject {
     
+    public enum AdaWebHostError: Error {
+        case WebViewFailedToLoad
+    }
+    
+    private var hasError = false
     public var handle = ""
     public var cluster = ""
     public var language = ""
@@ -25,6 +30,8 @@ public class AdaWebHost: NSObject {
     public var openWebLinksInSafari = false
     public var appScheme = ""
     
+    
+    public var errorCallback: ((Error) -> Void)? = nil
     public var zdChatterAuthCallback: (((@escaping (_ token: String) -> Void)) -> Void)?
     public var eventCallbacks: [String: (_ event: [String: Any]) -> Void]?
     
@@ -65,6 +72,7 @@ public class AdaWebHost: NSObject {
         openWebLinksInSafari: Bool = false,
         appScheme: String = "",
         zdChatterAuthCallback: (((@escaping (_ token: String) -> Void)) -> Void)? = nil,
+        errorCallback: ((Error) -> Void)? = nil,
         eventCallbacks: [String: (_ event: [String: Any]) -> Void]? = nil
     ) {
         self.handle = handle
@@ -76,6 +84,7 @@ public class AdaWebHost: NSObject {
         self.openWebLinksInSafari = openWebLinksInSafari
         self.appScheme = appScheme
         self.zdChatterAuthCallback = zdChatterAuthCallback
+        self.errorCallback = errorCallback
         self.eventCallbacks = eventCallbacks
     
         self.reachability = Reachability()!
@@ -188,7 +197,7 @@ public class AdaWebHost: NSObject {
 }
 
 extension AdaWebHost {
-    private func setupWebView() {
+    private func setupWebView(){
         let configuration = WKWebViewConfiguration()
         let userContentController = WKUserContentController()
         let clusterString = cluster.isEmpty ? "" : "\(cluster)."
@@ -201,8 +210,37 @@ extension AdaWebHost {
         webView.uiDelegate = self
         
         guard let remoteURL = URL(string: "https://\(handle).\(clusterString)ada.support/mobile-sdk-webview/") else { return }
-        let webRequest = URLRequest(url: remoteURL, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 30)
+        let timeout = 30.0
+        let webRequest = URLRequest(url: remoteURL, cachePolicy: .useProtocolCachePolicy, timeoutInterval: timeout)
         webView.load(webRequest)
+        
+        var timerCount = 0.0;
+        
+        // WebView timeout takes some extra time to call didFailProvisionalNavigation (around 240 seconds)
+        // So we use a timer to stop it if it took longer than expected
+        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { (timer) in
+            timerCount += timer.timeInterval;
+
+            if webView.isLoading && timerCount < timeout{
+                return
+            }
+            
+            // If the webview recieved any error or we ran over the alloted time
+            // call error callback and stop trying to load the webview
+            if(self.hasError || timerCount >= timeout){
+                webView.stopLoading()
+                timer.invalidate()
+                self.errorCallback?(AdaWebHostError.WebViewFailedToLoad)
+                return
+            }
+            
+            
+            // If we loaded and didn't run over the timer
+            // reset count and stop timer
+            timerCount = 0.0;
+            timer.invalidate()
+        }
+
         
         // Bind handlers for JS messages
         userContentController.add(self, name: "embedReady")
@@ -212,6 +250,9 @@ extension AdaWebHost {
 }
 
 extension AdaWebHost: WKNavigationDelegate, WKUIDelegate {
+    public func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
+            self.hasError = true
+    }
     public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Swift.Void) {
         let httpSchemes = ["http", "https"]
         

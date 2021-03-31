@@ -10,12 +10,20 @@ import UIKit
 import AdaEmbedFramework
 
 class ViewController: UIViewController {
-    
-    lazy var adaFramework = AdaWebHost(handle: "nic", appScheme: "adaexampleapp")
+    lazy var adaFramework = AdaWebHost(handle: "nic", appScheme: "adaexampleapp", errorCallback: errorCallback)
     
     @IBOutlet var firstNameField: UITextField!
     @IBOutlet var lastNameField: UITextField!
     @IBOutlet var emailField: UITextField!
+    
+    
+    //Example error callback
+    func errorCallback(error: Error){
+        // Handle any error logic here
+        view.window?.rootViewController?.dismiss(animated: true, completion: nil)
+        navigationController?.popToRootViewController(animated: true);
+        print(error)
+    }
 
     @IBAction func submitForm(_ sender: UIButton) {
         guard
