@@ -95,8 +95,8 @@ public class AdaWebHost: NSObject {
         self.reachability = Reachability()!
         super.init()
         
-        reachability.whenReachable = { _ in
-            self.isInOfflineMode = false
+        reachability.whenReachable = { [weak self] _ in
+            self?.isInOfflineMode = false
         }
         
         reachability.whenUnreachable = { [weak self] _ in
@@ -222,7 +222,8 @@ extension AdaWebHost {
         userContentController.add(self, name: "eventCallbackHandler")
         userContentController.add(self, name: "zdChatterAuthCallbackHandler")
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + webViewTimeout) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + webViewTimeout) { [weak self] in
+            guard let self = self else { return }
             if(!self.hasError && webView.isLoading){
                 webView.stopLoading();
                 self.webViewLoadingErrorCallback?(AdaWebHostError.WebViewTimeout)
