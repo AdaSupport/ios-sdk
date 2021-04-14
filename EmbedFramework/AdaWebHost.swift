@@ -174,7 +174,7 @@ public class AdaWebHost: NSObject {
     public func launchModalWebSupport(from viewController: UIViewController) {
         guard let webView = webView else { return }
         webView.translatesAutoresizingMaskIntoConstraints = true
-        let webNavController = AdaWebHostViewController.createNavController(with: webView)
+        let webNavController = AdaWebHostViewController.createNavController(with: webView, adaWebHost: self)
         webNavController.modalPresentationStyle = .overFullScreen
         viewController.present(webNavController, animated: true, completion: nil)
     }
@@ -183,7 +183,7 @@ public class AdaWebHost: NSObject {
     public func launchNavWebSupport(from navController: UINavigationController) {
         guard let webView = webView else { return }
         webView.translatesAutoresizingMaskIntoConstraints = true
-        let webController = AdaWebHostViewController.createWebController(with: webView)
+        let webController = AdaWebHostViewController.createWebController(with: webView, adaWebHost: self)
         navController.pushViewController(webController, animated: true)
     }
     
@@ -231,6 +231,13 @@ extension AdaWebHost {
         }
 
         
+    }
+
+    func teardownWebView() {
+        guard let userContentController = webView?.configuration.userContentController else { return }
+        userContentController.removeScriptMessageHandler(forName: "embedReady")
+        userContentController.removeScriptMessageHandler(forName: "eventCallbackHandler")
+        userContentController.removeScriptMessageHandler(forName: "zdChatterAuthCallbackHandler")
     }
 }
 
