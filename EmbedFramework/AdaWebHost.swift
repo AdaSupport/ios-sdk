@@ -256,6 +256,7 @@ extension AdaWebHost: WKNavigationDelegate, WKUIDelegate {
                         }
                     }
                 // Only open links in in-app WebView if URL uses HTTP(S) scheme, and the openWebLinksInSafari option is false
+                // This is where SUP-43 is likely crashing
                 } else if self.openWebLinksInSafari == false && httpSchemes.contains(urlScheme ?? "") {
                     let sfVC = SFSafariViewController(url: url)
                     guard let presentingVC = findViewController(from: webView) else { return }
