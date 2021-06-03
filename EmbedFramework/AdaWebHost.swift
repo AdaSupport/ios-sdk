@@ -203,11 +203,15 @@ public class AdaWebHost: NSObject {
 
 extension AdaWebHost {
     private func setupWebView() {
+        let wkPreferences = WKPreferences()
+        wkPreferences.javaScriptCanOpenWindowsAutomatically = true
+        wkPreferences.javaScriptEnabled = true
         let configuration = WKWebViewConfiguration()
         let userContentController = WKUserContentController()
         let clusterString = cluster.isEmpty ? "" : "\(cluster)."
         configuration.userContentController = userContentController
         configuration.mediaTypesRequiringUserActionForPlayback = []
+        configuration.preferences = wkPreferences
         webView = WKWebView(frame: .zero, configuration: configuration)
         guard let webView = webView else { return }
         webView.scrollView.isScrollEnabled = false
@@ -239,33 +243,48 @@ extension AdaWebHost: WKNavigationDelegate, WKUIDelegate {
             self.hasError = true
             self.webViewLoadingErrorCallback?(AdaWebHostError.WebViewFailedToLoad)
     }
-    public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Swift.Void) {
+    
+    // Shared function to handle opening of urls
+    public func openUrl(webView: WKWebView, url: URL) -> Swift.Void {
         let httpSchemes = ["http", "https"]
-        
+        let urlScheme = url.scheme
+        // Handle opening universal links within the host App
+        // This requires the appScheme argument to work
+        if urlScheme == self.appScheme {
+            guard let presentingVC = findViewController(from: webView) else { return }
+            presentingVC.dismiss(animated: true) {
+                let shared = UIApplication.shared
+                if shared.canOpenURL(url) {
+                    shared.open(url, options: [:], completionHandler: nil)
+                }
+            }
+        // Only open links in in-app WebView if URL uses HTTP(S) scheme, and the openWebLinksInSafari option is false
+        // This is where SUP-43 is likely crashing
+        } else if self.openWebLinksInSafari == false && httpSchemes.contains(urlScheme ?? "") {
+            let sfVC = SFSafariViewController(url: url)
+            guard let presentingVC = findViewController(from: webView) else { return }
+            presentingVC.present(sfVC, animated: true, completion: nil)
+        } else {
+            let shared = UIApplication.shared
+            if shared.canOpenURL(url) {
+                shared.open(url, options: [:], completionHandler: nil)
+            }
+        }
+    }
+    
+    // Used for weblinks and signon (handling window.open js call)
+    public func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
+        if let url = navigationAction.request.url {
+            openUrl(webView: webView, url: url)
+        }
+        return nil
+    }
+    
+    // Used for processing all other navigation
+    public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Swift.Void) {
         if navigationAction.navigationType == WKNavigationType.linkActivated {
             if let url = navigationAction.request.url {
-                let urlScheme = url.scheme
-                // Handle opening universal links within the host App
-                // This requires the appScheme argument to work
-                if urlScheme == self.appScheme {
-                    guard let presentingVC = findViewController(from: webView) else { return }
-                    presentingVC.dismiss(animated: true) {
-                        let shared = UIApplication.shared
-                        if shared.canOpenURL(url) {
-                            shared.open(url, options: [:], completionHandler: nil)
-                        }
-                    }
-                // Only open links in in-app WebView if URL uses HTTP(S) scheme, and the openWebLinksInSafari option is false
-                } else if self.openWebLinksInSafari == false && httpSchemes.contains(urlScheme ?? "") {
-                    let sfVC = SFSafariViewController(url: url)
-                    guard let presentingVC = findViewController(from: webView) else { return }
-                    presentingVC.present(sfVC, animated: true, completion: nil)
-                } else {
-                    let shared = UIApplication.shared
-                    if shared.canOpenURL(url) {
-                        shared.open(url, options: [:], completionHandler: nil)
-                    }
-                }
+                openUrl(webView: webView, url: url)
             }
             decisionHandler(.cancel)
         }
