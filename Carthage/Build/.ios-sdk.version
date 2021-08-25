@@ -1,0 +1,28 @@
+{
+  "Mac" : [
+
+  ],
+  "watchOS" : [
+
+  ],
+  "tvOS" : [
+
+  ],
+  "commitish" : "1.3.6",
+  "iOS" : [
+    {
+      "swiftToolchainVersion" : "5.4.2 (swiftlang-1205.0.28.2 clang-1205.0.19.57)",
+      "hash" : "ce0faf959848cd8b9eb0dcd683d81775cf9483d2c3af86ff7d4e70d5ff425484",
+      "name" : "AdaEmbedFramework",
+      "container" : "AdaEmbedFramework.xcframework",
+      "identifier" : "ios-arm64_i386_x86_64-simulator"
+    },
+    {
+      "swiftToolchainVersion" : "5.4.2 (swiftlang-1205.0.28.2 clang-1205.0.19.57)",
+      "hash" : "e8a3ea7a744296c21ee5b3faa55ad3f297d958f494794c6f1cf437a339d80d20",
+      "name" : "AdaEmbedFramework",
+      "container" : "AdaEmbedFramework.xcframework",
+      "identifier" : "ios-arm64_armv7"
+    }
+  ]
+}

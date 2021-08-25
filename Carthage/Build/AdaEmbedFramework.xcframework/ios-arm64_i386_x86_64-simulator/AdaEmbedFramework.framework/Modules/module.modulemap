@@ -1,0 +1,4 @@
+framework module AdaEmbedFramework {
+  header "AdaEmbedFramework-Swift.h"
+  requires objc
+}
