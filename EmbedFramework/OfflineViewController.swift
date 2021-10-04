@@ -17,6 +17,9 @@ class OfflineViewController: UIViewController {
     
     static func create() -> OfflineViewController? {
         let bundle = Bundle(for: OfflineViewController.self)
+        
+        var storyboard:UIStoryboard
+        
         // Loads the resource_bundle if available (Cocoapod)
         if (bundle.path(forResource: "AdaEmbedFramework", ofType: "bundle") != nil){
             let frameworkBundlePath = bundle.path(forResource: "AdaEmbedFramework", ofType: "bundle")!
