@@ -12,11 +12,18 @@ import SafariServices
 
 public class AdaWebHost: NSObject {
     
+    public enum AdaWebHostError: Error {
+        case WebViewFailedToLoad
+        case WebViewTimeout
+    }
+    
+    private var hasError = false
     public var handle = ""
     public var cluster = ""
     public var language = ""
     public var styles = ""
     public var greeting = ""
+    public var webViewTimeout = 30.0
     
     /// Metafields can be passed in during init; use `setMetaFields()`
     /// to send values in at runtime
@@ -25,6 +32,8 @@ public class AdaWebHost: NSObject {
     public var openWebLinksInSafari = false
     public var appScheme = ""
     
+    
+    public var webViewLoadingErrorCallback: ((Error) -> Void)? = nil
     public var zdChatterAuthCallback: (((@escaping (_ token: String) -> Void)) -> Void)?
     public var eventCallbacks: [String: (_ event: [String: Any]) -> Void]?
     
@@ -65,7 +74,9 @@ public class AdaWebHost: NSObject {
         openWebLinksInSafari: Bool = false,
         appScheme: String = "",
         zdChatterAuthCallback: (((@escaping (_ token: String) -> Void)) -> Void)? = nil,
-        eventCallbacks: [String: (_ event: [String: Any]) -> Void]? = nil
+        webViewLoadingErrorCallback: ((Error) -> Void)? = nil,
+        eventCallbacks: [String: (_ event: [String: Any]) -> Void]? = nil,
+        webViewTimeout: Double = 30.0
     ) {
         self.handle = handle
         self.cluster = cluster
@@ -76,7 +87,10 @@ public class AdaWebHost: NSObject {
         self.openWebLinksInSafari = openWebLinksInSafari
         self.appScheme = appScheme
         self.zdChatterAuthCallback = zdChatterAuthCallback
+        self.webViewLoadingErrorCallback = webViewLoadingErrorCallback
         self.eventCallbacks = eventCallbacks
+        self.webViewTimeout = webViewTimeout
+        self.hasError = false
     
         self.reachability = Reachability()!
         super.init()
@@ -124,9 +138,9 @@ public class AdaWebHost: NSObject {
     
     /// Push a dictionary of fields to the server
     public func setMetaFields(_ fields: [String: Any]) {
-        let serializedData = try! JSONSerialization.data(withJSONObject: fields, options: [])
-        let encodedData = serializedData.base64EncodedString()
-        let toRun = "setMetaFields('\(encodedData)');"
+        guard let json = try? JSONSerialization.data(withJSONObject: fields, options: []),
+              let jsonString = String(data: json, encoding: .utf8) else { return }
+        let toRun = "adaEmbed.setMetaFields(\(jsonString));"
         
         self.evalJS(toRun)
     }
@@ -189,10 +203,15 @@ public class AdaWebHost: NSObject {
 
 extension AdaWebHost {
     private func setupWebView() {
+        let wkPreferences = WKPreferences()
+        wkPreferences.javaScriptCanOpenWindowsAutomatically = true
+        wkPreferences.javaScriptEnabled = true
         let configuration = WKWebViewConfiguration()
         let userContentController = WKUserContentController()
         let clusterString = cluster.isEmpty ? "" : "\(cluster)."
         configuration.userContentController = userContentController
+        configuration.mediaTypesRequiringUserActionForPlayback = []
+        configuration.preferences = wkPreferences
         webView = WKWebView(frame: .zero, configuration: configuration)
         guard let webView = webView else { return }
         webView.scrollView.isScrollEnabled = false
@@ -200,44 +219,72 @@ extension AdaWebHost {
         webView.uiDelegate = self
         
         guard let remoteURL = URL(string: "https://\(handle).\(clusterString)ada.support/mobile-sdk-webview/") else { return }
-        let webRequest = URLRequest(url: remoteURL, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 30)
+        let webRequest = URLRequest(url: remoteURL, cachePolicy: .useProtocolCachePolicy, timeoutInterval: webViewTimeout)
         webView.load(webRequest)
-        
-        // Bind handlers for JS messages
+
         userContentController.add(self, name: "embedReady")
         userContentController.add(self, name: "eventCallbackHandler")
         userContentController.add(self, name: "zdChatterAuthCallbackHandler")
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + webViewTimeout) {
+            if(!self.hasError && webView.isLoading){
+                webView.stopLoading();
+                self.webViewLoadingErrorCallback?(AdaWebHostError.WebViewTimeout)
+            }
+        }
+
+        
     }
 }
 
 extension AdaWebHost: WKNavigationDelegate, WKUIDelegate {
-    public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Swift.Void) {
+    public func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
+            /// Whena  reset method is built - we will need to set this back to false
+            self.hasError = true
+            self.webViewLoadingErrorCallback?(AdaWebHostError.WebViewFailedToLoad)
+    }
+    
+    // Shared function to handle opening of urls
+    public func openUrl(webView: WKWebView, url: URL) -> Swift.Void {
         let httpSchemes = ["http", "https"]
-        
+        let urlScheme = url.scheme
+        // Handle opening universal links within the host App
+        // This requires the appScheme argument to work
+        if urlScheme == self.appScheme {
+            guard let presentingVC = findViewController(from: webView) else { return }
+            presentingVC.dismiss(animated: true) {
+                let shared = UIApplication.shared
+                if shared.canOpenURL(url) {
+                    shared.open(url, options: [:], completionHandler: nil)
+                }
+            }
+        // Only open links in in-app WebView if URL uses HTTP(S) scheme, and the openWebLinksInSafari option is false
+        // This is where SUP-43 is likely crashing
+        } else if self.openWebLinksInSafari == false && httpSchemes.contains(urlScheme ?? "") {
+            let sfVC = SFSafariViewController(url: url)
+            guard let presentingVC = findViewController(from: webView) else { return }
+            presentingVC.present(sfVC, animated: true, completion: nil)
+        } else {
+            let shared = UIApplication.shared
+            if shared.canOpenURL(url) {
+                shared.open(url, options: [:], completionHandler: nil)
+            }
+        }
+    }
+    
+    // Used for weblinks and signon (handling window.open js call)
+    public func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
+        if let url = navigationAction.request.url {
+            openUrl(webView: webView, url: url)
+        }
+        return nil
+    }
+    
+    // Used for processing all other navigation
+    public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Swift.Void) {
         if navigationAction.navigationType == WKNavigationType.linkActivated {
             if let url = navigationAction.request.url {
-                let urlScheme = url.scheme
-                // Handle opening universal links within the host App
-                // This requires the appScheme argument to work
-                if urlScheme == self.appScheme {
-                    guard let presentingVC = findViewController(from: webView) else { return }
-                    presentingVC.dismiss(animated: true) {
-                        let shared = UIApplication.shared
-                        if shared.canOpenURL(url) {
-                            shared.open(url, options: [:], completionHandler: nil)
-                        }
-                    }
-                // Only open links in in-app WebView if URL uses HTTP(S) scheme, and the openWebLinksInSafari option is false
-                } else if self.openWebLinksInSafari == false && httpSchemes.contains(urlScheme ?? "") {
-                    let sfVC = SFSafariViewController(url: url)
-                    guard let presentingVC = findViewController(from: webView) else { return }
-                    presentingVC.present(sfVC, animated: true, completion: nil)
-                } else {
-                    let shared = UIApplication.shared
-                    if shared.canOpenURL(url) {
-                        shared.open(url, options: [:], completionHandler: nil)
-                    }
-                }
+                openUrl(webView: webView, url: url)
             }
             decisionHandler(.cancel)
         }

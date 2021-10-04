@@ -10,7 +10,6 @@ import UIKit
 import WebKit
 
 class AdaWebHostViewController: UIViewController {
-    
     static func createWebController(with webView: WKWebView) -> AdaWebHostViewController {
         let bundle = Bundle(for: AdaWebHostViewController.self)
         let frameworkBundlePath = bundle.path(forResource: "AdaEmbedFramework", ofType: "bundle")!
