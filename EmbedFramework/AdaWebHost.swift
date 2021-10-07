@@ -331,7 +331,7 @@ extension AdaWebHost {
             evalJS("""
                 (function() {
                     window.adaEmbed.start({
-                        handle: "\(self.handle)",
+                        handle: "zoom",
                         cluster: "\(self.cluster)",
                         language: "\(self.language)",
                         styles: "\(self.styles)",
