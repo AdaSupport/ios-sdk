@@ -27,6 +27,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		0334E7BD270E1A1700FC8C7C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0334E7B6270E1A1700FC8C7C /* ExampleAppCocoapod.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 039BA90B270E157C00DF3600;
+			remoteInfo = ExampleAppCocoapod;
+		};
+		0334E7C6270E1A1700FC8C7C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0334E797270E1A1700FC8C7C /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F04E50D1B414FD7A2138716660B9C2A8;
+			remoteInfo = "Pods-ExampleAppCocoapod";
+		};
 		49C73564226F99FE00D22E4B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 49C73550226F99FE00D22E4B /* Project object */;
@@ -57,6 +71,43 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0334E78C270E1A1700FC8C7C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		0334E78D270E1A1700FC8C7C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		0334E78F270E1A1700FC8C7C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		0334E790270E1A1700FC8C7C /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		0334E791270E1A1700FC8C7C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		0334E792270E1A1700FC8C7C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0334E793270E1A1700FC8C7C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		0334E794270E1A1700FC8C7C /* InjectedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InjectedViewController.swift; sourceTree = "<group>"; };
+		0334E795270E1A1700FC8C7C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		0334E797270E1A1700FC8C7C /* Pods.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = Pods.xcodeproj; sourceTree = "<group>"; };
+		0334E79C270E1A1700FC8C7C /* AdaEmbedFramework.release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = AdaEmbedFramework.release.xcconfig; sourceTree = "<group>"; };
+		0334E79D270E1A1700FC8C7C /* AdaEmbedFramework.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = AdaEmbedFramework.modulemap; sourceTree = "<group>"; };
+		0334E79E270E1A1700FC8C7C /* AdaEmbedFramework-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AdaEmbedFramework-Info.plist"; sourceTree = "<group>"; };
+		0334E79F270E1A1700FC8C7C /* AdaEmbedFramework.debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = AdaEmbedFramework.debug.xcconfig; sourceTree = "<group>"; };
+		0334E7A0270E1A1700FC8C7C /* ResourceBundle-AdaEmbedFramework-AdaEmbedFramework-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ResourceBundle-AdaEmbedFramework-AdaEmbedFramework-Info.plist"; sourceTree = "<group>"; };
+		0334E7A1270E1A1700FC8C7C /* AdaEmbedFramework-prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AdaEmbedFramework-prefix.pch"; sourceTree = "<group>"; };
+		0334E7A2270E1A1700FC8C7C /* AdaEmbedFramework-dummy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "AdaEmbedFramework-dummy.m"; sourceTree = "<group>"; };
+		0334E7A3270E1A1700FC8C7C /* AdaEmbedFramework-umbrella.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AdaEmbedFramework-umbrella.h"; sourceTree = "<group>"; };
+		0334E7A5270E1A1700FC8C7C /* Pods-ExampleAppCocoapod-acknowledgements.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Pods-ExampleAppCocoapod-acknowledgements.plist"; sourceTree = "<group>"; };
+		0334E7A6270E1A1700FC8C7C /* Pods-ExampleAppCocoapod-acknowledgements.markdown */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "Pods-ExampleAppCocoapod-acknowledgements.markdown"; sourceTree = "<group>"; };
+		0334E7A7270E1A1700FC8C7C /* Pods-ExampleAppCocoapod-frameworks-Debug-input-files.xcfilelist */ = {isa = PBXFileReference; lastKnownFileType = text.xcfilelist; path = "Pods-ExampleAppCocoapod-frameworks-Debug-input-files.xcfilelist"; sourceTree = "<group>"; };
+		0334E7A8270E1A1700FC8C7C /* Pods-ExampleAppCocoapod-umbrella.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Pods-ExampleAppCocoapod-umbrella.h"; sourceTree = "<group>"; };
+		0334E7A9270E1A1700FC8C7C /* Pods-ExampleAppCocoapod-frameworks-Debug-output-files.xcfilelist */ = {isa = PBXFileReference; lastKnownFileType = text.xcfilelist; path = "Pods-ExampleAppCocoapod-frameworks-Debug-output-files.xcfilelist"; sourceTree = "<group>"; };
+		0334E7AA270E1A1700FC8C7C /* Pods-ExampleAppCocoapod.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = "Pods-ExampleAppCocoapod.modulemap"; sourceTree = "<group>"; };
+		0334E7AB270E1A1700FC8C7C /* Pods-ExampleAppCocoapod-dummy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "Pods-ExampleAppCocoapod-dummy.m"; sourceTree = "<group>"; };
+		0334E7AC270E1A1700FC8C7C /* Pods-ExampleAppCocoapod-frameworks.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "Pods-ExampleAppCocoapod-frameworks.sh"; sourceTree = "<group>"; };
+		0334E7AD270E1A1700FC8C7C /* Pods-ExampleAppCocoapod-frameworks-Release-input-files.xcfilelist */ = {isa = PBXFileReference; lastKnownFileType = text.xcfilelist; path = "Pods-ExampleAppCocoapod-frameworks-Release-input-files.xcfilelist"; sourceTree = "<group>"; };
+		0334E7AE270E1A1700FC8C7C /* Pods-ExampleAppCocoapod-frameworks-Release-output-files.xcfilelist */ = {isa = PBXFileReference; lastKnownFileType = text.xcfilelist; path = "Pods-ExampleAppCocoapod-frameworks-Release-output-files.xcfilelist"; sourceTree = "<group>"; };
+		0334E7AF270E1A1700FC8C7C /* Pods-ExampleAppCocoapod-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Pods-ExampleAppCocoapod-Info.plist"; sourceTree = "<group>"; };
+		0334E7B0270E1A1700FC8C7C /* Pods-ExampleAppCocoapod.release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Pods-ExampleAppCocoapod.release.xcconfig"; sourceTree = "<group>"; };
+		0334E7B1270E1A1700FC8C7C /* Pods-ExampleAppCocoapod.debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Pods-ExampleAppCocoapod.debug.xcconfig"; sourceTree = "<group>"; };
+		0334E7B2270E1A1700FC8C7C /* Manifest.lock */ = {isa = PBXFileReference; lastKnownFileType = text; path = Manifest.lock; sourceTree = "<group>"; };
+		0334E7B4270E1A1700FC8C7C /* AdaEmbedFramework.podspec.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = AdaEmbedFramework.podspec.json; sourceTree = "<group>"; };
+		0334E7B6270E1A1700FC8C7C /* ExampleAppCocoapod.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = ExampleAppCocoapod.xcodeproj; sourceTree = "<group>"; };
+		0334E7B9270E1A1700FC8C7C /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		0334E7BA270E1A1700FC8C7C /* ExampleAppCocoapod.xcworkspace */ = {isa = PBXFileReference; lastKnownFileType = wrapper.workspace; path = ExampleAppCocoapod.xcworkspace; sourceTree = "<group>"; };
+		0334E7BB270E1A1700FC8C7C /* Podfile.lock */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile.lock; sourceTree = "<group>"; };
 		26BCD96559D811599DFCFA56 /* Pods-AdaEmbedFramework.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AdaEmbedFramework.release.xcconfig"; path = "Target Support Files/Pods-AdaEmbedFramework/Pods-AdaEmbedFramework.release.xcconfig"; sourceTree = "<group>"; };
 		319C585ECB42770D19E19753 /* Pods-AdaEmbedFramework-AdaEmbedFrameworkTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AdaEmbedFramework-AdaEmbedFrameworkTests.release.xcconfig"; path = "Target Support Files/Pods-AdaEmbedFramework-AdaEmbedFrameworkTests/Pods-AdaEmbedFramework-AdaEmbedFrameworkTests.release.xcconfig"; sourceTree = "<group>"; };
 		389A38EA3B28D4803B940430 /* Pods-AdaEmbedFramework.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AdaEmbedFramework.debug.xcconfig"; path = "Target Support Files/Pods-AdaEmbedFramework/Pods-AdaEmbedFramework.debug.xcconfig"; sourceTree = "<group>"; };
@@ -109,6 +160,122 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0334E78A270E1A1700FC8C7C /* ExampleAppCocoapod */ = {
+			isa = PBXGroup;
+			children = (
+				0334E78B270E1A1700FC8C7C /* ExampleAppCocoapod */,
+				0334E795270E1A1700FC8C7C /* README.md */,
+				0334E796270E1A1700FC8C7C /* Pods */,
+				0334E7B6270E1A1700FC8C7C /* ExampleAppCocoapod.xcodeproj */,
+				0334E7B9270E1A1700FC8C7C /* Podfile */,
+				0334E7BA270E1A1700FC8C7C /* ExampleAppCocoapod.xcworkspace */,
+				0334E7BB270E1A1700FC8C7C /* Podfile.lock */,
+			);
+			path = ExampleAppCocoapod;
+			sourceTree = "<group>";
+		};
+		0334E78B270E1A1700FC8C7C /* ExampleAppCocoapod */ = {
+			isa = PBXGroup;
+			children = (
+				0334E78C270E1A1700FC8C7C /* ViewController.swift */,
+				0334E78D270E1A1700FC8C7C /* Assets.xcassets */,
+				0334E78E270E1A1700FC8C7C /* LaunchScreen.storyboard */,
+				0334E790270E1A1700FC8C7C /* Main.storyboard */,
+				0334E791270E1A1700FC8C7C /* AppDelegate.swift */,
+				0334E792270E1A1700FC8C7C /* Info.plist */,
+				0334E793270E1A1700FC8C7C /* SceneDelegate.swift */,
+				0334E794270E1A1700FC8C7C /* InjectedViewController.swift */,
+			);
+			path = ExampleAppCocoapod;
+			sourceTree = "<group>";
+		};
+		0334E796270E1A1700FC8C7C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0334E797270E1A1700FC8C7C /* Pods.xcodeproj */,
+				0334E79A270E1A1700FC8C7C /* Target Support Files */,
+				0334E7B2270E1A1700FC8C7C /* Manifest.lock */,
+				0334E7B3270E1A1700FC8C7C /* Local Podspecs */,
+				0334E7B5270E1A1700FC8C7C /* Headers */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		0334E798270E1A1700FC8C7C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0334E7C7270E1A1700FC8C7C /* Pods-ExampleAppCocoapod */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0334E79A270E1A1700FC8C7C /* Target Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				0334E79B270E1A1700FC8C7C /* AdaEmbedFramework */,
+				0334E7A4270E1A1700FC8C7C /* Pods-ExampleAppCocoapod */,
+			);
+			path = "Target Support Files";
+			sourceTree = "<group>";
+		};
+		0334E79B270E1A1700FC8C7C /* AdaEmbedFramework */ = {
+			isa = PBXGroup;
+			children = (
+				0334E79C270E1A1700FC8C7C /* AdaEmbedFramework.release.xcconfig */,
+				0334E79D270E1A1700FC8C7C /* AdaEmbedFramework.modulemap */,
+				0334E79E270E1A1700FC8C7C /* AdaEmbedFramework-Info.plist */,
+				0334E79F270E1A1700FC8C7C /* AdaEmbedFramework.debug.xcconfig */,
+				0334E7A0270E1A1700FC8C7C /* ResourceBundle-AdaEmbedFramework-AdaEmbedFramework-Info.plist */,
+				0334E7A1270E1A1700FC8C7C /* AdaEmbedFramework-prefix.pch */,
+				0334E7A2270E1A1700FC8C7C /* AdaEmbedFramework-dummy.m */,
+				0334E7A3270E1A1700FC8C7C /* AdaEmbedFramework-umbrella.h */,
+			);
+			path = AdaEmbedFramework;
+			sourceTree = "<group>";
+		};
+		0334E7A4270E1A1700FC8C7C /* Pods-ExampleAppCocoapod */ = {
+			isa = PBXGroup;
+			children = (
+				0334E7A5270E1A1700FC8C7C /* Pods-ExampleAppCocoapod-acknowledgements.plist */,
+				0334E7A6270E1A1700FC8C7C /* Pods-ExampleAppCocoapod-acknowledgements.markdown */,
+				0334E7A7270E1A1700FC8C7C /* Pods-ExampleAppCocoapod-frameworks-Debug-input-files.xcfilelist */,
+				0334E7A8270E1A1700FC8C7C /* Pods-ExampleAppCocoapod-umbrella.h */,
+				0334E7A9270E1A1700FC8C7C /* Pods-ExampleAppCocoapod-frameworks-Debug-output-files.xcfilelist */,
+				0334E7AA270E1A1700FC8C7C /* Pods-ExampleAppCocoapod.modulemap */,
+				0334E7AB270E1A1700FC8C7C /* Pods-ExampleAppCocoapod-dummy.m */,
+				0334E7AC270E1A1700FC8C7C /* Pods-ExampleAppCocoapod-frameworks.sh */,
+				0334E7AD270E1A1700FC8C7C /* Pods-ExampleAppCocoapod-frameworks-Release-input-files.xcfilelist */,
+				0334E7AE270E1A1700FC8C7C /* Pods-ExampleAppCocoapod-frameworks-Release-output-files.xcfilelist */,
+				0334E7AF270E1A1700FC8C7C /* Pods-ExampleAppCocoapod-Info.plist */,
+				0334E7B0270E1A1700FC8C7C /* Pods-ExampleAppCocoapod.release.xcconfig */,
+				0334E7B1270E1A1700FC8C7C /* Pods-ExampleAppCocoapod.debug.xcconfig */,
+			);
+			path = "Pods-ExampleAppCocoapod";
+			sourceTree = "<group>";
+		};
+		0334E7B3270E1A1700FC8C7C /* Local Podspecs */ = {
+			isa = PBXGroup;
+			children = (
+				0334E7B4270E1A1700FC8C7C /* AdaEmbedFramework.podspec.json */,
+			);
+			path = "Local Podspecs";
+			sourceTree = "<group>";
+		};
+		0334E7B5270E1A1700FC8C7C /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Headers;
+			sourceTree = "<group>";
+		};
+		0334E7B7270E1A1700FC8C7C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0334E7BE270E1A1700FC8C7C /* ExampleAppCocoapod.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		41D667627FD537E55AF8AD9F /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -125,6 +292,7 @@
 		49C7354F226F99FE00D22E4B = {
 			isa = PBXGroup;
 			children = (
+				0334E78A270E1A1700FC8C7C /* ExampleAppCocoapod */,
 				49C7355B226F99FE00D22E4B /* EmbedFramework */,
 				93A79782228C86D600499BF9 /* ExampleApp */,
 				49C73566226F99FE00D22E4B /* EmbedFrameworkTests */,
@@ -294,6 +462,16 @@
 			mainGroup = 49C7354F226F99FE00D22E4B;
 			productRefGroup = 49C7355A226F99FE00D22E4B /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 0334E7B7270E1A1700FC8C7C /* Products */;
+					ProjectRef = 0334E7B6270E1A1700FC8C7C /* ExampleAppCocoapod.xcodeproj */;
+				},
+				{
+					ProductGroup = 0334E798270E1A1700FC8C7C /* Products */;
+					ProjectRef = 0334E797270E1A1700FC8C7C /* Pods.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				49C73558226F99FE00D22E4B /* AdaEmbedFramework */,
@@ -302,6 +480,24 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		0334E7BE270E1A1700FC8C7C /* ExampleAppCocoapod.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = ExampleAppCocoapod.app;
+			remoteRef = 0334E7BD270E1A1700FC8C7C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		0334E7C7270E1A1700FC8C7C /* Pods-ExampleAppCocoapod */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			name = "Pods-ExampleAppCocoapod";
+			path = Pods_ExampleAppCocoapod.framework;
+			remoteRef = 0334E7C6270E1A1700FC8C7C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		49C73557226F99FE00D22E4B /* Resources */ = {
@@ -378,6 +574,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		0334E78E270E1A1700FC8C7C /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0334E78F270E1A1700FC8C7C /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
 		93A7978C228C86D700499BF9 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
