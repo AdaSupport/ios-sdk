@@ -25,9 +25,10 @@ public class AdaWebHost: NSObject {
     public var greeting = ""
     public var webViewTimeout = 30.0
     
-    /// Metafields can be passed in during init; use `setMetaFields()`
+    /// Metafields can be passed in during init; use `setMetaFields()` and `setSensitiveMetafields()`
     /// to send values in at runtime
     private var metafields: [String: String] = [:]
+    private var sensitiveMetafields: [String: String] = [:]
     
     public var openWebLinksInSafari = false
     public var appScheme = ""
@@ -71,6 +72,7 @@ public class AdaWebHost: NSObject {
         styles: String = "",
         greeting: String = "",
         metafields: [String: String] = [:],
+        sensitiveMetafields: [String:String] = [:],
         openWebLinksInSafari: Bool = false,
         appScheme: String = "",
         zdChatterAuthCallback: (((@escaping (_ token: String) -> Void)) -> Void)? = nil,
@@ -84,6 +86,7 @@ public class AdaWebHost: NSObject {
         self.styles = styles
         self.greeting = greeting
         self.metafields = metafields
+        self.sensitiveMetafields = sensitiveMetafields
         self.openWebLinksInSafari = openWebLinksInSafari
         self.appScheme = appScheme
         self.zdChatterAuthCallback = zdChatterAuthCallback
@@ -144,14 +147,24 @@ public class AdaWebHost: NSObject {
         
         self.evalJS(toRun)
     }
+
+    /// Push a dictionary of fields to the server
+    public func setSensitiveMetaFields(_ fields: [String: Any]) {
+        guard let json = try? JSONSerialization.data(withJSONObject: fields, options: []),
+              let jsonString = String(data: json, encoding: .utf8) else { return }
+        let toRun = "adaEmbed.setSensitiveMetaFields(\(jsonString));"
+        
+        self.evalJS(toRun)
+    }
     
     /// Re-initialize chat and optionally reset history, language, meta data, etc
-    public func reset(language: String? = nil, greeting: String? = nil, metaFields: [String: Any]? = nil, resetChatHistory: Bool? = true) {
+    public func reset(language: String? = nil, greeting: String? = nil, metaFields: [String: Any]? = nil, sensitiveMetaFields: [String: Any]? = nil, resetChatHistory: Bool? = true) {
         
         let data: [String: Any?] = [
             "language": language,
             "greeting": greeting,
             "metaFields": metaFields,
+            "sensitiveMetaFields": sensitiveMetaFields,
             "resetChatHistory": resetChatHistory
         ]
         
@@ -325,8 +338,11 @@ extension AdaWebHost: WKScriptMessageHandler {
 extension AdaWebHost {
     private func initializeWebView() {        
         do {
-            let jsonData = try JSONSerialization.data(withJSONObject: self.metafields, options: [])
-            let json = String(data: jsonData, encoding: .utf8) ?? "{}"
+            let metaFieldsData = try JSONSerialization.data(withJSONObject: self.metafields, options: [])
+            let metaFieldsJson = String(data: metaFieldsData, encoding: .utf8) ?? "{}"
+            
+            let sensitiveMetaFieldsData = try JSONSerialization.data(withJSONObject: self.sensitiveMetafields, options: [])
+            let sensitiveMetaFieldsJson = String(data: sensitiveMetaFieldsData, encoding: .utf8) ?? "{}"
 
             evalJS("""
                 (function() {
@@ -336,7 +352,8 @@ extension AdaWebHost {
                         language: "\(self.language)",
                         styles: "\(self.styles)",
                         greeting: "\(self.greeting)",
-                        metaFields: \(json),
+                        metaFields: \(metaFieldsJson),
+                        sensitiveMetaFields: \(sensitiveMetaFieldsJson),
                         parentElement: "parent-element",
                         zdChatterAuthCallback: function(callback) {
                             window.zdTokenCallback = callback;
