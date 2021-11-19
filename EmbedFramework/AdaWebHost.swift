@@ -86,6 +86,8 @@ public class AdaWebHost: NSObject {
         self.styles = styles
         self.greeting = greeting
         self.metafields = metafields
+//        we always want to append the sdkType
+        self.metafields["sdkType"] = "IOS"
         self.sensitiveMetafields = sensitiveMetafields
         self.openWebLinksInSafari = openWebLinksInSafari
         self.appScheme = appScheme
