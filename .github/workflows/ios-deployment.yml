@@ -1,7 +1,7 @@
 name: Deploy iOS SDK
 on:
   push:
-    branches: [ master, ap/chatx-863-auto-deployment]
+    branches: [master, ap/chatx-863-auto-deployment]
 jobs:
   build:
     name: Build & Deploy
@@ -9,7 +9,14 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
-      - name: Setup - Xcode
-        run: sudo xcode-select -s /Applications/Xcode_12.4.app
-      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+      - name: Set up Ruby 3.0
+        uses: actions/setup-ruby@v1
+        with:
+          ruby-version: 3.0.x
+      - name: Install Dependencies
+        run: gem install bundler && bundle install
+      - name: Run Fastlane patch lane
+        run: bundle exec fastlane patch
+      # - uses: michaelhenry/deploy-to-cocoapods-github-action@1.0.10
+      #   env:
+      #     COCOAPODS_TRUNK_TOKEN: ${{ secrets.COCOAPODS_TRUNK_TOKEN }}
