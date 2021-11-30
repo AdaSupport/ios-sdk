@@ -1,7 +1,7 @@
 name: Deploy iOS SDK
 on:
   push:
-    branches: [master, ap/chatx-863-auto-deployment]
+    branches: [ master ]
 jobs:
   build:
     name: Build & Deploy
