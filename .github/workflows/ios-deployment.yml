@@ -17,6 +17,6 @@ jobs:
         run: gem install bundler && bundle install
       - name: Run Fastlane patch lane
         run: bundle exec fastlane patch
-      # - uses: michaelhenry/deploy-to-cocoapods-github-action@1.0.10
-      #   env:
-      #     COCOAPODS_TRUNK_TOKEN: ${{ secrets.COCOAPODS_TRUNK_TOKEN }}
+      - uses: michaelhenry/deploy-to-cocoapods-github-action@1.0.10
+        env:
+          COCOAPODS_TRUNK_TOKEN: ${{ secrets.COCOAPODS_TRUNK_TOKEN }}

@@ -19,8 +19,8 @@ platform :ios do
   def release(type)
     update_fastlane
     podspecName = "AdaEmbedFramework.podspec"
-    # ensure_git_branch
-    # ensure_git_status_clean
+    ensure_git_branch
+    ensure_git_status_clean
     gym(
       skip_archive: true,
       skip_codesigning: true,
@@ -34,20 +34,18 @@ platform :ios do
     version = version_bump_podspec(path: podspecName, bump_type: type)
     puts "#{version}"
     
-    # git_add(path: podspecName)
-    # git_commit(path: [podspecName], message: "#{version} release")
-    # push_to_git_remote
+    git_add(path: podspecName)
+    git_commit(path: [podspecName], message: "version number updated")
+    push_to_git_remote
 
-    # github_release = set_github_release(
-    #   repository_name: "adasupport/ios-sdk",
-    #   api_token: ENV["GITHUB_TOKEN"],
-    #   name: "#{version}",
-    #   tag_name: "#{version}",
-    #   description: (File.read("changelog") rescue "No changelog provided"),
-    #   commitish: "master",
-    #   upload_assets: ["AdaEmbedFramework.framework.zip"]
-    # )
-
-    # pod_push(allow_warnings: true, verbose: true)
+    github_release = set_github_release(
+      repository_name: "adasupport/ios-sdk",
+      api_token: ENV["GITHUB_TOKEN"],
+      name: "#{version}",
+      tag_name: "#{version}",
+      description: (File.read("changelog") rescue "No changelog provided"),
+      commitish: "master",
+      upload_assets: ["AdaEmbedFramework.framework.zip"]
+    )
   end
 end
