@@ -3,3 +3,8 @@
 **/xcuserdata/*
 Pods
 Podfile.lock
+Build
+Logs
+ModuleCache.noindex
+info.plist
+**.zip
