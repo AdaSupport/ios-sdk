@@ -35,7 +35,7 @@ platform :ios do
 
     github_release = set_github_release(
       repository_name: "adasupport/ios-sdk",
-      api_bearer: ENV["FL_GITHUB_RELEASE_API_BEARER"]
+      api_bearer: ENV["FL_GITHUB_RELEASE_API_BEARER"],
       name: "#{version}",
       tag_name: "#{version}",
       description: (File.read("changelog") rescue "No changelog provided"),
