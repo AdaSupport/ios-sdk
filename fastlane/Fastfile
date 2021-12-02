@@ -36,7 +36,9 @@ platform :ios do
     
     git_add(path: podspecName)
     git_commit(path: [podspecName], message: "version number updated")
-    push_to_git_remote
+    push_to_git_remote(
+      force: true
+    )
 
     github_release = set_github_release(
       repository_name: "adasupport/ios-sdk",
