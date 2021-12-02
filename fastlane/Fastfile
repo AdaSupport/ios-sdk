@@ -17,20 +17,20 @@ platform :ios do
   end
 
   def release(type)
-    # update_fastlane
+    update_fastlane
     podspecName = "AdaEmbedFramework.podspec"
-    # ensure_git_branch
-    # # ensure_git_status_clean
-    # gym(
-    #   skip_archive: true,
-    #   skip_codesigning: true,
-    #   derived_data_path: "."
-    # )
-    # zip(
-    #   path: "Build/Products/Release-iphoneos/AdaEmbedFramework.framework",
-    #   output_path: "AdaEmbedFramework.framework.zip"
-    # )
-    # pod_lib_lint
+    ensure_git_branch
+    # ensure_git_status_clean
+    gym(
+      skip_archive: true,
+      skip_codesigning: true,
+      derived_data_path: "."
+    )
+    zip(
+      path: "Build/Products/Release-iphoneos/AdaEmbedFramework.framework",
+      output_path: "AdaEmbedFramework.framework.zip"
+    )
+    pod_lib_lint
     version = version_get_podspec(path: podspecName)
 
     github_release = set_github_release(
