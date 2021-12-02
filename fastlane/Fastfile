@@ -31,14 +31,7 @@ platform :ios do
       output_path: "AdaEmbedFramework.framework.zip"
     )
     pod_lib_lint
-    version = version_bump_podspec(path: podspecName, bump_type: type)
-    puts "#{version}"
-    
-    git_add(path: podspecName)
-    git_commit(path: [podspecName], message: "version number updated")
-    push_to_git_remote(
-      force: true
-    )
+    version = version_get_podspec(path: podspecName)
 
     github_release = set_github_release(
       repository_name: "adasupport/ios-sdk",
