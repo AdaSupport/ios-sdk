@@ -307,6 +307,34 @@ extension AdaWebHost: WKNavigationDelegate, WKUIDelegate {
             decisionHandler(.allow)
         }
     }
+
+     // Download the file from the given url and store it locally in the app's temp folder and present the activity viewer.
+    private func downloadBlobURL(url downloadUrl : URL, fileName: String) {
+         let localFileURL = FileManager.default.temporaryDirectory.appendingPathComponent(fileName)
+
+         URLSession.shared.dataTask(with: downloadUrl) { data, response, err in
+             guard let data = data, err == nil else {
+                 debugPrint("Error downloading from url=\(downloadUrl.absoluteString): \(err.debugDescription)")
+                 return
+             }
+             if let httpResponse = response as? HTTPURLResponse {
+                 debugPrint("HTTP Status=\(httpResponse.statusCode)")
+             }
+             // write the downloaded data to a temporary folder
+             do {
+                 try data.write(to: localFileURL, options: .atomic)   // atomic option overwrites it if needed
+                 DispatchQueue.main.async { [self] in
+                     // present activity viewer
+                     let items = [localFileURL]
+                     let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
+                     findViewController(from: self.webView!)?.present(ac, animated: true)
+                 }
+             } catch {
+                 debugPrint(error)
+                 return
+             }
+         }.resume()
+     }
 }
 
 extension AdaWebHost: WKScriptMessageHandler {
@@ -314,7 +342,6 @@ extension AdaWebHost: WKScriptMessageHandler {
     /// Fire our initialize methods when that happens.
     public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         let messageName = message.name
-        
         if messageName == "embedReady" {
             self.webHostLoaded = true
         } else if let zdChatterAuthCallback = self.zdChatterAuthCallback, messageName == "zdChatterAuthCallbackHandler" {
@@ -324,7 +351,14 @@ extension AdaWebHost: WKScriptMessageHandler {
         } else if messageName == "eventCallbackHandler" {
             if let event = message.body as? [String: Any] {
                 if let eventName = event["event_name"] as? String {
-                    if let specificCallback = self.eventCallbacks?[eventName] {
+                    if eventName == "adaDownloadTranscript" {
+                        if let urlstr = event["url"] as? String, let name = event["name"] as? String {
+                            if let url = URL(string: urlstr.replacingOccurrences(of: " ", with: "")) {
+                                downloadBlobURL(url: url, fileName: name)
+                            }
+                        }
+                    }
+                    else if let specificCallback = self.eventCallbacks?[eventName] {
                         specificCallback(event)
                     }
                 }
