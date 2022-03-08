@@ -159,6 +159,16 @@ public class AdaWebHost: NSObject {
         self.evalJS(toRun)
     }
     
+    public func setMetaFields(builder: MetaFields.Builder) {
+        let metaFields = builder.build().metaFields
+        print(metaFields)
+        guard let json = try? JSONSerialization.data(withJSONObject: metaFields, options: []),
+              let jsonString = String(data: json, encoding: .utf8) else { return }
+        let toRun = "adaEmbed.setMetaFields(\(jsonString));"
+        
+        self.evalJS(toRun)
+    }
+    
     /// Re-initialize chat and optionally reset history, language, meta data, etc
     public func reset(language: String? = nil, greeting: String? = nil, metaFields: [String: Any]? = nil, sensitiveMetaFields: [String: Any]? = nil, resetChatHistory: Bool? = true) {
         
@@ -462,6 +472,53 @@ extension AdaWebHost {
             return findViewController(from: nextResponder)
         } else {
             return nil
+        }
+    }
+}
+
+public class MetaFields {
+    
+    internal var metaFields: [String: Any] = [:]
+    
+    init(metaFields: [String: Any]) {
+        self.metaFields = metaFields
+    }
+    
+    public class Builder {
+    
+        private var metaFields: [String: Any] = [:]
+        
+        public init() {
+            self.metaFields = [:]
+        }
+        
+        public func setField(key: String, value: String) -> MetaFields.Builder {
+            self.metaFields[key] = value
+            return self
+        }
+        
+        public func setField(key: String, value: Bool) -> MetaFields.Builder {
+            self.metaFields[key] = value
+            return self
+        }
+        
+        public func setField(key: String, value:Int) -> MetaFields.Builder {
+            self.metaFields[key] = value
+            return self
+        }
+        
+        public func setField(key: String, value: Float) -> MetaFields.Builder {
+            self.metaFields[key] = value
+            return self
+        }
+        
+        public func setField(key: String, value: Double) -> MetaFields.Builder {
+            self.metaFields[key] = value
+            return self
+        }
+        
+        internal func build() -> MetaFields {
+            return MetaFields(metaFields: self.metaFields)
         }
     }
 }
