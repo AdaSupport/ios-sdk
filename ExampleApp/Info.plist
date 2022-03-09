@@ -26,6 +26,7 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>adaexampleapp</string>
+				<string>data</string>
 			</array>
 		</dict>
 	</array>
