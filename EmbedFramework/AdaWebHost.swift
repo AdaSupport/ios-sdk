@@ -159,11 +159,21 @@ public class AdaWebHost: NSObject {
         self.evalJS(toRun)
     }
     
+    /// Override method using builder class
     public func setMetaFields(builder: MetaFields.Builder) {
         let metaFields = builder.build().metaFields
         guard let json = try? JSONSerialization.data(withJSONObject: metaFields, options: []),
               let jsonString = String(data: json, encoding: .utf8) else { return }
         let toRun = "adaEmbed.setMetaFields(\(jsonString));"
+        
+        self.evalJS(toRun)
+    }
+    
+    public func setSensitiveMetaFields(builder: MetaFields.Builder) {
+        let metaFields = builder.build().metaFields
+        guard let json = try? JSONSerialization.data(withJSONObject: metaFields, options: []),
+              let jsonString = String(data: json, encoding: .utf8) else { return }
+        let toRun = "adaEmbed.setSensitiveMetaFields(\(jsonString));"
         
         self.evalJS(toRun)
     }
