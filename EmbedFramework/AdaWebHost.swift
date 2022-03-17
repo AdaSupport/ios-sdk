@@ -27,8 +27,8 @@ public class AdaWebHost: NSObject {
     
     /// Metafields can be passed in during init; use `setMetaFields()` and `setSensitiveMetafields()`
     /// to send values in at runtime
-    private var metafields: [String: String] = [:]
-    private var sensitiveMetafields: [String: String] = [:]
+    private var metafields: [String: Any] = [:]
+    private var sensitiveMetafields: [String: Any] = [:]
     
     public var openWebLinksInSafari = false
     public var appScheme = ""
@@ -71,8 +71,8 @@ public class AdaWebHost: NSObject {
         language: String = "",
         styles: String = "",
         greeting: String = "",
-        metafields: [String: String] = [:],
-        sensitiveMetafields: [String:String] = [:],
+        metafields: [String: Any] = [:],
+        sensitiveMetafields: [String:Any] = [:],
         openWebLinksInSafari: Bool = false,
         appScheme: String = "",
         zdChatterAuthCallback: (((@escaping (_ token: String) -> Void)) -> Void)? = nil,
@@ -142,6 +142,7 @@ public class AdaWebHost: NSObject {
     // MARK: - Public Methods
     
     /// Push a dictionary of fields to the server
+    @available(*, deprecated, message: "This method will be deprecated in the future, please upgrade to MetaFields.Builder.", renamed: "setMetaFields(builder:)")
     public func setMetaFields(_ fields: [String: Any]) {
         guard let json = try? JSONSerialization.data(withJSONObject: fields, options: []),
               let jsonString = String(data: json, encoding: .utf8) else { return }
@@ -151,6 +152,7 @@ public class AdaWebHost: NSObject {
     }
 
     /// Push a dictionary of fields to the server
+    @available(*, deprecated, message: "This method will be deprecated in the future, please upgrade to MetaFields.Builder.", renamed: "setSensitiveMetaFields(builder:)")
     public func setSensitiveMetaFields(_ fields: [String: Any]) {
         guard let json = try? JSONSerialization.data(withJSONObject: fields, options: []),
               let jsonString = String(data: json, encoding: .utf8) else { return }
@@ -159,7 +161,28 @@ public class AdaWebHost: NSObject {
         self.evalJS(toRun)
     }
     
+    /// Override method using builder class
+    public func setMetaFields(builder: MetaFields.Builder) {
+        let metaFields = builder.build().metaFields
+        guard let json = try? JSONSerialization.data(withJSONObject: metaFields, options: []),
+              let jsonString = String(data: json, encoding: .utf8) else { return }
+        let toRun = "adaEmbed.setMetaFields(\(jsonString));"
+        
+        self.evalJS(toRun)
+    }
+    
+    public func setSensitiveMetaFields(builder: MetaFields.Builder) {
+        let metaFields = builder.build().metaFields
+        guard let json = try? JSONSerialization.data(withJSONObject: metaFields, options: []),
+              let jsonString = String(data: json, encoding: .utf8) else { return }
+        let toRun = "adaEmbed.setSensitiveMetaFields(\(jsonString));"
+        
+        self.evalJS(toRun)
+    }
+    
     /// Re-initialize chat and optionally reset history, language, meta data, etc
+    @available(*, deprecated, message: "This method will be deprecated in the future, please upgrade to MetaFields.Builder.", renamed: "reset(metaFields:sensitiveMetaFields:)")
+    /// When this method is depreciated, the 4 override reset methods should be replaced
     public func reset(language: String? = nil, greeting: String? = nil, metaFields: [String: Any]? = nil, sensitiveMetaFields: [String: Any]? = nil, resetChatHistory: Bool? = true) {
         
         let data: [String: Any?] = [
@@ -170,6 +193,71 @@ public class AdaWebHost: NSObject {
             "resetChatHistory": resetChatHistory
         ]
         
+        guard let json = try? JSONSerialization.data(withJSONObject: data, options: .fragmentsAllowed),
+              let jsonString = String(data: json, encoding: .utf8) else { return }
+        let toRun = "adaEmbed.reset(\(jsonString));"
+        
+        self.evalJS(toRun)
+    }
+    
+    public func reset(language: String? = nil, greeting: String? = nil, metaFields: MetaFields.Builder, resetChatHistory: Bool? = true) {
+        
+        let data: [String: Any?] = [
+            "language": language,
+            "greeting": greeting,
+            "metaFields": metaFields.build().metaFields,
+            "sensitiveMetaFields": nil,
+            "resetChatHistory": resetChatHistory
+        ]
+        guard let json = try? JSONSerialization.data(withJSONObject: data, options: .fragmentsAllowed),
+              let jsonString = String(data: json, encoding: .utf8) else { return }
+        let toRun = "adaEmbed.reset(\(jsonString));"
+        
+        self.evalJS(toRun)
+    }
+    
+    public func reset(language: String? = nil, greeting: String? = nil, sensitiveMetaFields: MetaFields.Builder, resetChatHistory: Bool? = true) {
+        
+        let data: [String: Any?] = [
+            "language": language,
+            "greeting": greeting,
+            "metaFields": nil,
+            "sensitiveMetaFields": sensitiveMetaFields.build().metaFields,
+            "resetChatHistory": resetChatHistory
+        ]
+        guard let json = try? JSONSerialization.data(withJSONObject: data, options: .fragmentsAllowed),
+              let jsonString = String(data: json, encoding: .utf8) else { return }
+        
+        let toRun = "adaEmbed.reset(\(jsonString));"
+        
+        self.evalJS(toRun)
+    }
+    
+    public func reset(language: String? = nil, greeting: String? = nil, metaFields: MetaFields.Builder, sensitiveMetaFields: MetaFields.Builder, resetChatHistory: Bool? = true) {
+        
+        let data: [String: Any?] = [
+            "language": language,
+            "greeting": greeting,
+            "metaFields": metaFields.build().metaFields,
+            "sensitiveMetaFields": sensitiveMetaFields.build().metaFields,
+            "resetChatHistory": resetChatHistory
+        ]
+        guard let json = try? JSONSerialization.data(withJSONObject: data, options: .fragmentsAllowed),
+              let jsonString = String(data: json, encoding: .utf8) else { return }
+        let toRun = "adaEmbed.reset(\(jsonString));"
+        
+        self.evalJS(toRun)
+    }
+    
+    public func reset(language: String? = nil, greeting: String? = nil, resetChatHistory: Bool? = true) {
+        
+        let data: [String: Any?] = [
+            "language": language,
+            "greeting": greeting,
+            "metaFields": nil,
+            "sensitiveMetaFields": nil,
+            "resetChatHistory": resetChatHistory
+        ]
         guard let json = try? JSONSerialization.data(withJSONObject: data, options: .fragmentsAllowed),
               let jsonString = String(data: json, encoding: .utf8) else { return }
         let toRun = "adaEmbed.reset(\(jsonString));"
@@ -462,6 +550,53 @@ extension AdaWebHost {
             return findViewController(from: nextResponder)
         } else {
             return nil
+        }
+    }
+}
+
+public class MetaFields {
+    
+    internal var metaFields: [String: Any] = [:]
+    
+    init(metaFields: [String: Any]) {
+        self.metaFields = metaFields
+    }
+    
+    public class Builder {
+    
+        private var metaFields: [String: Any] = [:]
+        
+        public init() {
+            self.metaFields = [:]
+        }
+        
+        public func setField(key: String, value: String) -> MetaFields.Builder {
+            self.metaFields[key] = value
+            return self
+        }
+        
+        public func setField(key: String, value: Bool) -> MetaFields.Builder {
+            self.metaFields[key] = value
+            return self
+        }
+        
+        public func setField(key: String, value:Int) -> MetaFields.Builder {
+            self.metaFields[key] = value
+            return self
+        }
+        
+        public func setField(key: String, value: Float) -> MetaFields.Builder {
+            self.metaFields[key] = value
+            return self
+        }
+        
+        public func setField(key: String, value: Double) -> MetaFields.Builder {
+            self.metaFields[key] = value
+            return self
+        }
+        
+        internal func build() -> MetaFields {
+            return MetaFields(metaFields: self.metaFields)
         }
     }
 }

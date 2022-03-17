@@ -30,11 +30,13 @@ class ViewController: UIViewController {
             let firstName = firstNameField.text,
             let lastName = lastNameField.text,
             let email = emailField.text else { return }
+        let builder = MetaFields.Builder()
+        builder.setField(key: "firstName", value: firstName)
+            .setField(key: "lastName", value: lastName)
+            .setField(key: "email", value: email)
         
-        adaFramework.setMetaFields([
-            "firstName": firstName,
-            "lastName": lastName,
-            "email": email])
+        adaFramework.setMetaFields(builder: builder)
+        
     }
     
     @IBAction func openModalSupport(_ sender: UIButton) {
