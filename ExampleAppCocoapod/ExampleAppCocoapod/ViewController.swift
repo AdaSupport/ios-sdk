@@ -10,7 +10,7 @@ import UIKit
 import AdaEmbedFramework
 
 class ViewController: UIViewController {
-    lazy var adaFramework = AdaWebHost(handle: "nic", appScheme: "adaexampleapp", webViewLoadingErrorCallback: LoadingErrorCallback, webViewTimeout: 30.0)
+    lazy var adaFramework = AdaWebHost(handle: "coffees", appScheme: "adaexampleapp", webViewLoadingErrorCallback: LoadingErrorCallback, webViewTimeout: 30.0)
     
     @IBOutlet var firstNameField: UITextField!
     @IBOutlet var lastNameField: UITextField!
@@ -31,10 +31,12 @@ class ViewController: UIViewController {
             let lastName = lastNameField.text,
             let email = emailField.text else { return }
         
-        adaFramework.setMetaFields([
-            "firstName": firstName,
-            "lastName": lastName,
-            "email": email])
+        let builder = MetaFields.Builder()
+        builder.setField(key: "firstName", value: firstName)
+            .setField(key: "lastName", value: lastName)
+            .setField(key: "email", value: email)
+        
+        adaFramework.setMetaFields(builder: builder)
     }
     
     @IBAction func openModalSupport(_ sender: UIButton) {
