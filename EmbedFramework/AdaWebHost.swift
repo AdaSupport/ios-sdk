@@ -25,6 +25,7 @@ public class AdaWebHost: NSObject {
     public var greeting = ""
     public var webViewTimeout = 30.0
     
+    
     /// Metafields can be passed in during init; use `setMetaFields()` and `setSensitiveMetafields()`
     /// to send values in at runtime
     private var metafields: [String: Any] = [:]
@@ -88,6 +89,7 @@ public class AdaWebHost: NSObject {
         self.metafields = metafields
 //        we always want to append the sdkType
         self.metafields["sdkType"] = "IOS"
+        self.metafields["sdkSupportsDownloadLink"] = true
         self.sensitiveMetafields = sensitiveMetafields
         self.openWebLinksInSafari = openWebLinksInSafari
         self.appScheme = appScheme
@@ -340,7 +342,22 @@ extension AdaWebHost {
     }
 }
 
-extension AdaWebHost: WKNavigationDelegate, WKUIDelegate {
+extension AdaWebHost: WKNavigationDelegate, WKUIDelegate, WKDownloadDelegate {
+    @available(iOS 14.5, *)
+    public func download(_ download: WKDownload, decideDestinationUsing response: URLResponse, suggestedFilename: String, completionHandler: @escaping (URL?) -> Void) {
+        
+        let localFileURL = FileManager.default.temporaryDirectory.appendingPathComponent(suggestedFilename)
+        
+        completionHandler(localFileURL)
+        
+        DispatchQueue.main.async { [self] in
+            // present activity viewer
+            let items = [localFileURL]
+            let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
+            findViewController(from: self.webView!)?.present(ac, animated: true)
+        }
+    }
+    
     public func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
             /// Whena  reset method is built - we will need to set this back to false
             self.hasError = true
@@ -385,7 +402,13 @@ extension AdaWebHost: WKNavigationDelegate, WKUIDelegate {
     
     // Used for processing all other navigation
     public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Swift.Void) {
-        if navigationAction.navigationType == WKNavigationType.linkActivated {
+        if #available(iOS 14.5, *), navigationAction.shouldPerformDownload{
+            decisionHandler(.download)
+        } else if navigationAction.request.url!.absoluteString.range(of: "/transcript/") != nil{
+            downloadUrl(url: navigationAction.request.url!, fileName: "chat_transcript.txt")
+            decisionHandler(.cancel)
+        }
+        else if navigationAction.navigationType == WKNavigationType.linkActivated {
             if let url = navigationAction.request.url {
                 openUrl(webView: webView, url: url)
             }
@@ -395,34 +418,42 @@ extension AdaWebHost: WKNavigationDelegate, WKUIDelegate {
             decisionHandler(.allow)
         }
     }
+    
+    
+    // Download the file from the given url and store it locally in the app's temp folder and present the activity viewer.
+   private func downloadUrl(url downloadUrl : URL, fileName: String) {
+        let localFileURL = FileManager.default.temporaryDirectory.appendingPathComponent(fileName)
 
-     // Download the file from the given url and store it locally in the app's temp folder and present the activity viewer.
-    private func downloadBlobURL(url downloadUrl : URL, fileName: String) {
-         let localFileURL = FileManager.default.temporaryDirectory.appendingPathComponent(fileName)
+        URLSession.shared.dataTask(with: downloadUrl) { data, response, err in
+            guard let data = data, err == nil else {
+                debugPrint("Error downloading from url=\(downloadUrl.absoluteString): \(err.debugDescription)")
+                return
+            }
+            if let httpResponse = response as? HTTPURLResponse {
+                debugPrint("HTTP Status=\(httpResponse.statusCode)")
+            }
+            // write the downloaded data to a temporary folder
+            do {
+                try data.write(to: localFileURL, options: .atomic)   // atomic option overwrites it if needed
+                DispatchQueue.main.async { [self] in
+                    // present activity viewer
+                    let items = [localFileURL]
+                    let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
+                    findViewController(from: self.webView!)?.present(ac, animated: true)
+                }
+            } catch {
+                debugPrint(error)
+                return
+            }
+        }.resume()
+    }
+    
+    @available(iOS 14.5, *)
+    public func webView(_ webView: WKWebView, navigationAction: WKNavigationAction, didBecome download: WKDownload) {
+    
+        download.delegate = self
+    }
 
-         URLSession.shared.dataTask(with: downloadUrl) { data, response, err in
-             guard let data = data, err == nil else {
-                 debugPrint("Error downloading from url=\(downloadUrl.absoluteString): \(err.debugDescription)")
-                 return
-             }
-             if let httpResponse = response as? HTTPURLResponse {
-                 debugPrint("HTTP Status=\(httpResponse.statusCode)")
-             }
-             // write the downloaded data to a temporary folder
-             do {
-                 try data.write(to: localFileURL, options: .atomic)   // atomic option overwrites it if needed
-                 DispatchQueue.main.async { [self] in
-                     // present activity viewer
-                     let items = [localFileURL]
-                     let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
-                     findViewController(from: self.webView!)?.present(ac, animated: true)
-                 }
-             } catch {
-                 debugPrint(error)
-                 return
-             }
-         }.resume()
-     }
 }
 
 extension AdaWebHost: WKScriptMessageHandler {
@@ -439,14 +470,8 @@ extension AdaWebHost: WKScriptMessageHandler {
         } else if messageName == "eventCallbackHandler" {
             if let event = message.body as? [String: Any] {
                 if let eventName = event["event_name"] as? String {
-                    if eventName == "adaDownloadTranscript" {
-                        if let urlstr = event["url"] as? String, let name = event["name"] as? String {
-                            if let url = URL(string: urlstr.replacingOccurrences(of: " ", with: "")) {
-                                downloadBlobURL(url: url, fileName: name)
-                            }
-                        }
-                    }
-                    else if let specificCallback = self.eventCallbacks?[eventName] {
+
+                    if let specificCallback = self.eventCallbacks?[eventName] {
                         specificCallback(event)
                     }
                 }
@@ -471,7 +496,8 @@ extension AdaWebHost {
             evalJS("""
                 (function() {
                     window.adaEmbed.start({
-                        handle: "\(self.handle)",
+                        handle: "josephstagingbranch",
+                        domain: "ada-dev2",
                         cluster: "\(self.cluster)",
                         language: "\(self.language)",
                         styles: "\(self.styles)",
