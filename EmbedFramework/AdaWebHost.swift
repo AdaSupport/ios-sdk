@@ -496,8 +496,7 @@ extension AdaWebHost {
             evalJS("""
                 (function() {
                     window.adaEmbed.start({
-                        handle: "josephstagingbranch",
-                        domain: "ada-dev2",
+                        handle: "\(self.handle)",
                         cluster: "\(self.cluster)",
                         language: "\(self.language)",
                         styles: "\(self.styles)",
