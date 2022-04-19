@@ -19,6 +19,7 @@ public class AdaWebHost: NSObject {
     
     private var hasError = false
     public var handle = ""
+    public var domain = ""
     public var cluster = ""
     public var language = ""
     public var styles = ""
@@ -70,6 +71,7 @@ public class AdaWebHost: NSObject {
         handle: String,
         cluster: String = "",
         language: String = "",
+        domain: String = "",
         styles: String = "",
         greeting: String = "",
         metafields: [String: Any] = [:],
@@ -85,6 +87,7 @@ public class AdaWebHost: NSObject {
         self.cluster = cluster
         self.language = language
         self.styles = styles
+        self.domain = domain
         self.greeting = greeting
         self.metafields = metafields
 //        we always want to append the sdkType
@@ -314,6 +317,7 @@ extension AdaWebHost {
         let configuration = WKWebViewConfiguration()
         let userContentController = WKUserContentController()
         let clusterString = cluster.isEmpty ? "" : "\(cluster)."
+        let domainString = domain.isEmpty ? "ada" : "\(domain)"
         configuration.userContentController = userContentController
         configuration.mediaTypesRequiringUserActionForPlayback = []
         configuration.preferences = wkPreferences
@@ -323,7 +327,7 @@ extension AdaWebHost {
         webView.navigationDelegate = self
         webView.uiDelegate = self
         
-        guard let remoteURL = URL(string: "https://\(handle).\(clusterString)ada.support/mobile-sdk-webview/") else { return }
+        guard let remoteURL = URL(string: "https://\(handle).\(clusterString)\(domainString).support/mobile-sdk-webview/") else { return }
         let webRequest = URLRequest(url: remoteURL, cachePolicy: .useProtocolCachePolicy, timeoutInterval: webViewTimeout)
         webView.load(webRequest)
 
@@ -498,6 +502,7 @@ extension AdaWebHost {
                     window.adaEmbed.start({
                         handle: "\(self.handle)",
                         cluster: "\(self.cluster)",
+                        domain: "\(self.domain)",
                         language: "\(self.language)",
                         styles: "\(self.styles)",
                         greeting: "\(self.greeting)",
