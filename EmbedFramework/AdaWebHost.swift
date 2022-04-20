@@ -334,6 +334,7 @@ extension AdaWebHost {
         userContentController.add(self, name: "embedReady")
         userContentController.add(self, name: "eventCallbackHandler")
         userContentController.add(self, name: "zdChatterAuthCallbackHandler")
+        userContentController.add(self, name: "chatFrameTimeoutCallbackHandler")
         
         DispatchQueue.main.asyncAfter(deadline: .now() + webViewTimeout) {
             if(!self.hasError && webView.isLoading){
@@ -467,6 +468,8 @@ extension AdaWebHost: WKScriptMessageHandler {
         let messageName = message.name
         if messageName == "embedReady" {
             self.webHostLoaded = true
+        } else if let webViewLoadingErrorCallback = self.webViewLoadingErrorCallback, messageName == "chatFrameTimeoutCallbackHandler" {
+            webViewLoadingErrorCallback(AdaWebHostError.WebViewTimeout)
         } else if let zdChatterAuthCallback = self.zdChatterAuthCallback, messageName == "zdChatterAuthCallbackHandler" {
             zdChatterAuthCallback() { token in
                 self.evalJS("window.zdTokenCallback(\"\(token)\");")
@@ -509,6 +512,11 @@ extension AdaWebHost {
                         metaFields: \(metaFieldsJson),
                         sensitiveMetaFields: \(sensitiveMetaFieldsJson),
                         parentElement: "parent-element",
+                        onAdaEmbedLoaded: () => {
+                            adaEmbed.subscribeEvent("ada:chat_frame_timeout", (data, context) => {
+                                window.webkit.messageHandlers.chatFrameTimeoutCallbackHandler.postMessage("chatFrameTimeout");
+                            });
+                        },
                         zdChatterAuthCallback: function(callback) {
                             window.zdTokenCallback = callback;
                             window.webkit.messageHandlers.zdChatterAuthCallbackHandler.postMessage("getToken");
