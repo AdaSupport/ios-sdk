@@ -8,9 +8,10 @@
 
 import UIKit
 import AdaEmbedFramework
+import FirebaseMessaging
 
 class ViewController: UIViewController {
-    lazy var adaFramework = AdaWebHost(handle: "nic", appScheme: "adaexampleapp", webViewLoadingErrorCallback: LoadingErrorCallback, webViewTimeout: 30.0)
+    lazy var adaFramework = AdaWebHost(handle: "nic", appScheme: "adaexampleapp", webViewLoadingErrorCallback: LoadingErrorCallback, webViewTimeout: 30.0, deviceToken: "")
     
     @IBOutlet var firstNameField: UITextField!
     @IBOutlet var lastNameField: UITextField!
@@ -36,6 +37,8 @@ class ViewController: UIViewController {
             .setField(key: "lastName", value: lastName)
             .setField(key: "email", value: email)
         
+       
+        
         adaFramework.setMetaFields(builder: builder)
     }
     
@@ -49,6 +52,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func resetChat(_ sender: UIButton) {
+        print("Device Token: \(Messaging.messaging().fcmToken)")
         adaFramework.reset()
     }
     

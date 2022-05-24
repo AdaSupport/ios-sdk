@@ -81,7 +81,8 @@ public class AdaWebHost: NSObject {
         zdChatterAuthCallback: (((@escaping (_ token: String) -> Void)) -> Void)? = nil,
         webViewLoadingErrorCallback: ((Error) -> Void)? = nil,
         eventCallbacks: [String: (_ event: [String: Any]) -> Void]? = nil,
-        webViewTimeout: Double = 30.0
+        webViewTimeout: Double = 30.0,
+        deviceToken: String = ""
     ) {
         self.handle = handle
         self.cluster = cluster
@@ -140,7 +141,7 @@ public class AdaWebHost: NSObject {
         } catch {
             print("Unable to start reachability notifier.")
         }
-        
+        setDeviceToken(deviceToken: deviceToken)
         setupWebView()
     }
     
@@ -273,6 +274,12 @@ public class AdaWebHost: NSObject {
     /// Re-initialize chat and optionally reset history, language, meta data, etc
     public func deleteHistory() {
         let toRun = "adaEmbed.deleteHistory();"
+        
+        self.evalJS(toRun)
+    }
+    
+    public func setDeviceToken(deviceToken: String) {
+        let toRun = "adaEmbed.setDeviceToken(\(deviceToken);"
         
         self.evalJS(toRun)
     }
