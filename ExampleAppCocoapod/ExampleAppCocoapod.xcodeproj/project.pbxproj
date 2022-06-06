@@ -30,6 +30,7 @@
 		66B2D16C192F5D92B22AA0AE /* Pods-ExampleAppCocoapod.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExampleAppCocoapod.release.xcconfig"; path = "Target Support Files/Pods-ExampleAppCocoapod/Pods-ExampleAppCocoapod.release.xcconfig"; sourceTree = "<group>"; };
 		73D3C79D896FEE077C559153 /* Pods-ExampleAppCocoapod.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExampleAppCocoapod.debug.xcconfig"; path = "Target Support Files/Pods-ExampleAppCocoapod/Pods-ExampleAppCocoapod.debug.xcconfig"; sourceTree = "<group>"; };
 		98CB6A2FEE20585E9E84257B /* Pods_ExampleAppCocoapod.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ExampleAppCocoapod.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B7035B65284E4B17007D20FC /* ExampleAppCocoapod.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ExampleAppCocoapod.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +66,7 @@
 		039BA90D270E157C00DF3600 /* ExampleAppCocoapod */ = {
 			isa = PBXGroup;
 			children = (
+				B7035B65284E4B17007D20FC /* ExampleAppCocoapod.entitlements */,
 				039BA928270E16A900DF3600 /* InjectedViewController.swift */,
 				039BA929270E16A900DF3600 /* Main.storyboard */,
 				039BA90E270E157C00DF3600 /* AppDelegate.swift */,
@@ -352,9 +354,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = ExampleAppCocoapod/ExampleAppCocoapod.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = BY82U3VVS9;
+				DEVELOPMENT_TEAM = ZRU59KP7YH;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ExampleAppCocoapod/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -367,7 +370,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = MichaelTest.ExampleAppCocoapod;
+				PRODUCT_BUNDLE_IDENTIFIER = support.ada.ios.sample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -381,9 +384,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = ExampleAppCocoapod/ExampleAppCocoapod.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = BY82U3VVS9;
+				DEVELOPMENT_TEAM = ZRU59KP7YH;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ExampleAppCocoapod/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -396,7 +400,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = MichaelTest.ExampleAppCocoapod;
+				PRODUCT_BUNDLE_IDENTIFIER = support.ada.ios.sample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

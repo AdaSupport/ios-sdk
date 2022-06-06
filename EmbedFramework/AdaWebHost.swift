@@ -149,7 +149,7 @@ public class AdaWebHost: NSObject {
     // MARK: - Public Methods
     
     public func setDeviceToken(deviceToken : String) {
-        let toRun = "adaEmbed.setDeviceToken(\(deviceToken));"
+        let toRun = "adaEmbed.setDeviceToken(\"\(deviceToken)\");"
         
         self.evalJS(toRun)
     }
