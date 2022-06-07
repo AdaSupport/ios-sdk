@@ -10,7 +10,9 @@ import UIKit
 import AdaEmbedFramework
 
 class ViewController: UIViewController {
-    lazy var adaFramework = AdaWebHost(handle: "messaging-platform-bot", domain: "ada-dev", appScheme: "adaexampleapp", webViewLoadingErrorCallback: LoadingErrorCallback, webViewTimeout: 30.0)
+    let deviceToken : String? = UserDefaults.standard.string(forKey: "device_token")
+    
+    lazy var adaFramework = AdaWebHost(handle: "nic", appScheme: "adaexampleapp", webViewLoadingErrorCallback: LoadingErrorCallback, webViewTimeout: 30.0, deviceToken: deviceToken ?? "")
     
     @IBOutlet var firstNameField: UITextField!
     @IBOutlet var lastNameField: UITextField!
@@ -40,11 +42,6 @@ class ViewController: UIViewController {
     }
     
     @IBAction func openModalSupport(_ sender: UIButton) {
-        let deviceToken : String? = UserDefaults.standard.string(forKey: "device_token")
-        
-        if let xy = deviceToken {
-            adaFramework.setDeviceToken(deviceToken: xy)
-        }
         adaFramework.launchModalWebSupport(from: self)
     }
     
