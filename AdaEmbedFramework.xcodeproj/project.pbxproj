@@ -41,6 +41,83 @@
 			remoteGlobalIDString = F04E50D1B414FD7A2138716660B9C2A8;
 			remoteInfo = "Pods-ExampleAppCocoapod";
 		};
+		035CF1D1284F886700ADCB7D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0334E797270E1A1700FC8C7C /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 161D416B380E59DB3518E76D1BE0BC8A;
+			remoteInfo = AdaEmbedFramework;
+		};
+		035CF1D3284F886700ADCB7D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0334E797270E1A1700FC8C7C /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C69CD74069907C5679945816B74B2E25;
+			remoteInfo = "AdaEmbedFramework-AdaEmbedFramework";
+		};
+		035CF1D5284F886700ADCB7D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0334E797270E1A1700FC8C7C /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E2B63D462DB7F827C4B11FD51E4F8E2D;
+			remoteInfo = FirebaseCore;
+		};
+		035CF1D7284F886700ADCB7D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0334E797270E1A1700FC8C7C /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8CC9178C366942FD6FF6A115604EAD58;
+			remoteInfo = FirebaseCoreDiagnostics;
+		};
+		035CF1D9284F886700ADCB7D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0334E797270E1A1700FC8C7C /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 148D0F9E8C7373FEAF40D800FC5F1BAA;
+			remoteInfo = FirebaseCoreInternal;
+		};
+		035CF1DB284F886700ADCB7D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0334E797270E1A1700FC8C7C /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 13C8C8B254851998F9289F71229B28A2;
+			remoteInfo = FirebaseInstallations;
+		};
+		035CF1DD284F886700ADCB7D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0334E797270E1A1700FC8C7C /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5B654B4B042BA7DC93766943A643E42B;
+			remoteInfo = FirebaseMessaging;
+		};
+		035CF1DF284F886700ADCB7D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0334E797270E1A1700FC8C7C /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 856B5CD56F194FAD26EA91620B66D614;
+			remoteInfo = GoogleDataTransport;
+		};
+		035CF1E1284F886700ADCB7D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0334E797270E1A1700FC8C7C /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = B43874C6CBB50E7134FBEC24BABFE14F;
+			remoteInfo = GoogleUtilities;
+		};
+		035CF1E3284F886700ADCB7D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0334E797270E1A1700FC8C7C /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 06FC5C9CF96D60C50FCD47D339C91951;
+			remoteInfo = nanopb;
+		};
+		035CF1E5284F886700ADCB7D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0334E797270E1A1700FC8C7C /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3347A1AB6546F0A3977529B8F199DC41;
+			remoteInfo = PromisesObjC;
+		};
 		49C73564226F99FE00D22E4B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 49C73550226F99FE00D22E4B /* Project object */;
@@ -204,7 +281,18 @@
 		0334E798270E1A1700FC8C7C /* Products */ = {
 			isa = PBXGroup;
 			children = (
+				035CF1D2284F886700ADCB7D /* AdaEmbedFramework */,
+				035CF1D4284F886700ADCB7D /* AdaEmbedFramework-AdaEmbedFramework */,
+				035CF1D6284F886700ADCB7D /* FirebaseCore */,
+				035CF1D8284F886700ADCB7D /* FirebaseCoreDiagnostics */,
+				035CF1DA284F886700ADCB7D /* FirebaseCoreInternal */,
+				035CF1DC284F886700ADCB7D /* FirebaseInstallations */,
+				035CF1DE284F886700ADCB7D /* FirebaseMessaging */,
+				035CF1E0284F886700ADCB7D /* GoogleDataTransport */,
+				035CF1E2284F886700ADCB7D /* GoogleUtilities */,
+				035CF1E4284F886700ADCB7D /* nanopb */,
 				0334E7C7270E1A1700FC8C7C /* Pods-ExampleAppCocoapod */,
+				035CF1E6284F886700ADCB7D /* PromisesObjC */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -497,6 +585,94 @@
 			remoteRef = 0334E7C6270E1A1700FC8C7C /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		035CF1D2284F886700ADCB7D /* AdaEmbedFramework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			name = AdaEmbedFramework;
+			path = AdaEmbedFramework.framework;
+			remoteRef = 035CF1D1284F886700ADCB7D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		035CF1D4284F886700ADCB7D /* AdaEmbedFramework-AdaEmbedFramework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			name = "AdaEmbedFramework-AdaEmbedFramework";
+			path = AdaEmbedFramework.bundle;
+			remoteRef = 035CF1D3284F886700ADCB7D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		035CF1D6284F886700ADCB7D /* FirebaseCore */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			name = FirebaseCore;
+			path = FirebaseCore.framework;
+			remoteRef = 035CF1D5284F886700ADCB7D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		035CF1D8284F886700ADCB7D /* FirebaseCoreDiagnostics */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			name = FirebaseCoreDiagnostics;
+			path = FirebaseCoreDiagnostics.framework;
+			remoteRef = 035CF1D7284F886700ADCB7D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		035CF1DA284F886700ADCB7D /* FirebaseCoreInternal */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			name = FirebaseCoreInternal;
+			path = FirebaseCoreInternal.framework;
+			remoteRef = 035CF1D9284F886700ADCB7D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		035CF1DC284F886700ADCB7D /* FirebaseInstallations */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			name = FirebaseInstallations;
+			path = FirebaseInstallations.framework;
+			remoteRef = 035CF1DB284F886700ADCB7D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		035CF1DE284F886700ADCB7D /* FirebaseMessaging */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			name = FirebaseMessaging;
+			path = FirebaseMessaging.framework;
+			remoteRef = 035CF1DD284F886700ADCB7D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		035CF1E0284F886700ADCB7D /* GoogleDataTransport */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			name = GoogleDataTransport;
+			path = GoogleDataTransport.framework;
+			remoteRef = 035CF1DF284F886700ADCB7D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		035CF1E2284F886700ADCB7D /* GoogleUtilities */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			name = GoogleUtilities;
+			path = GoogleUtilities.framework;
+			remoteRef = 035CF1E1284F886700ADCB7D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		035CF1E4284F886700ADCB7D /* nanopb */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			name = nanopb;
+			path = nanopb.framework;
+			remoteRef = 035CF1E3284F886700ADCB7D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		035CF1E6284F886700ADCB7D /* PromisesObjC */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			name = PromisesObjC;
+			path = FBLPromises.framework;
+			remoteRef = 035CF1E5284F886700ADCB7D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -662,6 +838,7 @@
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = ZRU59KP7YH;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -691,6 +868,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = ZRU59KP7YH;
 				INFOPLIST_FILE = EmbedFrameworkTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -710,7 +888,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = ExampleApp/ExampleApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 45N226Q5J8;
+				DEVELOPMENT_TEAM = ZRU59KP7YH;
 				INFOPLIST_FILE = ExampleApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (

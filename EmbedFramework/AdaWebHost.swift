@@ -24,6 +24,7 @@ public class AdaWebHost: NSObject {
     public var language = ""
     public var styles = ""
     public var greeting = ""
+    public var deviceToken = ""
     public var webViewTimeout = 30.0
     
     
@@ -102,6 +103,7 @@ public class AdaWebHost: NSObject {
         self.eventCallbacks = eventCallbacks
         self.webViewTimeout = webViewTimeout
         self.hasError = false
+        self.deviceToken = deviceToken
     
         self.reachability = Reachability()!
         super.init()
@@ -142,14 +144,13 @@ public class AdaWebHost: NSObject {
             print("Unable to start reachability notifier.")
         }
         
-        setDeviceToken(deviceToken: deviceToken)
         setupWebView()
     }
     
     // MARK: - Public Methods
     
     public func setDeviceToken(deviceToken : String) {
-        let toRun = "adaEmbed.setDeviceToken(\(deviceToken));"
+        let toRun = "adaEmbed.setDeviceToken(\"\(deviceToken)\");"
         
         self.evalJS(toRun)
     }
@@ -350,7 +351,8 @@ extension AdaWebHost {
                 self.webViewLoadingErrorCallback?(AdaWebHostError.WebViewTimeout)
             }
         }
-
+        
+       
         
     }
 }
@@ -521,6 +523,7 @@ extension AdaWebHost {
                         sensitiveMetaFields: \(sensitiveMetaFieldsJson),
                         parentElement: "parent-element",
                         onAdaEmbedLoaded: () => {
+                            adaEmbed.setDeviceToken("\(self.deviceToken)\");
                             adaEmbed.subscribeEvent("ada:chat_frame_timeout", (data, context) => {
                                 window.webkit.messageHandlers.chatFrameTimeoutCallbackHandler.postMessage("chatFrameTimeout");
                             });
@@ -535,6 +538,7 @@ extension AdaWebHost {
                     });
                 })();
             """)
+            
         } catch (let error) {
             print("Serialization error: \(error.localizedDescription)")
             return
