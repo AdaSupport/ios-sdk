@@ -22,3 +22,19 @@ jobs:
       - uses: michaelhenry/deploy-to-cocoapods-github-action@1.0.10
         env:
           COCOAPODS_TRUNK_TOKEN: ${{ secrets.COCOAPODS_TRUNK_TOKEN }}
+  release: 
+    name: Release TestFlight
+    runs-on: macos-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - name: Set up Ruby 3.0
+        uses: actions/setup-ruby@v1
+        with:
+          ruby-version: 3.0.x
+      - name: Install Dependencies
+        run: gem install bundler && bundle install
+      - name: Run Fastlane testflight lane
+        run: bundle exec fastlane closed_beta
+        env:
+          FL_GITHUB_RELEASE_API_BEARER: ${{ secrets.GITHUB_TOKEN }}
