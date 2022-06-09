@@ -39,10 +39,10 @@ Release a new version with a minor bump_type
 
 Release a new version with a major bump_type
 
-### ios closed_beta
+### ios beta
 
 ```sh
-[bundle exec] fastlane ios closed_beta
+[bundle exec] fastlane ios beta
 ```
 
 
