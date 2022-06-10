@@ -322,8 +322,6 @@ public class AdaWebHost: NSObject {
             if #available(iOS 13.0, *) {
                 let navBarAppearance = UINavigationBarAppearance()
                 navBarAppearance.configureWithOpaqueBackground()
-                navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
-                navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
                 navBarAppearance.backgroundColor = UIColor(rgb: 0xF3F3F3)
                 webNavController.navigationBar.standardAppearance = navBarAppearance
                 webNavController.navigationBar.scrollEdgeAppearance = navBarAppearance
