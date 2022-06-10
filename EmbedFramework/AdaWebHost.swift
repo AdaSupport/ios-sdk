@@ -10,6 +10,24 @@ import Foundation
 import WebKit
 import SafariServices
 
+extension UIColor {
+   convenience init(red: Int, green: Int, blue: Int) {
+       assert(red >= 0 && red <= 255, "Invalid red component")
+       assert(green >= 0 && green <= 255, "Invalid green component")
+       assert(blue >= 0 && blue <= 255, "Invalid blue component")
+
+       self.init(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: 1.0)
+   }
+
+   convenience init(rgb: Int) {
+       self.init(
+           red: (rgb >> 16) & 0xFF,
+           green: (rgb >> 8) & 0xFF,
+           blue: rgb & 0xFF
+       )
+   }
+}
+
 public class AdaWebHost: NSObject {
     
     public enum AdaWebHostError: Error {
@@ -40,6 +58,9 @@ public class AdaWebHost: NSObject {
     public var webViewLoadingErrorCallback: ((Error) -> Void)? = nil
     public var zdChatterAuthCallback: (((@escaping (_ token: String) -> Void)) -> Void)?
     public var eventCallbacks: [String: (_ event: [String: Any]) -> Void]?
+    
+    ///Set modal navigation bar and status bar to grey by default
+    public var navigationBarOpaqueBackground = false
     
     /// Here's where we do our business
     private var webView: WKWebView?
@@ -83,7 +104,8 @@ public class AdaWebHost: NSObject {
         webViewLoadingErrorCallback: ((Error) -> Void)? = nil,
         eventCallbacks: [String: (_ event: [String: Any]) -> Void]? = nil,
         webViewTimeout: Double = 30.0,
-        deviceToken: String = ""
+        deviceToken: String = "",
+        navigationBarOpaqueBackground: Bool = false
     ) {
         self.handle = handle
         self.cluster = cluster
@@ -104,6 +126,7 @@ public class AdaWebHost: NSObject {
         self.webViewTimeout = webViewTimeout
         self.hasError = false
         self.deviceToken = deviceToken
+        self.navigationBarOpaqueBackground = navigationBarOpaqueBackground
     
         self.reachability = Reachability()!
         super.init()
@@ -293,6 +316,20 @@ public class AdaWebHost: NSObject {
         webView.translatesAutoresizingMaskIntoConstraints = true
         let webNavController = AdaWebHostViewController.createNavController(with: webView)
         webNavController.modalPresentationStyle = .overFullScreen
+        if self.navigationBarOpaqueBackground {
+            
+            webNavController.modalPresentationStyle = .fullScreen
+            webNavController.navigationBar.backgroundColor = UIColor(rgb: 0xF3F3F3)
+            if #available(iOS 13.0, *) {
+                let navBarAppearance = UINavigationBarAppearance()
+                navBarAppearance.configureWithOpaqueBackground()
+                navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+                navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+                navBarAppearance.backgroundColor = UIColor(rgb: 0xF3F3F3)
+                webNavController.navigationBar.standardAppearance = navBarAppearance
+                webNavController.navigationBar.scrollEdgeAppearance = navBarAppearance
+            }
+        }
         viewController.present(webNavController, animated: true, completion: nil)
     }
     
