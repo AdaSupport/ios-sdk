@@ -319,7 +319,6 @@ public class AdaWebHost: NSObject {
         if self.navigationBarOpaqueBackground {
             
             webNavController.modalPresentationStyle = .fullScreen
-            webNavController.navigationBar.backgroundColor = UIColor(rgb: 0xF3F3F3)
             if #available(iOS 13.0, *) {
                 let navBarAppearance = UINavigationBarAppearance()
                 navBarAppearance.configureWithOpaqueBackground()
