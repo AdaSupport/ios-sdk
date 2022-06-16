@@ -1,0 +1,244 @@
+2022-06-13 16:15:58 +0000  Initial pipeline context: <IDEDistributionProcessingPipelineContext: 0x7fe5863ee170; archive(resolved)="<IDEArchive: 0x7fe581a6b170>", distributionTask(resolved)="2", distributionDestination(resolved)="1", distributionMethod(resolved)="<IDEDistributionMethodiOSAppStoreDistribution: 0x7fe582859ad0>", team(resolved)="<IDEProvisioningDisambiguatableBasicTeam: 0x7fe59d0deda0; teamID='ZRU59KP7YH', teamName='Ada Support Inc.', teamType='Company', username='lucas.cheng@ada.support', isFreeProvisioningTeam='0'>">
+	Chain (16, self inclusive):
+	<IDEDistributionProcessingPipelineContext: 0x7fe5863ee170; archive = "<IDEArchive: 0x7fe581a6b170>", distributionMethod="<IDEDistributionMethodiOSAppStoreDistribution: 0x7fe582859ad0>", team="<IDEProvisioningDisambiguatableBasicTeam: 0x7fe59d0deda0; teamID='ZRU59KP7YH', teamName='Ada Support Inc.', teamType='Company', username='lucas.cheng@ada.support', isFreeProvisioningTeam='0'>">
+	<IDEDistributionProcessingPipelineContext: 0x7fe58632e640; archive = "<IDEArchive: 0x7fe581a6b170>", distributionMethod="<IDEDistributionMethodiOSAppStoreDistribution: 0x7fe582859ad0>", team="<IDEProvisioningDisambiguatableBasicTeam: 0x7fe59d0deda0; teamID='ZRU59KP7YH', teamName='Ada Support Inc.', teamType='Company', username='lucas.cheng@ada.support', isFreeProvisioningTeam='0'>">
+	<IDEDistributionContext: 0x7fe59e7b0430; archive = "<IDEArchive: 0x7fe581a6b170>", distributionMethod="<IDEDistributionMethodiOSAppStoreDistribution: 0x7fe582859ad0>", team="<IDEProvisioningDisambiguatableBasicTeam: 0x7fe59d0deda0; teamID='ZRU59KP7YH', teamName='Ada Support Inc.', teamType='Company', username='lucas.cheng@ada.support', isFreeProvisioningTeam='0'>">
+	<IDEDistributionContext: 0x7fe59bc31120; archive = "<IDEArchive: 0x7fe581a6b170>", distributionMethod="<IDEDistributionMethodiOSAppStoreDistribution: 0x7fe582859ad0>", team="<IDEProvisioningDisambiguatableBasicTeam: 0x7fe59d0deda0; teamID='ZRU59KP7YH', teamName='Ada Support Inc.', teamType='Company', username='lucas.cheng@ada.support', isFreeProvisioningTeam='0'>">
+	<IDEDistributionContext: 0x7fe59e806f40; archive = "<IDEArchive: 0x7fe581a6b170>", distributionMethod="<IDEDistributionMethodiOSAppStoreDistribution: 0x7fe582859ad0>", team="<IDEProvisioningDisambiguatableBasicTeam: 0x7fe59d0deda0; teamID='ZRU59KP7YH', teamName='Ada Support Inc.', teamType='Company', username='lucas.cheng@ada.support', isFreeProvisioningTeam='0'>">
+	<IDEDistributionContext: 0x7fe5897ca1c0; archive = "<IDEArchive: 0x7fe581a6b170>", distributionMethod="<IDEDistributionMethodiOSAppStoreDistribution: 0x7fe582859ad0>", team="<IDEProvisioningDisambiguatableBasicTeam: 0x7fe59d0deda0; teamID='ZRU59KP7YH', teamName='Ada Support Inc.', teamType='Company', username='lucas.cheng@ada.support', isFreeProvisioningTeam='0'>">
+	<IDEDistributionContext: 0x7fe59e8505c0; archive = "<IDEArchive: 0x7fe581a6b170>", distributionMethod="<IDEDistributionMethodiOSAppStoreDistribution: 0x7fe582859ad0>", team="<IDEProvisioningDisambiguatableBasicTeam: 0x7fe59d0deda0; teamID='ZRU59KP7YH', teamName='Ada Support Inc.', teamType='Company', username='lucas.cheng@ada.support', isFreeProvisioningTeam='0'>">
+	<IDEDistributionContext: 0x7fe5863c2170; archive = "<IDEArchive: 0x7fe581a6b170>", distributionMethod="<IDEDistributionMethodiOSAppStoreDistribution: 0x7fe582859ad0>", team="<IDEProvisioningDisambiguatableBasicTeam: 0x7fe59d0deda0; teamID='ZRU59KP7YH', teamName='Ada Support Inc.', teamType='Company', username='lucas.cheng@ada.support', isFreeProvisioningTeam='0'>">
+	<IDEDistributionContext: 0x7fe5863fa360; archive = "<IDEArchive: 0x7fe581a6b170>", distributionMethod="<IDEDistributionMethodiOSAppStoreDistribution: 0x7fe582859ad0>", team="<IDEProvisioningDisambiguatableBasicTeam: 0x7fe59d0deda0; teamID='ZRU59KP7YH', teamName='Ada Support Inc.', teamType='Company', username='lucas.cheng@ada.support', isFreeProvisioningTeam='0'>">
+	<IDEDistributionContext: 0x7fe59dbb08c0; archive = "<IDEArchive: 0x7fe581a6b170>", distributionMethod="<IDEDistributionMethodiOSAppStoreDistribution: 0x7fe582859ad0>", team="<IDEProvisioningDisambiguatableBasicTeam: 0x7fe59d0deda0; teamID='ZRU59KP7YH', teamName='Ada Support Inc.', teamType='Company', username='lucas.cheng@ada.support', isFreeProvisioningTeam='0'>">
+	<IDEDistributionContext: 0x7fe58c130520; archive = "<IDEArchive: 0x7fe581a6b170>", distributionMethod="<IDEDistributionMethodiOSAppStoreDistribution: 0x7fe582859ad0>", team="<IDEProvisioningDisambiguatableBasicTeam: 0x7fe59d0deda0; teamID='ZRU59KP7YH', teamName='Ada Support Inc.', teamType='Company', username='lucas.cheng@ada.support', isFreeProvisioningTeam='0'>">
+	<IDEDistributionContext: 0x7fe58c1e1430; archive = "<IDEArchive: 0x7fe581a6b170>", distributionMethod="<IDEDistributionMethodiOSAppStoreDistribution: 0x7fe582859ad0>", team="<IDEProvisioningDisambiguatableBasicTeam: 0x7fe59d0deda0; teamID='ZRU59KP7YH', teamName='Ada Support Inc.', teamType='Company', username='lucas.cheng@ada.support', isFreeProvisioningTeam='0'>">
+	<IDEDistributionContext: 0x7fe58783a3a0; archive = "<IDEArchive: 0x7fe581a6b170>", distributionMethod="<IDEDistributionMethodiOSAppStoreDistribution: 0x7fe582859ad0>", team="<IDEProvisioningDisambiguatableBasicTeam: 0x7fe59d0deda0; teamID='ZRU59KP7YH', teamName='Ada Support Inc.', teamType='Company', username='lucas.cheng@ada.support', isFreeProvisioningTeam='0'>">
+	<IDEDistributionContext: 0x7fe58c71bef0; archive = "<IDEArchive: 0x7fe581a6b170>", distributionMethod="<IDEDistributionMethodiOSAppStoreDistribution: 0x7fe582859ad0>", team="(null)">
+	<IDEDistributionContext: 0x7fe58fd10090; archive = "<IDEArchive: 0x7fe581a6b170>", distributionMethod="<IDEDistributionMethodiOSAppStoreDistribution: 0x7fe582859ad0>", team="(null)">
+	<IDEDistributionContext: 0x7fe599b9f9c0; archive = "<IDEArchive: 0x7fe581a6b170>", distributionMethod="(null)", team="(null)">
+</IDEDistributionProcessingPipelineContext: 0x7fe5863ee170>
+2022-06-13 16:15:58 +0000  Processing step: IDEDistributionCreateDestRootStep
+2022-06-13 16:15:58 +0000  Processing step: IDEDistributionCopyItemStep
+2022-06-13 16:15:58 +0000  Running /usr/bin/ditto '-V' '/Users/lucascheng/Library/Developer/Xcode/Archives/2022-06-13/ExampleAppCocoapod 2022-06-13, 12.07 PM.xcarchive/Products/Applications/ExampleAppCocoapod.app' '/var/folders/m4/2g86vb_j2bb9psqz3qzj97t00000gn/T/XcodeDistPipeline.~~~AZKfdl/Root/Payload/ExampleAppCocoapod.app'
+2022-06-13 16:15:58 +0000  >>> Copying /Users/lucascheng/Library/Developer/Xcode/Archives/2022-06-13/ExampleAppCocoapod 2022-06-13, 12.07 PM.xcarchive/Products/Applications/ExampleAppCocoapod.app 
+2022-06-13 16:15:58 +0000  copying file ./_CodeSignature/CodeResources ... 
+2022-06-13 16:15:58 +0000  8159 bytes for ./_CodeSignature/CodeResources
+2022-06-13 16:15:58 +0000  copying file ./Base.lproj/LaunchScreen.storyboardc/01J-lp-oVM-view-Ze5-6b-2t3.nib ... 
+2022-06-13 16:15:58 +0000  1197 bytes for ./Base.lproj/LaunchScreen.storyboardc/01J-lp-oVM-view-Ze5-6b-2t3.nib
+2022-06-13 16:15:58 +0000  copying file ./Base.lproj/LaunchScreen.storyboardc/UIViewController-01J-lp-oVM.nib ... 
+2022-06-13 16:15:58 +0000  896 bytes for ./Base.lproj/LaunchScreen.storyboardc/UIViewController-01J-lp-oVM.nib
+2022-06-13 16:15:58 +0000  copying file ./Base.lproj/LaunchScreen.storyboardc/Info.plist ... 
+2022-06-13 16:15:58 +0000  258 bytes for ./Base.lproj/LaunchScreen.storyboardc/Info.plist
+2022-06-13 16:15:58 +0000  copying file ./ExampleAppCocoapod ... 
+2022-06-13 16:15:58 +0000  330496 bytes for ./ExampleAppCocoapod
+2022-06-13 16:15:58 +0000  copying file ./Main.storyboardc/UIViewController-r5d-3u-sPX.nib ... 
+2022-06-13 16:15:58 +0000  989 bytes for ./Main.storyboardc/UIViewController-r5d-3u-sPX.nib
+2022-06-13 16:15:58 +0000  copying file ./Main.storyboardc/UINavigationController-YZz-zj-PLA.nib ... 
+2022-06-13 16:15:58 +0000  2058 bytes for ./Main.storyboardc/UINavigationController-YZz-zj-PLA.nib
+copying file ./Main.storyboardc/BYZ-38-t0r-view-8bC-Xf-vdC.nib ... 
+2022-06-13 16:15:58 +0000  9783 bytes for ./Main.storyboardc/BYZ-38-t0r-view-8bC-Xf-vdC.nib
+2022-06-13 16:15:58 +0000  copying file ./Main.storyboardc/r5d-3u-sPX-view-u6Z-G9-uMX.nib ... 
+2022-06-13 16:15:58 +0000  2436 bytes for ./Main.storyboardc/r5d-3u-sPX-view-u6Z-G9-uMX.nib
+2022-06-13 16:15:58 +0000  copying file ./Main.storyboardc/Info.plist ... 
+2022-06-13 16:15:58 +0000  351 bytes for ./Main.storyboardc/Info.plist
+2022-06-13 16:15:58 +0000  copying file ./Frameworks/AdaEmbedFramework.framework/_CodeSignature/CodeResources ... 
+2022-06-13 16:15:58 +0000  4618 bytes for ./Frameworks/AdaEmbedFramework.framework/_CodeSignature/CodeResources
+2022-06-13 16:15:58 +0000  copying file ./Frameworks/AdaEmbedFramework.framework/AdaEmbedFramework.bundle/AdaWebHostViewController.storyboardc/D6W-gQ-JwA-view-i5u-Yf-gbe.nib ... 
+2022-06-13 16:15:58 +0000  1869 bytes for ./Frameworks/AdaEmbedFramework.framework/AdaEmbedFramework.bundle/AdaWebHostViewController.storyboardc/D6W-gQ-JwA-view-i5u-Yf-gbe.nib
+2022-06-13 16:15:58 +0000  copying file ./Frameworks/AdaEmbedFramework.framework/AdaEmbedFramework.bundle/AdaWebHostViewController.storyboardc/OfflineViewController.nib ... 
+2022-06-13 16:15:58 +0000  1043 bytes for ./Frameworks/AdaEmbedFramework.framework/AdaEmbedFramework.bundle/AdaWebHostViewController.storyboardc/OfflineViewController.nib
+2022-06-13 16:15:58 +0000  copying file ./Frameworks/AdaEmbedFramework.framework/AdaEmbedFramework.bundle/AdaWebHostViewController.storyboardc/dls-Jp-5Mo-view-AJC-ml-g1g.nib ... 
+2022-06-13 16:15:58 +0000  5899 bytes for ./Frameworks/AdaEmbedFramework.framework/AdaEmbedFramework.bundle/AdaWebHostViewController.storyboardc/dls-Jp-5Mo-view-AJC-ml-g1g.nib
+copying file ./Frameworks/AdaEmbedFramework.framework/AdaEmbedFramework.bundle/AdaWebHostViewController.storyboardc/adaWebHostViewController.nib ... 
+2022-06-13 16:15:58 +0000  1041 bytes for ./Frameworks/AdaEmbedFramework.framework/AdaEmbedFramework.bundle/AdaWebHostViewController.storyboardc/adaWebHostViewController.nib
+2022-06-13 16:15:58 +0000  copying file ./Frameworks/AdaEmbedFramework.framework/AdaEmbedFramework.bundle/AdaWebHostViewController.storyboardc/Info.plist ... 
+2022-06-13 16:15:58 +0000  273 bytes for ./Frameworks/AdaEmbedFramework.framework/AdaEmbedFramework.bundle/AdaWebHostViewController.storyboardc/Info.plist
+2022-06-13 16:15:58 +0000  copying file ./Frameworks/AdaEmbedFramework.framework/AdaEmbedFramework.bundle/Assets.car ... 
+2022-06-13 16:15:58 +0000  62943 bytes for ./Frameworks/AdaEmbedFramework.framework/AdaEmbedFramework.bundle/Assets.car
+2022-06-13 16:15:58 +0000  copying file ./Frameworks/AdaEmbedFramework.framework/AdaEmbedFramework.bundle/Info.plist ... 
+2022-06-13 16:15:58 +0000  733 bytes for ./Frameworks/AdaEmbedFramework.framework/AdaEmbedFramework.bundle/Info.plist
+2022-06-13 16:15:58 +0000  copying file ./Frameworks/AdaEmbedFramework.framework/AdaEmbedFramework ... 
+2022-06-13 16:15:58 +0000  1099920 bytes for ./Frameworks/AdaEmbedFramework.framework/AdaEmbedFramework
+2022-06-13 16:15:58 +0000  copying file ./Frameworks/AdaEmbedFramework.framework/Info.plist ... 
+2022-06-13 16:15:58 +0000  758 bytes for ./Frameworks/AdaEmbedFramework.framework/Info.plist
+2022-06-13 16:15:58 +0000  copying file ./embedded.mobileprovision ... 
+2022-06-13 16:15:58 +0000  20920 bytes for ./embedded.mobileprovision
+2022-06-13 16:15:58 +0000  copying file ./Info.plist ... 
+2022-06-13 16:15:58 +0000  1498 bytes for ./Info.plist
+2022-06-13 16:15:58 +0000  copying file ./PkgInfo ... 
+2022-06-13 16:15:58 +0000  8 bytes for ./PkgInfo
+2022-06-13 16:15:58 +0000  /usr/bin/ditto exited with 0
+2022-06-13 16:15:58 +0000  Processing step: IDEDistributionEmbedProfileStep
+2022-06-13 16:15:58 +0000  Skipping profile for item: <IDEDistributionItem: 0x7fe59ca733b0; bundleID='org.cocoapods.AdaEmbedFramework', path='<DVTFilePath:0x7fe58e69cda0:'/Users/lucascheng/Library/Developer/Xcode/Archives/2022-06-13/ExampleAppCocoapod 2022-06-13, 12.07 PM.xcarchive/Products/Applications/ExampleAppCocoapod.app/Frameworks/AdaEmbedFramework.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7fe59f1cb300; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7fe58e1f1850; name='Apple Development: Lucas Cheng (69U5KZC8DF)', hash='E24059A51934D576D84FBD129F22DCD9D26BAA00', serialNumber='34AF8C21CE18B96C7A0F252A973D60A8', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2022-05-31 15:25:36 +0000''>', entitlements='(null)', teamID='ZRU59KP7YH', identifier='org.cocoapods.AdaEmbedFramework', executablePath='<DVTFilePath:0x7fe58e6deb50:'/Users/lucascheng/Library/Developer/Xcode/Archives/2022-06-13/ExampleAppCocoapod 2022-06-13, 12.07 PM.xcarchive/Products/Applications/ExampleAppCocoapod.app/Frameworks/AdaEmbedFramework.framework/AdaEmbedFramework'>', hardenedRuntime='0'>'>
+2022-06-13 16:15:58 +0000  Processing step: IDEDistributionInfoPlistStep
+2022-06-13 16:15:58 +0000  Processing step: IDEDistributionItemRemovalStep
+2022-06-13 16:15:58 +0000  Processing step: IDEDistributionAppThinningPlistStep
+2022-06-13 16:15:58 +0000  Skipping step: IDEDistributionAppThinningPlistStep because it said so
+2022-06-13 16:15:58 +0000  Processing step: IDEDistributionCompileBitcodeStep
+2022-06-13 16:15:58 +0000  Skipping step: IDEDistributionCompileBitcodeStep because it said so
+2022-06-13 16:15:58 +0000  Processing step: IDEDistributionCodeSlimmingStep
+2022-06-13 16:15:58 +0000  Running /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/bitcode_strip '/var/folders/m4/2g86vb_j2bb9psqz3qzj97t00000gn/T/XcodeDistPipeline.~~~AZKfdl/Root/Payload/ExampleAppCocoapod.app/Frameworks/AdaEmbedFramework.framework/AdaEmbedFramework' '-l' '-keep_cs' '-o' '/var/folders/m4/2g86vb_j2bb9psqz3qzj97t00000gn/T/XcodeDistPipeline.~~~AZKfdl/Root/Payload/ExampleAppCocoapod.app/Frameworks/AdaEmbedFramework.framework/AdaEmbedFramework'
+2022-06-13 16:15:58 +0000  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/bitcode_strip exited with 0
+2022-06-13 16:15:58 +0000  Running /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/bitcode_strip '/var/folders/m4/2g86vb_j2bb9psqz3qzj97t00000gn/T/XcodeDistPipeline.~~~AZKfdl/Root/Payload/ExampleAppCocoapod.app/ExampleAppCocoapod' '-l' '-keep_cs' '-o' '/var/folders/m4/2g86vb_j2bb9psqz3qzj97t00000gn/T/XcodeDistPipeline.~~~AZKfdl/Root/Payload/ExampleAppCocoapod.app/ExampleAppCocoapod'
+2022-06-13 16:15:58 +0000  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/bitcode_strip exited with 0
+2022-06-13 16:15:58 +0000  Processing step: IDEDistributionCopyBCSymbolMapsStep
+2022-06-13 16:15:58 +0000  Running /usr/bin/ditto '-V' '/Users/lucascheng/Library/Developer/Xcode/Archives/2022-06-13/ExampleAppCocoapod 2022-06-13, 12.07 PM.xcarchive/BCSymbolMaps/EC6AF4F2-CE61-32CE-B70F-4A4016CBAB0C.bcsymbolmap' '/var/folders/m4/2g86vb_j2bb9psqz3qzj97t00000gn/T/XcodeDistPipeline.~~~AZKfdl/Root/BCSymbolMaps/EC6AF4F2-CE61-32CE-B70F-4A4016CBAB0C.bcsymbolmap'
+2022-06-13 16:15:58 +0000  >>> Copying /Users/lucascheng/Library/Developer/Xcode/Archives/2022-06-13/ExampleAppCocoapod 2022-06-13, 12.07 PM.xcarchive/BCSymbolMaps/EC6AF4F2-CE61-32CE-B70F-4A4016CBAB0C.bcsymbolmap 
+2022-06-13 16:15:58 +0000  copying file ./EC6AF4F2-CE61-32CE-B70F-4A4016CBAB0C.bcsymbolmap ... 
+2022-06-13 16:15:58 +0000  112829 bytes for ./EC6AF4F2-CE61-32CE-B70F-4A4016CBAB0C.bcsymbolmap
+2022-06-13 16:15:58 +0000  /usr/bin/ditto exited with 0
+2022-06-13 16:15:58 +0000  Running /usr/bin/ditto '-V' '/Users/lucascheng/Library/Developer/Xcode/Archives/2022-06-13/ExampleAppCocoapod 2022-06-13, 12.07 PM.xcarchive/BCSymbolMaps/BE9CF2EB-E83D-3766-B743-57331635F53D.bcsymbolmap' '/var/folders/m4/2g86vb_j2bb9psqz3qzj97t00000gn/T/XcodeDistPipeline.~~~AZKfdl/Root/BCSymbolMaps/BE9CF2EB-E83D-3766-B743-57331635F53D.bcsymbolmap'
+2022-06-13 16:15:58 +0000  >>> Copying /Users/lucascheng/Library/Developer/Xcode/Archives/2022-06-13/ExampleAppCocoapod 2022-06-13, 12.07 PM.xcarchive/BCSymbolMaps/BE9CF2EB-E83D-3766-B743-57331635F53D.bcsymbolmap 
+2022-06-13 16:15:58 +0000  copying file ./BE9CF2EB-E83D-3766-B743-57331635F53D.bcsymbolmap ... 
+2022-06-13 16:15:58 +0000  29706 bytes for ./BE9CF2EB-E83D-3766-B743-57331635F53D.bcsymbolmap
+2022-06-13 16:15:58 +0000  /usr/bin/ditto exited with 0
+2022-06-13 16:15:58 +0000  Processing step: IDEDistributionSymbolsStep
+2022-06-13 16:15:58 +0000  Excluding symbols for AdaEmbedFramework.framework
+2022-06-13 16:15:58 +0000  Excluding symbols for ExampleAppCocoapod.app
+2022-06-13 16:15:58 +0000  Processing step: IDEDistributionCopyAppleProvidedContentStep
+2022-06-13 16:15:58 +0000  Processing step: IDEDistributionAppThinningStep
+2022-06-13 16:15:58 +0000  Skipping step: IDEDistributionAppThinningStep because it said so
+2022-06-13 16:15:58 +0000  Processing step: IDEDistributionArchThinningStep
+2022-06-13 16:15:58 +0000  Running /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/m4/2g86vb_j2bb9psqz3qzj97t00000gn/T/XcodeDistPipeline.~~~AZKfdl/Root/Payload/ExampleAppCocoapod.app/Frameworks/AdaEmbedFramework.framework/AdaEmbedFramework' '-verify_arch' 'arm64e'
+2022-06-13 16:15:58 +0000  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 1
+2022-06-13 16:15:58 +0000  Skipping architecture thinning for item "AdaEmbedFramework" because arch "arm64e" wasn't found
+2022-06-13 16:15:58 +0000  Running /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/m4/2g86vb_j2bb9psqz3qzj97t00000gn/T/XcodeDistPipeline.~~~AZKfdl/Root/Payload/ExampleAppCocoapod.app/ExampleAppCocoapod' '-verify_arch' 'arm64e'
+2022-06-13 16:15:58 +0000  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 1
+2022-06-13 16:15:58 +0000  Skipping architecture thinning for item "ExampleAppCocoapod" because arch "arm64e" wasn't found
+2022-06-13 16:15:58 +0000  Processing step: IDEDistributionODRStep
+2022-06-13 16:15:58 +0000  Processing step: IDEDistributionStripXattrsStep
+2022-06-13 16:15:58 +0000  Skipping stripping extended attributes of item: <IDEDistributionItem: 0x7fe59ca733b0; bundleID='org.cocoapods.AdaEmbedFramework', path='<DVTFilePath:0x7fe58e69cda0:'/Users/lucascheng/Library/Developer/Xcode/Archives/2022-06-13/ExampleAppCocoapod 2022-06-13, 12.07 PM.xcarchive/Products/Applications/ExampleAppCocoapod.app/Frameworks/AdaEmbedFramework.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7fe59f1cb300; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7fe58ce415c0; name='Apple Development: Lucas Cheng (69U5KZC8DF)', hash='E24059A51934D576D84FBD129F22DCD9D26BAA00', serialNumber='34AF8C21CE18B96C7A0F252A973D60A8', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2022-05-31 15:25:36 +0000''>', entitlements='(null)', teamID='ZRU59KP7YH', identifier='org.cocoapods.AdaEmbedFramework', executablePath='<DVTFilePath:0x7fe58e6deb50:'/Users/lucascheng/Library/Developer/Xcode/Archives/2022-06-13/ExampleAppCocoapod 2022-06-13, 12.07 PM.xcarchive/Products/Applications/ExampleAppCocoapod.app/Frameworks/AdaEmbedFramework.framework/AdaEmbedFramework'>', hardenedRuntime='0'>'>
+2022-06-13 16:15:58 +0000  Running /usr/bin/xattr '-crs' '/var/folders/m4/2g86vb_j2bb9psqz3qzj97t00000gn/T/XcodeDistPipeline.~~~AZKfdl/Root/Payload/ExampleAppCocoapod.app'
+2022-06-13 16:15:58 +0000  /usr/bin/xattr exited with 0
+2022-06-13 16:15:58 +0000  Processing step: IDEDistributionCodesignStep
+2022-06-13 16:15:58 +0000  Entitlements for <IDEDistributionItem: 0x7fe59ca733b0; bundleID='org.cocoapods.AdaEmbedFramework', path='<DVTFilePath:0x7fe58e69cda0:'/Users/lucascheng/Library/Developer/Xcode/Archives/2022-06-13/ExampleAppCocoapod 2022-06-13, 12.07 PM.xcarchive/Products/Applications/ExampleAppCocoapod.app/Frameworks/AdaEmbedFramework.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7fe59f1cb300; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7fe5863e5580; name='Apple Development: Lucas Cheng (69U5KZC8DF)', hash='E24059A51934D576D84FBD129F22DCD9D26BAA00', serialNumber='34AF8C21CE18B96C7A0F252A973D60A8', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2022-05-31 15:25:36 +0000''>', entitlements='(null)', teamID='ZRU59KP7YH', identifier='org.cocoapods.AdaEmbedFramework', executablePath='<DVTFilePath:0x7fe58e6deb50:'/Users/lucascheng/Library/Developer/Xcode/Archives/2022-06-13/ExampleAppCocoapod 2022-06-13, 12.07 PM.xcarchive/Products/Applications/ExampleAppCocoapod.app/Frameworks/AdaEmbedFramework.framework/AdaEmbedFramework'>', hardenedRuntime='0'>'>: {
+}
+2022-06-13 16:15:58 +0000  Entitlements for <IDEDistributionItem: 0x7fe59ca733b0; bundleID='org.cocoapods.AdaEmbedFramework', path='<DVTFilePath:0x7fe58e69cda0:'/Users/lucascheng/Library/Developer/Xcode/Archives/2022-06-13/ExampleAppCocoapod 2022-06-13, 12.07 PM.xcarchive/Products/Applications/ExampleAppCocoapod.app/Frameworks/AdaEmbedFramework.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7fe59f1cb300; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7fe58ce416c0; name='Apple Development: Lucas Cheng (69U5KZC8DF)', hash='E24059A51934D576D84FBD129F22DCD9D26BAA00', serialNumber='34AF8C21CE18B96C7A0F252A973D60A8', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2022-05-31 15:25:36 +0000''>', entitlements='(null)', teamID='ZRU59KP7YH', identifier='org.cocoapods.AdaEmbedFramework', executablePath='<DVTFilePath:0x7fe58e6deb50:'/Users/lucascheng/Library/Developer/Xcode/Archives/2022-06-13/ExampleAppCocoapod 2022-06-13, 12.07 PM.xcarchive/Products/Applications/ExampleAppCocoapod.app/Frameworks/AdaEmbedFramework.framework/AdaEmbedFramework'>', hardenedRuntime='0'>'> are: {
+}
+2022-06-13 16:15:58 +0000  Writing entitlements for <IDEDistributionItem: 0x7fe59ca733b0; bundleID='org.cocoapods.AdaEmbedFramework', path='<DVTFilePath:0x7fe58e69cda0:'/Users/lucascheng/Library/Developer/Xcode/Archives/2022-06-13/ExampleAppCocoapod 2022-06-13, 12.07 PM.xcarchive/Products/Applications/ExampleAppCocoapod.app/Frameworks/AdaEmbedFramework.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7fe59f1cb300; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7fe5818c0670; name='Apple Development: Lucas Cheng (69U5KZC8DF)', hash='E24059A51934D576D84FBD129F22DCD9D26BAA00', serialNumber='34AF8C21CE18B96C7A0F252A973D60A8', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2022-05-31 15:25:36 +0000''>', entitlements='(null)', teamID='ZRU59KP7YH', identifier='org.cocoapods.AdaEmbedFramework', executablePath='<DVTFilePath:0x7fe58e6deb50:'/Users/lucascheng/Library/Developer/Xcode/Archives/2022-06-13/ExampleAppCocoapod 2022-06-13, 12.07 PM.xcarchive/Products/Applications/ExampleAppCocoapod.app/Frameworks/AdaEmbedFramework.framework/AdaEmbedFramework'>', hardenedRuntime='0'>'> to: /var/folders/m4/2g86vb_j2bb9psqz3qzj97t00000gn/T/XcodeDistPipeline.~~~AZKfdl/entitlements~~~YPdwd6
+2022-06-13 16:15:58 +0000  Running /usr/bin/codesign '-vvv' '--force' '--sign' 'A998DD06FB6C3E28E542163AA37A0543D2132BDD' '--entitlements' '/var/folders/m4/2g86vb_j2bb9psqz3qzj97t00000gn/T/XcodeDistPipeline.~~~AZKfdl/entitlements~~~YPdwd6' '--generate-entitlement-der' '--preserve-metadata=identifier,flags,runtime' '/var/folders/m4/2g86vb_j2bb9psqz3qzj97t00000gn/T/XcodeDistPipeline.~~~AZKfdl/Root/Payload/ExampleAppCocoapod.app/Frameworks/AdaEmbedFramework.framework'
+2022-06-13 16:15:58 +0000  /var/folders/m4/2g86vb_j2bb9psqz3qzj97t00000gn/T/XcodeDistPipeline.~~~AZKfdl/Root/Payload/ExampleAppCocoapod.app/Frameworks/AdaEmbedFramework.framework: replacing existing signature
+2022-06-13 16:15:58 +0000  /var/folders/m4/2g86vb_j2bb9psqz3qzj97t00000gn/T/XcodeDistPipeline.~~~AZKfdl/Root/Payload/ExampleAppCocoapod.app/Frameworks/AdaEmbedFramework.framework: signed bundle with Mach-O universal (arm64) [org.cocoapods.AdaEmbedFramework]
+2022-06-13 16:15:58 +0000  /usr/bin/codesign exited with 0
+2022-06-13 16:15:58 +0000  Entitlements for <IDEDistributionItem: 0x7fe5897b0d40; bundleID='support.ada.ios.sample', path='<DVTFilePath:0x7fe599cd6300:'/Users/lucascheng/Library/Developer/Xcode/Archives/2022-06-13/ExampleAppCocoapod 2022-06-13, 12.07 PM.xcarchive/Products/Applications/ExampleAppCocoapod.app'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7fe58668b200; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7fe5818c0670; name='Apple Development: Lucas Cheng (69U5KZC8DF)', hash='E24059A51934D576D84FBD129F22DCD9D26BAA00', serialNumber='34AF8C21CE18B96C7A0F252A973D60A8', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2022-05-31 15:25:36 +0000''>', entitlements='{
+    "application-identifier" = "ZRU59KP7YH.support.ada.ios.sample";
+    "aps-environment" = development;
+    "com.apple.developer.team-identifier" = ZRU59KP7YH;
+    "get-task-allow" = 1;
+}', teamID='ZRU59KP7YH', identifier='support.ada.ios.sample', executablePath='<DVTFilePath:0x7fe59d0bbd80:'/Users/lucascheng/Library/Developer/Xcode/Archives/2022-06-13/ExampleAppCocoapod 2022-06-13, 12.07 PM.xcarchive/Products/Applications/ExampleAppCocoapod.app/ExampleAppCocoapod'>', hardenedRuntime='0'>'>: {
+    "application-identifier" = "ZRU59KP7YH.support.ada.ios.sample";
+    "aps-environment" = production;
+    "beta-reports-active" = 1;
+    "com.apple.developer.team-identifier" = ZRU59KP7YH;
+    "get-task-allow" = 0;
+}
+2022-06-13 16:15:58 +0000  Entitlements for <IDEDistributionItem: 0x7fe5897b0d40; bundleID='support.ada.ios.sample', path='<DVTFilePath:0x7fe599cd6300:'/Users/lucascheng/Library/Developer/Xcode/Archives/2022-06-13/ExampleAppCocoapod 2022-06-13, 12.07 PM.xcarchive/Products/Applications/ExampleAppCocoapod.app'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7fe58668b200; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7fe59bc354f0; name='Apple Development: Lucas Cheng (69U5KZC8DF)', hash='E24059A51934D576D84FBD129F22DCD9D26BAA00', serialNumber='34AF8C21CE18B96C7A0F252A973D60A8', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2022-05-31 15:25:36 +0000''>', entitlements='{
+    "application-identifier" = "ZRU59KP7YH.support.ada.ios.sample";
+    "aps-environment" = development;
+    "com.apple.developer.team-identifier" = ZRU59KP7YH;
+    "get-task-allow" = 1;
+}', teamID='ZRU59KP7YH', identifier='support.ada.ios.sample', executablePath='<DVTFilePath:0x7fe59d0bbd80:'/Users/lucascheng/Library/Developer/Xcode/Archives/2022-06-13/ExampleAppCocoapod 2022-06-13, 12.07 PM.xcarchive/Products/Applications/ExampleAppCocoapod.app/ExampleAppCocoapod'>', hardenedRuntime='0'>'> are: {
+    "application-identifier" = "ZRU59KP7YH.support.ada.ios.sample";
+    "aps-environment" = production;
+    "beta-reports-active" = 1;
+    "com.apple.developer.team-identifier" = ZRU59KP7YH;
+    "get-task-allow" = 0;
+}
+2022-06-13 16:15:58 +0000  Writing entitlements for <IDEDistributionItem: 0x7fe5897b0d40; bundleID='support.ada.ios.sample', path='<DVTFilePath:0x7fe599cd6300:'/Users/lucascheng/Library/Developer/Xcode/Archives/2022-06-13/ExampleAppCocoapod 2022-06-13, 12.07 PM.xcarchive/Products/Applications/ExampleAppCocoapod.app'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7fe58668b200; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7fe59e7acfd0; name='Apple Development: Lucas Cheng (69U5KZC8DF)', hash='E24059A51934D576D84FBD129F22DCD9D26BAA00', serialNumber='34AF8C21CE18B96C7A0F252A973D60A8', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2022-05-31 15:25:36 +0000''>', entitlements='{
+    "application-identifier" = "ZRU59KP7YH.support.ada.ios.sample";
+    "aps-environment" = development;
+    "com.apple.developer.team-identifier" = ZRU59KP7YH;
+    "get-task-allow" = 1;
+}', teamID='ZRU59KP7YH', identifier='support.ada.ios.sample', executablePath='<DVTFilePath:0x7fe59d0bbd80:'/Users/lucascheng/Library/Developer/Xcode/Archives/2022-06-13/ExampleAppCocoapod 2022-06-13, 12.07 PM.xcarchive/Products/Applications/ExampleAppCocoapod.app/ExampleAppCocoapod'>', hardenedRuntime='0'>'> to: /var/folders/m4/2g86vb_j2bb9psqz3qzj97t00000gn/T/XcodeDistPipeline.~~~AZKfdl/entitlements~~~SYhR2Z
+2022-06-13 16:15:58 +0000  Running /usr/bin/codesign '-vvv' '--force' '--sign' 'A998DD06FB6C3E28E542163AA37A0543D2132BDD' '--entitlements' '/var/folders/m4/2g86vb_j2bb9psqz3qzj97t00000gn/T/XcodeDistPipeline.~~~AZKfdl/entitlements~~~SYhR2Z' '--generate-entitlement-der' '--preserve-metadata=identifier,flags,runtime' '/var/folders/m4/2g86vb_j2bb9psqz3qzj97t00000gn/T/XcodeDistPipeline.~~~AZKfdl/Root/Payload/ExampleAppCocoapod.app'
+2022-06-13 16:15:58 +0000  /var/folders/m4/2g86vb_j2bb9psqz3qzj97t00000gn/T/XcodeDistPipeline.~~~AZKfdl/Root/Payload/ExampleAppCocoapod.app: replacing existing signature
+2022-06-13 16:15:58 +0000  /var/folders/m4/2g86vb_j2bb9psqz3qzj97t00000gn/T/XcodeDistPipeline.~~~AZKfdl/Root/Payload/ExampleAppCocoapod.app: signed app bundle with Mach-O thin (arm64) [support.ada.ios.sample]
+2022-06-13 16:15:58 +0000  /usr/bin/codesign exited with 0
+2022-06-13 16:15:58 +0000  Processing step: IDEDistributionZipODRItemStep
+2022-06-13 16:15:58 +0000  Skipping step: IDEDistributionZipODRItemStep because it said so
+2022-06-13 16:15:58 +0000  Skipping step: IDEDistributionZipODRItemStep because it said so
+2022-06-13 16:15:58 +0000  Processing step: IDEDistributionCreateIPAStep
+2022-06-13 16:15:58 +0000  Running /usr/bin/ditto '-V' '-c' '-k' '--norsrc' '/var/folders/m4/2g86vb_j2bb9psqz3qzj97t00000gn/T/XcodeDistPipeline.~~~AZKfdl/Root' '/var/folders/m4/2g86vb_j2bb9psqz3qzj97t00000gn/T/XcodeDistPipeline.~~~AZKfdl/Packages/ExampleAppCocoapod.ipa'
+2022-06-13 16:15:58 +0000  >>> Copying /var/folders/m4/2g86vb_j2bb9psqz3qzj97t00000gn/T/XcodeDistPipeline.~~~AZKfdl/Root 
+2022-06-13 16:15:58 +0000  copying file ./BCSymbolMaps/EC6AF4F2-CE61-32CE-B70F-4A4016CBAB0C.bcsymbolmap ... 
+2022-06-13 16:15:58 +0000  112829 bytes for ./BCSymbolMaps/EC6AF4F2-CE61-32CE-B70F-4A4016CBAB0C.bcsymbolmap
+2022-06-13 16:15:58 +0000  copying file ./BCSymbolMaps/BE9CF2EB-E83D-3766-B743-57331635F53D.bcsymbolmap ... 
+2022-06-13 16:15:58 +0000  29706 bytes for ./BCSymbolMaps/BE9CF2EB-E83D-3766-B743-57331635F53D.bcsymbolmap
+2022-06-13 16:15:58 +0000  copying file ./Payload/ExampleAppCocoapod.app/_CodeSignature/CodeResources ... 
+2022-06-13 16:15:58 +0000  8159 bytes for ./Payload/ExampleAppCocoapod.app/_CodeSignature/CodeResources
+2022-06-13 16:15:58 +0000  copying file ./Payload/ExampleAppCocoapod.app/Base.lproj/LaunchScreen.storyboardc/01J-lp-oVM-view-Ze5-6b-2t3.nib ... 
+2022-06-13 16:15:58 +0000  1197 bytes for ./Payload/ExampleAppCocoapod.app/Base.lproj/LaunchScreen.storyboardc/01J-lp-oVM-view-Ze5-6b-2t3.nib
+2022-06-13 16:15:58 +0000  copying file ./Payload/ExampleAppCocoapod.app/Base.lproj/LaunchScreen.storyboardc/UIViewController-01J-lp-oVM.nib ... 
+2022-06-13 16:15:58 +0000  896 bytes for ./Payload/ExampleAppCocoapod.app/Base.lproj/LaunchScreen.storyboardc/UIViewController-01J-lp-oVM.nib
+copying file ./Payload/ExampleAppCocoapod.app/Base.lproj/LaunchScreen.storyboardc/Info.plist ... 
+258 bytes for ./Payload/ExampleAppCocoapod.app/Base.lproj/LaunchScreen.storyboardc/Info.plist
+2022-06-13 16:15:58 +0000  copying file ./Payload/ExampleAppCocoapod.app/ExampleAppCocoapod ... 
+2022-06-13 16:15:58 +0000  257872 bytes for ./Payload/ExampleAppCocoapod.app/ExampleAppCocoapod
+2022-06-13 16:15:58 +0000  copying file ./Payload/ExampleAppCocoapod.app/Main.storyboardc/UIViewController-r5d-3u-sPX.nib ... 
+2022-06-13 16:15:58 +0000  989 bytes for ./Payload/ExampleAppCocoapod.app/Main.storyboardc/UIViewController-r5d-3u-sPX.nib
+copying file ./Payload/ExampleAppCocoapod.app/Main.storyboardc/UINavigationController-YZz-zj-PLA.nib ... 
+2022-06-13 16:15:58 +0000  2058 bytes for ./Payload/ExampleAppCocoapod.app/Main.storyboardc/UINavigationController-YZz-zj-PLA.nib
+copying file ./Payload/ExampleAppCocoapod.app/Main.storyboardc/BYZ-38-t0r-view-8bC-Xf-vdC.nib ... 
+2022-06-13 16:15:58 +0000  9783 bytes for ./Payload/ExampleAppCocoapod.app/Main.storyboardc/BYZ-38-t0r-view-8bC-Xf-vdC.nib
+2022-06-13 16:15:58 +0000  copying file ./Payload/ExampleAppCocoapod.app/Main.storyboardc/r5d-3u-sPX-view-u6Z-G9-uMX.nib ... 
+2022-06-13 16:15:58 +0000  2436 bytes for ./Payload/ExampleAppCocoapod.app/Main.storyboardc/r5d-3u-sPX-view-u6Z-G9-uMX.nib
+copying file ./Payload/ExampleAppCocoapod.app/Main.storyboardc/Info.plist ... 
+2022-06-13 16:15:58 +0000  351 bytes for ./Payload/ExampleAppCocoapod.app/Main.storyboardc/Info.plist
+2022-06-13 16:15:58 +0000  copying file ./Payload/ExampleAppCocoapod.app/Frameworks/AdaEmbedFramework.framework/_CodeSignature/CodeResources ... 
+2022-06-13 16:15:58 +0000  4618 bytes for ./Payload/ExampleAppCocoapod.app/Frameworks/AdaEmbedFramework.framework/_CodeSignature/CodeResources
+2022-06-13 16:15:58 +0000  copying file ./Payload/ExampleAppCocoapod.app/Frameworks/AdaEmbedFramework.framework/AdaEmbedFramework.bundle/AdaWebHostViewController.storyboardc/D6W-gQ-JwA-view-i5u-Yf-gbe.nib ... 
+2022-06-13 16:15:58 +0000  1869 bytes for ./Payload/ExampleAppCocoapod.app/Frameworks/AdaEmbedFramework.framework/AdaEmbedFramework.bundle/AdaWebHostViewController.storyboardc/D6W-gQ-JwA-view-i5u-Yf-gbe.nib
+copying file ./Payload/ExampleAppCocoapod.app/Frameworks/AdaEmbedFramework.framework/AdaEmbedFramework.bundle/AdaWebHostViewController.storyboardc/OfflineViewController.nib ... 
+2022-06-13 16:15:58 +0000  1043 bytes for ./Payload/ExampleAppCocoapod.app/Frameworks/AdaEmbedFramework.framework/AdaEmbedFramework.bundle/AdaWebHostViewController.storyboardc/OfflineViewController.nib
+copying file ./Payload/ExampleAppCocoapod.app/Frameworks/AdaEmbedFramework.framework/AdaEmbedFramework.bundle/AdaWebHostViewController.storyboardc/dls-Jp-5Mo-view-AJC-ml-g1g.nib ... 
+2022-06-13 16:15:58 +0000  5899 bytes for ./Payload/ExampleAppCocoapod.app/Frameworks/AdaEmbedFramework.framework/AdaEmbedFramework.bundle/AdaWebHostViewController.storyboardc/dls-Jp-5Mo-view-AJC-ml-g1g.nib
+2022-06-13 16:15:58 +0000  copying file ./Payload/ExampleAppCocoapod.app/Frameworks/AdaEmbedFramework.framework/AdaEmbedFramework.bundle/AdaWebHostViewController.storyboardc/adaWebHostViewController.nib ... 
+2022-06-13 16:15:58 +0000  1041 bytes for ./Payload/ExampleAppCocoapod.app/Frameworks/AdaEmbedFramework.framework/AdaEmbedFramework.bundle/AdaWebHostViewController.storyboardc/adaWebHostViewController.nib
+copying file ./Payload/ExampleAppCocoapod.app/Frameworks/AdaEmbedFramework.framework/AdaEmbedFramework.bundle/AdaWebHostViewController.storyboardc/Info.plist ... 
+273 bytes for ./Payload/ExampleAppCocoapod.app/Frameworks/AdaEmbedFramework.framework/AdaEmbedFramework.bundle/AdaWebHostViewController.storyboardc/Info.plist
+2022-06-13 16:15:58 +0000  copying file ./Payload/ExampleAppCocoapod.app/Frameworks/AdaEmbedFramework.framework/AdaEmbedFramework.bundle/Assets.car ... 
+2022-06-13 16:15:58 +0000  62943 bytes for ./Payload/ExampleAppCocoapod.app/Frameworks/AdaEmbedFramework.framework/AdaEmbedFramework.bundle/Assets.car
+2022-06-13 16:15:58 +0000  copying file ./Payload/ExampleAppCocoapod.app/Frameworks/AdaEmbedFramework.framework/AdaEmbedFramework.bundle/Info.plist ... 
+733 bytes for ./Payload/ExampleAppCocoapod.app/Frameworks/AdaEmbedFramework.framework/AdaEmbedFramework.bundle/Info.plist
+2022-06-13 16:15:58 +0000  copying file ./Payload/ExampleAppCocoapod.app/Frameworks/AdaEmbedFramework.framework/AdaEmbedFramework ... 
+2022-06-13 16:15:58 +0000  756368 bytes for ./Payload/ExampleAppCocoapod.app/Frameworks/AdaEmbedFramework.framework/AdaEmbedFramework
+copying file ./Payload/ExampleAppCocoapod.app/Frameworks/AdaEmbedFramework.framework/Info.plist ... 
+2022-06-13 16:15:58 +0000  756 bytes for ./Payload/ExampleAppCocoapod.app/Frameworks/AdaEmbedFramework.framework/Info.plist
+copying file ./Payload/ExampleAppCocoapod.app/embedded.mobileprovision ... 
+2022-06-13 16:15:58 +0000  20515 bytes for ./Payload/ExampleAppCocoapod.app/embedded.mobileprovision
+copying file ./Payload/ExampleAppCocoapod.app/Info.plist ... 
+2022-06-13 16:15:58 +0000  1498 bytes for ./Payload/ExampleAppCocoapod.app/Info.plist
+copying file ./Payload/ExampleAppCocoapod.app/PkgInfo ... 
+2022-06-13 16:15:58 +0000  8 bytes for ./Payload/ExampleAppCocoapod.app/PkgInfo
+2022-06-13 16:15:58 +0000  /usr/bin/ditto exited with 0
+2022-06-13 16:15:58 +0000  Processing step: IDEDistributionAppStoreInformationStep
+2022-06-13 16:15:58 +0000  Skipping step: IDEDistributionAppStoreInformationStep because it said so
+2022-06-13 16:15:58 +0000  Processing step: IDEDistributionGenerateProcessedDistributionItems
+2022-06-13 16:15:58 +0000  IDEDistributionItem init <DVTFilePath:0x7fe59e7ee1d0:'/var/folders/m4/2g86vb_j2bb9psqz3qzj97t00000gn/T/XcodeDistPipeline.~~~AZKfdl/Root/Payload/ExampleAppCocoapod.app/Frameworks/AdaEmbedFramework.framework'>
+2022-06-13 16:15:58 +0000  IDEDistributionItem init <DVTFilePath:0x7fe58cf57010:'/var/folders/m4/2g86vb_j2bb9psqz3qzj97t00000gn/T/XcodeDistPipeline.~~~AZKfdl/Root/Payload/ExampleAppCocoapod.app'>
+2022-06-13 16:15:58 +0000  Processing step: IDEDistributionCreateManifestStep
+2022-06-13 16:15:58 +0000  Skipping step: IDEDistributionCreateManifestStep because it said so

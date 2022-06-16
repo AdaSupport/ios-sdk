@@ -10,9 +10,11 @@ import UIKit
 import AdaEmbedFramework
 
 class ViewController: UIViewController {
-    let deviceToken : String? = UserDefaults.standard.string(forKey: "device_token")
+
+    lazy var deviceToken : String? = UserDefaults.standard.string(forKey: "device_token")
+
     
-    lazy var adaFramework = AdaWebHost(handle: "nic", appScheme: "adaexampleapp", webViewLoadingErrorCallback: LoadingErrorCallback, webViewTimeout: 30.0, deviceToken: deviceToken ?? "")
+    lazy var adaFramework = AdaWebHost(handle: "chatx-bot", appScheme: "adaexampleapp", webViewLoadingErrorCallback: LoadingErrorCallback, webViewTimeout: 30.0, deviceToken: deviceToken ?? "")
     
     @IBOutlet var firstNameField: UITextField!
     @IBOutlet var lastNameField: UITextField!
