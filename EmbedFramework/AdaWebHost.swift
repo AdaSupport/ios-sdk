@@ -309,6 +309,11 @@ public class AdaWebHost: NSObject {
         self.evalJS(toRun)
     }
     
+    public func triggerAnswer(answerId: String) {
+        let toRun = "adaEmbed.triggerAnswer(\(answerId));"
+        
+        self.evalJS(toRun)
+    }
     /// Provide a view controller to launch web support from
     /// this will present the chat view modally
     public func launchModalWebSupport(from viewController: UIViewController) {
