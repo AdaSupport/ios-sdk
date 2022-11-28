@@ -10,7 +10,7 @@ import UIKit
 import AdaEmbedFramework
 
 class ViewController: UIViewController {
-    lazy var adaFramework = AdaWebHost(handle: "chatx-bot", appScheme: "adaexampleapp", webViewLoadingErrorCallback: LoadingErrorCallback, webViewTimeout: 30.0, navigationBarOpaqueBackground: true)
+    lazy var adaFramework = AdaWebHost(handle: "nic", appScheme: "adaexampleapp", webViewLoadingErrorCallback: LoadingErrorCallback, webViewTimeout: 30.0, navigationBarOpaqueBackground: true)
     
     @IBOutlet var firstNameField: UITextField!
     @IBOutlet var lastNameField: UITextField!
@@ -40,7 +40,6 @@ class ViewController: UIViewController {
     }
     @IBAction func openModalSupport(_ sender: UIButton) {
         adaFramework.launchModalWebSupport(from: self)
-        adaFramework.triggerAnswer(answerId: "62e975d8e94047d7177665a4")
     }
     
     @IBAction func openNavigationControllerSupport(_ sender: UIButton) {

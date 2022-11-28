@@ -310,9 +310,13 @@ public class AdaWebHost: NSObject {
     }
     
     public func triggerAnswer(answerId: String) {
-        let toRun = "adaEmbed.triggerAnswer(\(answerId));"
+        if(webHostLoaded){
+            let toRun = "adaEmbed.triggerAnswer(\"\(answerId)\");"
+            self.evalJS(toRun)
+            return
+        }
         
-        self.evalJS(toRun)
+        debugPrint("AdaWebHost. triggerAnswer failed due to webHostLoaded=\(webHostLoaded)")
     }
     /// Provide a view controller to launch web support from
     /// this will present the chat view modally
