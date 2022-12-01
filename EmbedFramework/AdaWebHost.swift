@@ -326,7 +326,7 @@ public class AdaWebHost: NSObject {
             return
         }
         
-        debugPrint("AdaWebHost.triggerAnswer failed, webView needs to be initialized.")
+        debugPrint("AdaWebHost.setLanguage failed, webView needs to be initialized.")
     }
     /// Provide a view controller to launch web support from
     /// this will present the chat view modally
