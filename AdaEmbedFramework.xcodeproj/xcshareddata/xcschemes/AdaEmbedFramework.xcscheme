@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1300"
+   LastUpgradeVersion = "1410"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,24 +14,34 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "039BA90A270E157C00DF3600"
-               BuildableName = "ExampleAppCocoapod.app"
-               BlueprintName = "ExampleAppCocoapod"
-               ReferencedContainer = "container:ExampleAppCocoapod.xcodeproj">
+               BlueprintIdentifier = "49C73558226F99FE00D22E4B"
+               BuildableName = "AdaEmbedFramework.framework"
+               BlueprintName = "AdaEmbedFramework"
+               ReferencedContainer = "container:AdaEmbedFramework.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
-      buildConfiguration = "Debug"
+      buildConfiguration = "Release"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "49C73561226F99FE00D22E4B"
+               BuildableName = "AdaEmbedFrameworkTests.xctest"
+               BlueprintName = "AdaEmbedFrameworkTests"
+               ReferencedContainer = "container:AdaEmbedFramework.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
-      buildConfiguration = "Debug"
+      buildConfiguration = "Release"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
@@ -40,16 +50,6 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "039BA90A270E157C00DF3600"
-            BuildableName = "ExampleAppCocoapod.app"
-            BlueprintName = "ExampleAppCocoapod"
-            ReferencedContainer = "container:ExampleAppCocoapod.xcodeproj">
-         </BuildableReference>
-      </BuildableProductRunnable>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -57,19 +57,18 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "039BA90A270E157C00DF3600"
-            BuildableName = "ExampleAppCocoapod.app"
-            BlueprintName = "ExampleAppCocoapod"
-            ReferencedContainer = "container:ExampleAppCocoapod.xcodeproj">
+            BlueprintIdentifier = "49C73558226F99FE00D22E4B"
+            BuildableName = "AdaEmbedFramework.framework"
+            BlueprintName = "AdaEmbedFramework"
+            ReferencedContainer = "container:AdaEmbedFramework.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
-      buildConfiguration = "Debug">
+      buildConfiguration = "Release">
    </AnalyzeAction>
    <ArchiveAction
       buildConfiguration = "Release"
