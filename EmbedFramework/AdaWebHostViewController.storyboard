@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="D6W-gQ-JwA">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="D6W-gQ-JwA">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -74,7 +74,6 @@
                                                 <constraints>
                                                     <constraint firstItem="DyO-zH-0Hs" firstAttribute="top" secondItem="Qvu-aw-TnU" secondAttribute="top" constant="10" id="90I-6d-cmL"/>
                                                     <constraint firstItem="DyO-zH-0Hs" firstAttribute="centerX" secondItem="Qvu-aw-TnU" secondAttribute="centerX" id="E7L-qu-faS"/>
-                                                    <constraint firstAttribute="width" constant="110" id="P2S-Un-epb"/>
                                                     <constraint firstAttribute="height" constant="80" id="ZOc-RG-qra"/>
                                                 </constraints>
                                             </view>
