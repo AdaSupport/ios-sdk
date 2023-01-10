@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		03BBFFE7296C9037009D8B04 /* ExampleAppCocoapod.xcworkspace in Resources */ = {isa = PBXBuildFile; fileRef = 0334E7BA270E1A1700FC8C7C /* ExampleAppCocoapod.xcworkspace */; };
 		49C73563226F99FE00D22E4B /* AdaEmbedFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49C73559226F99FE00D22E4B /* AdaEmbedFramework.framework */; };
 		49C73568226F99FE00D22E4B /* EmbedFrameworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C73567226F99FE00D22E4B /* EmbedFrameworkTests.swift */; };
 		49C7356A226F99FE00D22E4B /* EmbedFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = 49C7355C226F99FE00D22E4B /* EmbedFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -54,69 +55,6 @@
 			proxyType = 2;
 			remoteGlobalIDString = C69CD74069907C5679945816B74B2E25;
 			remoteInfo = "AdaEmbedFramework-AdaEmbedFramework";
-		};
-		035CF1D5284F886700ADCB7D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0334E797270E1A1700FC8C7C /* Pods.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = E2B63D462DB7F827C4B11FD51E4F8E2D;
-			remoteInfo = FirebaseCore;
-		};
-		035CF1D7284F886700ADCB7D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0334E797270E1A1700FC8C7C /* Pods.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 8CC9178C366942FD6FF6A115604EAD58;
-			remoteInfo = FirebaseCoreDiagnostics;
-		};
-		035CF1D9284F886700ADCB7D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0334E797270E1A1700FC8C7C /* Pods.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 148D0F9E8C7373FEAF40D800FC5F1BAA;
-			remoteInfo = FirebaseCoreInternal;
-		};
-		035CF1DB284F886700ADCB7D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0334E797270E1A1700FC8C7C /* Pods.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 13C8C8B254851998F9289F71229B28A2;
-			remoteInfo = FirebaseInstallations;
-		};
-		035CF1DD284F886700ADCB7D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0334E797270E1A1700FC8C7C /* Pods.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 5B654B4B042BA7DC93766943A643E42B;
-			remoteInfo = FirebaseMessaging;
-		};
-		035CF1DF284F886700ADCB7D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0334E797270E1A1700FC8C7C /* Pods.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 856B5CD56F194FAD26EA91620B66D614;
-			remoteInfo = GoogleDataTransport;
-		};
-		035CF1E1284F886700ADCB7D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0334E797270E1A1700FC8C7C /* Pods.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = B43874C6CBB50E7134FBEC24BABFE14F;
-			remoteInfo = GoogleUtilities;
-		};
-		035CF1E3284F886700ADCB7D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0334E797270E1A1700FC8C7C /* Pods.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 06FC5C9CF96D60C50FCD47D339C91951;
-			remoteInfo = nanopb;
-		};
-		035CF1E5284F886700ADCB7D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0334E797270E1A1700FC8C7C /* Pods.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 3347A1AB6546F0A3977529B8F199DC41;
-			remoteInfo = PromisesObjC;
 		};
 		49C73564226F99FE00D22E4B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -283,16 +221,7 @@
 			children = (
 				035CF1D2284F886700ADCB7D /* AdaEmbedFramework */,
 				035CF1D4284F886700ADCB7D /* AdaEmbedFramework-AdaEmbedFramework */,
-				035CF1D6284F886700ADCB7D /* FirebaseCore */,
-				035CF1D8284F886700ADCB7D /* FirebaseCoreDiagnostics */,
-				035CF1DA284F886700ADCB7D /* FirebaseCoreInternal */,
-				035CF1DC284F886700ADCB7D /* FirebaseInstallations */,
-				035CF1DE284F886700ADCB7D /* FirebaseMessaging */,
-				035CF1E0284F886700ADCB7D /* GoogleDataTransport */,
-				035CF1E2284F886700ADCB7D /* GoogleUtilities */,
-				035CF1E4284F886700ADCB7D /* nanopb */,
 				0334E7C7270E1A1700FC8C7C /* Pods-ExampleAppCocoapod */,
-				035CF1E6284F886700ADCB7D /* PromisesObjC */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -601,78 +530,6 @@
 			remoteRef = 035CF1D3284F886700ADCB7D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		035CF1D6284F886700ADCB7D /* FirebaseCore */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			name = FirebaseCore;
-			path = FirebaseCore.framework;
-			remoteRef = 035CF1D5284F886700ADCB7D /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		035CF1D8284F886700ADCB7D /* FirebaseCoreDiagnostics */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			name = FirebaseCoreDiagnostics;
-			path = FirebaseCoreDiagnostics.framework;
-			remoteRef = 035CF1D7284F886700ADCB7D /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		035CF1DA284F886700ADCB7D /* FirebaseCoreInternal */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			name = FirebaseCoreInternal;
-			path = FirebaseCoreInternal.framework;
-			remoteRef = 035CF1D9284F886700ADCB7D /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		035CF1DC284F886700ADCB7D /* FirebaseInstallations */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			name = FirebaseInstallations;
-			path = FirebaseInstallations.framework;
-			remoteRef = 035CF1DB284F886700ADCB7D /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		035CF1DE284F886700ADCB7D /* FirebaseMessaging */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			name = FirebaseMessaging;
-			path = FirebaseMessaging.framework;
-			remoteRef = 035CF1DD284F886700ADCB7D /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		035CF1E0284F886700ADCB7D /* GoogleDataTransport */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			name = GoogleDataTransport;
-			path = GoogleDataTransport.framework;
-			remoteRef = 035CF1DF284F886700ADCB7D /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		035CF1E2284F886700ADCB7D /* GoogleUtilities */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			name = GoogleUtilities;
-			path = GoogleUtilities.framework;
-			remoteRef = 035CF1E1284F886700ADCB7D /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		035CF1E4284F886700ADCB7D /* nanopb */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			name = nanopb;
-			path = nanopb.framework;
-			remoteRef = 035CF1E3284F886700ADCB7D /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		035CF1E6284F886700ADCB7D /* PromisesObjC */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			name = PromisesObjC;
-			path = FBLPromises.framework;
-			remoteRef = 035CF1E5284F886700ADCB7D /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -681,6 +538,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				936ED6B9228F471800796860 /* AdaWebHostViewController.storyboard in Resources */,
+				03BBFFE7296C9037009D8B04 /* ExampleAppCocoapod.xcworkspace in Resources */,
 				938BBFD122A93F1B000012A9 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -834,6 +692,7 @@
 		49C7356F226F99FE00D22E4B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
