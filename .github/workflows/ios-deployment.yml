@@ -19,6 +19,6 @@ jobs:
         run: bundle exec fastlane patch
         env:
           FL_GITHUB_RELEASE_API_BEARER: ${{ secrets.GITHUB_TOKEN }}
-      #- uses: michaelhenry/deploy-to-cocoapods-github-action@1.0.10
-      #  env:
-      #    COCOAPODS_TRUNK_TOKEN: ${{ secrets.COCOAPODS_TRUNK_TOKEN }}
+      - uses: michaelhenry/deploy-to-cocoapods-github-action@1.0.10
+        env:
+          COCOAPODS_TRUNK_TOKEN: ${{ secrets.COCOAPODS_TRUNK_TOKEN }}
