@@ -8,4 +8,5 @@ Logs
 ModuleCache.noindex
 info.plist
 **.zip
-fastlane/report.xml
+fastlane/*
+AdaEmbedFramework.framework.zip
