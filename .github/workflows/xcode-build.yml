@@ -19,6 +19,9 @@ jobs:
       - name: Build Simulator Framework
         run: xcodebuild build -sdk iphonesimulator -arch arm64 -arch x86_64 BUILD_LIBRARY_FOR_DISTRIBUTION=YES
 
+      - name: Remove arm64 from Binary
+        run: lipo -remove arm64 build/Release-iphonesimulator/AdaEmbedFramework.framework/AdaEmbedFramework -output build/Release-iphonesimulator/AdaEmbedFramework.framework/AdaEmbedFramework
+
       - name: Copy Packages
         run: cp -r build/Release-iphonesimulator/AdaEmbedFramework.framework build/simulator
 
