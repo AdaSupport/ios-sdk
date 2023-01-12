@@ -9,12 +9,23 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Build
-        run: xcodebuild build
+      - name: Build Framework
+        run: xcodebuild build BUILD_LIBRARY_FOR_DISTRIBUTION=YES
       - name: List
         run: ls -las
       - name: Zip
         run: zip -r build.zip build
+
+      - name: Copy Packages
+        run: cp -r build/Products/Release-iphoneos/AdaEmbedFramework.framework build/devices
+      
+      - name: Build Simulator Framework
+        run: xcodebuild build -sdk iphonesimulator BUILD_LIBRARY_FOR_DISTRIBUTION=YES
+
+
+      - name: Copy Packages
+        run: cp -r derived_data/Build/Products/Release-iphonesimulator/ build/simulator/
+
       - uses: actions/upload-artifact@v3
         with:
           name: build
