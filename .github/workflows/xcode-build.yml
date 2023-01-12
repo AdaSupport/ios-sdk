@@ -1,7 +1,7 @@
-name: Xcode Build
+name: Deploy iOS SDK
 on:
   push:
-    branches: [ ml/replace-pipeline ]
+    branches: [ master ]
 
 jobs:
   build:
@@ -32,3 +32,8 @@ jobs:
       
       - name: Upload Zip and Create Github Release
         run: bundle exec fastlane patch
+
+      - name: Upload to Cocoapods
+        uses: michaelhenry/deploy-to-cocoapods-github-action@1.0.10
+        env:
+          COCOAPODS_TRUNK_TOKEN: ${{ secrets.COCOAPODS_TRUNK_TOKEN }}
