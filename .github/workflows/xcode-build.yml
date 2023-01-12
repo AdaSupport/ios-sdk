@@ -22,6 +22,9 @@ jobs:
       - name: Copy Packages
         run: cp -r build/Release-iphonesimulator/AdaEmbedFramework.framework build/simulator
 
+      - name: Prep Universal Package Folder
+        run: mkdir build/universal && cp -r build/devices/AdaEmbedFramework build/universal/
+    
       - name: Create Universal Package
         run: lipo -create build/simulator/AdaEmbedFramework build/devices/AdaEmbedFramework -output build/universal/AdaEmbedFramework
 
