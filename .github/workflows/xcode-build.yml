@@ -17,7 +17,7 @@ jobs:
         run: xcodebuild build -sdk iphonesimulator
 
       - name: Crate xcframework
-        run: xcodebuild -create-xcframework -framework Release-iphoneos/AdaEmbedFramework.framework/ -framework Release-iphonesimulator/AdaEmbedFramework.framework/ -output "AdaEmbedFramework.xcframework"
+        run: xcodebuild -create-xcframework -framework build/Release-iphoneos/AdaEmbedFramework.framework/ -framework build/Release-iphonesimulator/AdaEmbedFramework.framework/ -output "AdaEmbedFramework.xcframework"
 
       - name: List
         run: ls -las
