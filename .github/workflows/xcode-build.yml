@@ -32,6 +32,8 @@ jobs:
       
       - name: Upload Zip and Create Github Release
         run: bundle exec fastlane patch
+        env:
+          FL_GITHUB_RELEASE_API_BEARER: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Upload to Cocoapods
         uses: michaelhenry/deploy-to-cocoapods-github-action@1.0.10
