@@ -1,0 +1,16 @@
+name: Xcode Build
+on:
+  push:
+    branches: [ ml/replace-pipeline ]
+
+jobs:
+  build:
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        platform:
+          - iOS
+    steps:
+      - uses: mxcl/xcodebuild@v1
+        with:
+          platform: ${{ matrix.platform }}
