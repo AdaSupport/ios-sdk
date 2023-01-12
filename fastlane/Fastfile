@@ -6,31 +6,9 @@ platform :ios do
     release("patch")
   end
 
-  desc "Release a new version with a minor bump_type"
-  lane :minor do
-    release("minor")
-  end
-
-  desc "Release a new version with a major bump_type"
-  lane :major do
-    release("major")
-  end
-
   def release(type)
     update_fastlane
     podspecName = "AdaEmbedFramework.podspec"
-    ensure_git_branch
-    # ensure_git_status_clean
-    gym(
-      skip_archive: true,
-      skip_codesigning: true,
-      derived_data_path: "."
-    )
-    zip(
-      path: "Build/Products/Release-iphoneos/AdaEmbedFramework.framework",
-      output_path: "AdaEmbedFramework.framework.zip"
-    )
-    pod_lib_lint
     version = version_get_podspec(path: podspecName)
 
     github_release = set_github_release(
@@ -40,7 +18,7 @@ platform :ios do
       tag_name: "#{version}",
       description: (File.read("changelog") rescue "No changelog provided"),
       commitish: "master",
-      upload_assets: ["AdaEmbedFramework.framework.zip"]
+      upload_assets: ["AdaEmbedFramework.xcframework.zip"]
     )
   end
 end
