@@ -22,5 +22,13 @@ jobs:
       - name: Zip
         run: zip -r AdaEmbedFramework.xcframework.zip AdaEmbedFramework.xcframework
 
+      - name: Set up Ruby 3.0
+        uses: actions/setup-ruby@v1
+        with:
+          ruby-version: 3.0.x
+
+      - name: Install Dependencies
+        run: gem install bundler && bundle install
+      
       - name: Upload Zip and Create Github Release
         run: bundle exec fastlane patch
