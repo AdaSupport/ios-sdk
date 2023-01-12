@@ -17,7 +17,7 @@ jobs:
         run: cp -r build/Release-iphoneos/AdaEmbedFramework.framework build/devices
       
       - name: Build Simulator Framework
-        run: xcodebuild build -sdk iphonesimulator ARCHS="x86_64" BUILD_LIBRARY_FOR_DISTRIBUTION=YES
+        run: xcodebuild build -sdk iphonesimulator -arch arm64 -arch x86_64 BUILD_LIBRARY_FOR_DISTRIBUTION=YES
 
       - name: Copy Packages
         run: cp -r build/Release-iphonesimulator/AdaEmbedFramework.framework build/simulator
@@ -30,6 +30,9 @@ jobs:
 
       - name: Copy
         run: cp -r build/simulator/Modules/AdaEmbedFramework.swiftmodule/* build/universal/Modules/AdaEmbedFramework.swiftmodule/
+
+      - name: Rename
+        run: mv build/universal build/AdaEmbedFramework.framework
 
       - name: List
         run: ls -las
