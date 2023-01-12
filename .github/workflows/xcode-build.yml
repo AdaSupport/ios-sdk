@@ -16,11 +16,11 @@ jobs:
       - name: Build Framework for iPhone Simulator
         run: xcodebuild build -sdk iphonesimulator
 
-      - name: Crate xcframework
+      - name: Create xcframework
         run: xcodebuild -create-xcframework -framework build/Release-iphoneos/AdaEmbedFramework.framework/ -framework build/Release-iphonesimulator/AdaEmbedFramework.framework/ -output "AdaEmbedFramework.xcframework"
-
-      - name: List
-        run: ls -las
 
       - name: Zip
         run: zip -r AdaEmbedFramework.xcframework.zip AdaEmbedFramework.xcframework
+
+      - name: Upload Zip and Create Github Release
+        run: bundle exec fastlane patch
