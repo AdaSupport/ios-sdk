@@ -14,5 +14,7 @@ jobs:
           platform: iOS
           action: build
           scheme: AdaEmbedFramework
+      - name: List
+        run: ls -las
       - name: Zip
         run: zip -r build.zip build
