@@ -25,9 +25,8 @@ jobs:
       - name: Zip
         run: zip -r AdaEmbedFramework.xcframework.zip AdaEmbedFramework.xcframework
 
-      - uses: actions/upload-artifact@v3
+      - name: Upload Release
+        uses: ncipollo/release-action@v1
         with:
-          name: AdaEmbedFramework.xcframework.zip
-          path: AdaEmbedFramework.xcframework.zip
-
-
+          artifacts: "AdaEmbedFramework.xcframework.zip"
+          token: ${{ secrets.GITHUB_TOKEN }}
