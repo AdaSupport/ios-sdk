@@ -18,7 +18,7 @@ platform :ios do
       tag_name: "#{version}",
       description: (File.read("changelog") rescue "No changelog provided"),
       commitish: "master",
-      upload_assets: ["AdaEmbedFramework.framework.zip"]
+      upload_assets: ["AdaEmbedFramework.xcframework.zip"]
     )
   end
 end
