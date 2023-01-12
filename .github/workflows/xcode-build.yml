@@ -9,41 +9,25 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Build Framework
-        run: xcodebuild build BUILD_LIBRARY_FOR_DISTRIBUTION=YES
 
+      - name: Build Framework for iPhones
+        run: xcodebuild build
 
-      - name: Copy Packages
-        run: cp -r build/Release-iphoneos/AdaEmbedFramework.framework build/devices
-      
-      - name: Build Simulator Framework
-        run: xcodebuild build -sdk iphonesimulator -arch arm64 -arch x86_64 BUILD_LIBRARY_FOR_DISTRIBUTION=YES
+      - name: Build Framework for iPhone Simulator
+        run: xcodebuild build -sdk iphonesimulator
 
-      - name: Remove arm64 from Binary
-        run: lipo -remove arm64 build/Release-iphonesimulator/AdaEmbedFramework.framework/AdaEmbedFramework -output build/Release-iphonesimulator/AdaEmbedFramework.framework/AdaEmbedFramework
-
-      - name: Copy Packages
-        run: cp -r build/Release-iphonesimulator/AdaEmbedFramework.framework build/simulator
-
-      - name: Prep Universal Package Folder
-        run: mkdir build/universal && cp -r build/devices/ build/universal/
-    
-      - name: Create Universal Package
-        run: lipo -create build/simulator/AdaEmbedFramework build/devices/AdaEmbedFramework -output build/universal/AdaEmbedFramework
-
-      - name: Copy
-        run: cp -r build/simulator/Modules/AdaEmbedFramework.swiftmodule/* build/universal/Modules/AdaEmbedFramework.swiftmodule/
-
-      - name: Rename
-        run: mv build/universal build/AdaEmbedFramework.framework
+      - name: Crate xcframework
+        run: xcodebuild -create-xcframework -framework Release-iphoneos/AdaEmbedFramework.framework/ -framework Release-iphonesimulator/AdaEmbedFramework.framework/ -output "AdaEmbedFramework.xcframework"
 
       - name: List
         run: ls -las
 
       - name: Zip
-        run: zip -r build.zip build
+        run: zip -r AdaEmbedFramework.xcframework.zip AdaEmbedFramework.xcframework
 
       - uses: actions/upload-artifact@v3
         with:
-          name: build
-          path: build.zip
+          name: AdaEmbedFramework.xcframework.zip
+          path: AdaEmbedFramework.xcframework.zip
+
+
