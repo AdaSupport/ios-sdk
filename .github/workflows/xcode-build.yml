@@ -23,7 +23,7 @@ jobs:
         run: cp -r build/Release-iphonesimulator/AdaEmbedFramework.framework build/simulator
 
       - name: Create Universal Package
-        run: lipo -create build/simulator/AdaEmbedFramework build/devices AdaEmbedFramework -output build/universal/AdaEmbedFramework
+        run: lipo -create build/simulator/AdaEmbedFramework build/devices/AdaEmbedFramework -output build/universal/AdaEmbedFramework
 
       - name: List
         run: ls -las
