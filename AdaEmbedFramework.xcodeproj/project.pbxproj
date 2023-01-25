@@ -63,6 +63,13 @@
 			remoteGlobalIDString = 49C73558226F99FE00D22E4B;
 			remoteInfo = EmbedFramework;
 		};
+		88E7E55F2981D30800F08C85 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 88E7E55B2981D30700F08C85 /* ExampleAppCarthage.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 88E7E5442981D30500F08C85;
+			remoteInfo = ExampleAppCarthage;
+		};
 		93A7979B228C939100499BF9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 49C73550226F99FE00D22E4B /* Project object */;
@@ -132,6 +139,7 @@
 		49C73562226F99FE00D22E4B /* AdaEmbedFrameworkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AdaEmbedFrameworkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		49C73567226F99FE00D22E4B /* EmbedFrameworkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmbedFrameworkTests.swift; sourceTree = "<group>"; };
 		49C73569226F99FE00D22E4B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		88E7E55B2981D30700F08C85 /* ExampleAppCarthage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ExampleAppCarthage.xcodeproj; path = ExampleAppCarthage/ExampleAppCarthage.xcodeproj; sourceTree = "<group>"; };
 		8D84564760E66C5DB8D387D2 /* Pods-ExampleApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExampleApp.release.xcconfig"; path = "Target Support Files/Pods-ExampleApp/Pods-ExampleApp.release.xcconfig"; sourceTree = "<group>"; };
 		8EDF945E44BBD03973DD86FC /* Pods_AdaEmbedFramework_AdaEmbedFrameworkTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AdaEmbedFramework_AdaEmbedFrameworkTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		936ED6B6228F438800796860 /* AdaWebHostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaWebHostViewController.swift; sourceTree = "<group>"; };
@@ -309,6 +317,7 @@
 		49C7354F226F99FE00D22E4B = {
 			isa = PBXGroup;
 			children = (
+				88E7E55B2981D30700F08C85 /* ExampleAppCarthage.xcodeproj */,
 				0334E78A270E1A1700FC8C7C /* ExampleAppCocoapod */,
 				49C7355B226F99FE00D22E4B /* EmbedFramework */,
 				93A79782228C86D600499BF9 /* ExampleApp */,
@@ -361,6 +370,14 @@
 				C242136079C1E4A0DDE09CF8 /* Pods_ExampleApp.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		88E7E55C2981D30700F08C85 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				88E7E5602981D30800F08C85 /* ExampleAppCarthage.app */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		93A79782228C86D600499BF9 /* ExampleApp */ = {
@@ -481,6 +498,10 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
+					ProductGroup = 88E7E55C2981D30700F08C85 /* Products */;
+					ProjectRef = 88E7E55B2981D30700F08C85 /* ExampleAppCarthage.xcodeproj */;
+				},
+				{
 					ProductGroup = 0334E7B7270E1A1700FC8C7C /* Products */;
 					ProjectRef = 0334E7B6270E1A1700FC8C7C /* ExampleAppCocoapod.xcodeproj */;
 				},
@@ -528,6 +549,13 @@
 			name = "AdaEmbedFramework-AdaEmbedFramework";
 			path = AdaEmbedFramework.bundle;
 			remoteRef = 035CF1D3284F886700ADCB7D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		88E7E5602981D30800F08C85 /* ExampleAppCarthage.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = ExampleAppCarthage.app;
+			remoteRef = 88E7E55F2981D30800F08C85 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */

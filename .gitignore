@@ -9,3 +9,5 @@ ModuleCache.noindex
 info.plist
 **.zip
 fastlane/report.xml
+Cartfile.resolved
+Carthage/
