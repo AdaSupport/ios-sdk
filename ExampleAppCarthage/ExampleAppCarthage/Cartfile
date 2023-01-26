@@ -1,1 +1,1 @@
-git "file:///Users/lucascheng/data/ios-sdk" "LI/CHATX-1928-Carthage"
+github "https://github.com/AdaSupport/ios-sdk.git" "master"
