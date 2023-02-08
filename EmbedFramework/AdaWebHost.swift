@@ -44,7 +44,7 @@ public class AdaWebHost: NSObject {
     public var greeting = ""
     public var deviceToken = ""
     public var webViewTimeout = 30.0
-    
+    public weak var delegate: AdaWebHostDelegate?
     
     /// Metafields can be passed in during init; use `setMetaFields()` and `setSensitiveMetafields()`
     /// to send values in at runtime
@@ -434,6 +434,10 @@ extension AdaWebHost: WKNavigationDelegate, WKUIDelegate, WKDownloadDelegate {
     
     // Shared function to handle opening of urls
     public func openUrl(webView: WKWebView, url: URL) -> Swift.Void {
+        guard let delegate,
+              delegate.adaWebHost(self, shouldOpenUrl: url)
+        else { return }
+        
         let httpSchemes = ["http", "https"]
         let urlScheme = url.scheme
         // Handle opening universal links within the host App

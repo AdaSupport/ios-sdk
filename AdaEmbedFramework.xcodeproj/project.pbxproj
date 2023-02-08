@@ -12,6 +12,7 @@
 		49C73568226F99FE00D22E4B /* EmbedFrameworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C73567226F99FE00D22E4B /* EmbedFrameworkTests.swift */; };
 		49C7356A226F99FE00D22E4B /* EmbedFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = 49C7355C226F99FE00D22E4B /* EmbedFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4D62BE845FB815D5E41D3EFA /* Pods_AdaEmbedFramework_AdaEmbedFrameworkTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EDF945E44BBD03973DD86FC /* Pods_AdaEmbedFramework_AdaEmbedFrameworkTests.framework */; };
+		59B38CC1298DBD380086A2B4 /* AdaWebHost+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B38CC0298DBD380086A2B4 /* AdaWebHost+Delegate.swift */; };
 		936ED6B7228F438800796860 /* AdaWebHostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936ED6B6228F438800796860 /* AdaWebHostViewController.swift */; };
 		936ED6B9228F471800796860 /* AdaWebHostViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 936ED6B8228F471800796860 /* AdaWebHostViewController.storyboard */; };
 		938BBFD122A93F1B000012A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 938BBFD022A93F1B000012A9 /* Assets.xcassets */; };
@@ -139,6 +140,7 @@
 		49C73562226F99FE00D22E4B /* AdaEmbedFrameworkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AdaEmbedFrameworkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		49C73567226F99FE00D22E4B /* EmbedFrameworkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmbedFrameworkTests.swift; sourceTree = "<group>"; };
 		49C73569226F99FE00D22E4B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		59B38CC0298DBD380086A2B4 /* AdaWebHost+Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AdaWebHost+Delegate.swift"; sourceTree = "<group>"; };
 		88E7E55B2981D30700F08C85 /* ExampleAppCarthage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ExampleAppCarthage.xcodeproj; path = ExampleAppCarthage/ExampleAppCarthage.xcodeproj; sourceTree = "<group>"; };
 		8D84564760E66C5DB8D387D2 /* Pods-ExampleApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExampleApp.release.xcconfig"; path = "Target Support Files/Pods-ExampleApp/Pods-ExampleApp.release.xcconfig"; sourceTree = "<group>"; };
 		8EDF945E44BBD03973DD86FC /* Pods_AdaEmbedFramework_AdaEmbedFrameworkTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AdaEmbedFramework_AdaEmbedFrameworkTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -349,6 +351,7 @@
 				938BBFD222A94100000012A9 /* OfflineViewController.swift */,
 				938BBFD022A93F1B000012A9 /* Assets.xcassets */,
 				938BBFD422A94304000012A9 /* Reachability.swift */,
+				59B38CC0298DBD380086A2B4 /* AdaWebHost+Delegate.swift */,
 			);
 			path = EmbedFramework;
 			sourceTree = "<group>";
@@ -597,6 +600,7 @@
 			files = (
 				938BBFD322A94100000012A9 /* OfflineViewController.swift in Sources */,
 				936ED6B7228F438800796860 /* AdaWebHostViewController.swift in Sources */,
+				59B38CC1298DBD380086A2B4 /* AdaWebHost+Delegate.swift in Sources */,
 				938BBFD522A94304000012A9 /* Reachability.swift in Sources */,
 				93A79798228C871200499BF9 /* AdaWebHost.swift in Sources */,
 			);
