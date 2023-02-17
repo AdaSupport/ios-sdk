@@ -1,0 +1,42 @@
+name: Deploy iOS SDK
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+    name: Build & Deploy
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Build Framework for iPhones
+        run: xcodebuild build
+
+      - name: Build Framework for iPhone Simulator
+        run: xcodebuild build -sdk iphonesimulator
+
+      - name: Create xcframework
+        run: xcodebuild -create-xcframework -framework build/Release-iphoneos/AdaEmbedFramework.framework/ -framework build/Release-iphonesimulator/AdaEmbedFramework.framework/ -output "AdaEmbedFramework.xcframework"
+
+      - name: Zip
+        run: zip -r AdaEmbedFramework.xcframework.zip AdaEmbedFramework.xcframework
+
+      - name: Set up Ruby 3.0
+        uses: actions/setup-ruby@v1
+        with:
+          ruby-version: 3.0.x
+
+      - name: Install Dependencies
+        run: gem install bundler && bundle install
+      
+      - name: Upload Zip and Create Github Release
+        run: bundle exec fastlane patch
+        env:
+          FL_GITHUB_RELEASE_API_BEARER: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload to Cocoapods
+        uses: michaelhenry/deploy-to-cocoapods-github-action@1.0.10
+        env:
+          COCOAPODS_TRUNK_TOKEN: ${{ secrets.COCOAPODS_TRUNK_TOKEN }}

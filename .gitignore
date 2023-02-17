@@ -11,3 +11,5 @@ info.plist
 fastlane/report.xml
 .build
 .swiftpm
+Cartfile.resolved
+Carthage/
