@@ -9,12 +9,17 @@
 import UIKit
 import WebKit
 
+
+@objc(AdaWebHostViewController)
 class AdaWebHostViewController: UIViewController {
     static func createWebController(with webView: WKWebView) -> AdaWebHostViewController {
-        let bundle = Bundle(for: AdaWebHostViewController.self)
-        
         var storyboard:UIStoryboard
-                
+        #if SWIFT_PACKAGE
+        let bundle = Bundle.module
+        storyboard = UIStoryboard(name: "AdaWebHostViewController", bundle: bundle)
+      
+        #else
+        let bundle = Bundle(for: AdaWebHostViewController.self)
         // Loads the resource_bundle if available (Cocoapod)
         if (bundle.path(forResource: "AdaEmbedFramework", ofType: "bundle") != nil){
             let frameworkBundlePath = bundle.path(forResource: "AdaEmbedFramework", ofType: "bundle")!
@@ -24,6 +29,9 @@ class AdaWebHostViewController: UIViewController {
             // Used for if SDK was manually imported
             storyboard = UIStoryboard(name: "AdaWebHostViewController", bundle: bundle)
         }
+        #endif
+
+                
         
         guard let viewController = storyboard.instantiateInitialViewController() as? AdaWebHostViewController else { fatalError("This should never, ever happen.") }
         viewController.webView = webView

@@ -9,5 +9,7 @@ ModuleCache.noindex
 info.plist
 **.zip
 fastlane/report.xml
+.build
+.swiftpm
 Cartfile.resolved
 Carthage/

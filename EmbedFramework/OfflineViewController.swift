@@ -8,6 +8,7 @@
 
 import UIKit
 
+@objc(OfflineViewController)
 class OfflineViewController: UIViewController {
     
     @IBOutlet var container: UIView!
@@ -16,9 +17,14 @@ class OfflineViewController: UIViewController {
     var retryBlock: (() -> Void)?
     
     static func create() -> OfflineViewController? {
-        let bundle = Bundle(for: OfflineViewController.self)
-        
         var storyboard:UIStoryboard
+      
+        #if SWIFT_PACKAGE
+        let bundle = Bundle.module
+        storyboard = UIStoryboard(name: "AdaWebHostViewController", bundle: bundle)
+      
+        #else
+        let bundle = Bundle(for: OfflineViewController.self)
         
         // Loads the resource_bundle if available (Cocoapod)
         if (bundle.path(forResource: "AdaEmbedFramework", ofType: "bundle") != nil){
@@ -29,6 +35,8 @@ class OfflineViewController: UIViewController {
             // Used for if SDK was manually imported
             storyboard = UIStoryboard(name: "AdaWebHostViewController", bundle: bundle)
         }
+        #endif
+      
         return storyboard.instantiateViewController(withIdentifier: "OfflineViewController") as? OfflineViewController
     }
     
