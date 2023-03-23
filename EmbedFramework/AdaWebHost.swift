@@ -89,6 +89,9 @@ public class AdaWebHost: NSObject {
     /// If commands are sent prior to `embedReady`, store until it can be cleared out
     private var pendingCommands = [String]()
     
+    /// URL handler
+    private var openUrlHandler: ((URL) -> Bool)?
+    
     public init(
         handle: String,
         cluster: String = "",
@@ -105,7 +108,8 @@ public class AdaWebHost: NSObject {
         eventCallbacks: [String: (_ event: [String: Any]) -> Void]? = nil,
         webViewTimeout: Double = 30.0,
         deviceToken: String = "",
-        navigationBarOpaqueBackground: Bool = false
+        navigationBarOpaqueBackground: Bool = false,
+        openUrlHandler: ((URL) -> Bool)? = nil
     ) {
         self.handle = handle
         self.cluster = cluster
@@ -127,7 +131,8 @@ public class AdaWebHost: NSObject {
         self.hasError = false
         self.deviceToken = deviceToken
         self.navigationBarOpaqueBackground = navigationBarOpaqueBackground
-    
+        self.openUrlHandler = openUrlHandler
+        
         self.reachability = Reachability()!
         super.init()
         
@@ -434,6 +439,13 @@ extension AdaWebHost: WKNavigationDelegate, WKUIDelegate, WKDownloadDelegate {
     
     // Shared function to handle opening of urls
     public func openUrl(webView: WKWebView, url: URL) -> Swift.Void {
+        // If there's a handler for opening the URL and it returns `true`, then
+        // skip the rest of the URL handling logic here.
+        if let openUrlHandler,
+           openUrlHandler(url) {
+            return
+        }
+        
         let httpSchemes = ["http", "https"]
         let urlScheme = url.scheme
         // Handle opening universal links within the host App
